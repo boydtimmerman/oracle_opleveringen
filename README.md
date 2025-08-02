@@ -1,49 +1,71 @@
-# oracle_opleveringen
-Sample repo voor het testen van SQLcl project
-# Example Template
+# Oracle SQLcl Project
 
-The introduction summarizes the purpose and function of the project, and should be concise (a brief paragraph or two). This introduction may be the same as the first paragraph on the project page.
+Deze repository is een voorbeeld voor het gebruik van SQLcl project als tooling voor het maken releases van Oracle database en APEX code.
 
-For a full description of the module, visit the
-[project page](https://www.oracle.com).
+## Overzicht
 
-Submit bug reports and feature suggestions, or track changes in the
-[issue queue](https://www.oracle.com).
+Dit project bevat de sample application APEXToGo. 
 
+## Folder Structuur
 
-## Table of contents (optional)
+```
+oracle_opleveringen/
+└── .dbtools
+  ├── filters/
+    └── project.filters           # SQL file waarbij verschillende database objecten gefilterd kunnen worden
+  ├── project.config.json         # config file voor het project
+  └── project.sqlformat.xml       # config file voor de formatting van SQL
+├── dist         
+  └── releases/
+    ├── apex/
+      └── apex.changelog.xml      # install file voor APEX applicaties
+    ├── next/
+      └── changes/
+        ├── feature_folder(s)     # alle features welke worden opgenomen in de volgende release
+          └── stage.changelog.xml # install file per feature
+        └── release.changelog.xml # install file voor alle next items
+    └── main.changelog.xml        # main install file, hier worden alle release en next installs in bijgehouden
+├── src/
+  └── database/
+    └── project/
+      ├── apex_apps/              # APEX applicaties
+        └── f104/                 # Restaurant Management App (ID: 104)
+      ├── package_bodies/         # PL/SQL package bodies
+      ├── package_specs/          # PL/SQL package specifications
+      ├── ref_constraints/        # Referentiële integriteit constraints
+      ├── tables/                 # Database tabellen
+      └── triggers/               # Database triggers
+└── README.md   
+```
 
-- Requirements
-- Installation
-- Configuration
-- Troubleshooting
-- FAQ
-- Maintainers
+### Vereisten
 
+- Oracle Database 19c of hoger
+- Oracle APEX 24.2 of hoger
+- SQLcl 25.2                    # de gebruikte SQLcl versie moet gelijk zijn aan de versie die staat in `project.config.json`
 
-## Requirements (required)
+### Installatie Stappen
 
-This project requires the following:
+1 **Database Connectie**
+   ```sql
+   sql {connection-string}
+   ```
 
-- [Hard Work](https://www.noMorePlay.com)
+2a. **Omgeving release**
+   ```sql
+   project gen-artifact -version {version}
+   project deploy -file artifact/{PROJECTNAAM}-{version}.zip
+   ```
 
+2b. **Productie release**
+  ```sql
+   project release -version {version}
+   project deploy -file release/{PROJECTNAAM}-{version}.zip
+   ```
 
-## Installation (required, unless a separate INSTALL.md is provided)
+## Versie Informatie
 
-Install as you would normally install.
+- **Versie**: 1.0
+- **Laatste Update**: Augustus 2025
+- **Compatibiliteit**: Oracle Database 19c+, APEX 24.2+
 
-## Configuration (optional)
-
-## Troubleshooting (optional)
-
-## FAQ (optional)
-
-**Q: How do I write a README?**
-
-**A:** Follow this template. It's fun and easy!
-
-## Maintainers (optional)
-
-
-## For more information about SQLcl Projects:
-Reach out to the SQLcl Project Extension documentation by visiting the [Database Application CI/CD Doc Link](https://docs.oracle.com/en/database/oracle/sql-developer-command-line/24.3/sqcug/database-application-ci-cd.html).

@@ -2,3 +2,12 @@ set cloudconfig c:\software\Wallet_AMS23AI.zip
 conn project@ams23ai_tp
 TransferSolutions$2025
 
+// Developer
+project export -v
+project export -v -o apex.104
+project stage -v
+
+// Release manager
+project release -version 1.1 -v
+project gen-artifact -version 1.1 -v
+project deploy -file artifact/DEMO-1.zip -v
