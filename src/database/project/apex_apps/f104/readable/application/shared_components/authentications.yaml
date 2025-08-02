@@ -1,0 +1,35 @@
+---
+- # ====== Authentication: Username Only =======================
+  id: 1935007971896997368
+  identification: 
+    name: Username Only
+
+  subscription: 
+    version-number: 37167854302101
+
+  settings: 
+    type: Custom
+    authentication-function-name: login
+    enable-legacy-authentication-attributes: false
+
+  source: 
+    pl/sql-code: |
+      function login (
+          p_username in varchar2,
+          p_password in varchar2 )
+          return boolean
+      is
+      begin
+          -- This sample app allows authentication for any username, no password
+          return true;
+      end;
+
+  session-not-valid: 
+    redirect-to: Login Page
+
+  login-processing: 
+    switch-in-session: false
+
+  real-application-security: 
+    ras-mode: Disabled
+

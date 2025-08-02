@@ -1,0 +1,468 @@
+---
+# ====== Page: Orders ========================================
+id: 9
+identification: 
+  name: Orders
+  alias: ORDERS
+  title: Orders
+
+appearance: 
+  page-mode: Normal
+  page-template: Theme Default
+  template-options: 
+  - '#DEFAULT#'
+
+navigation-menu: 
+  override-user-interface-level: false
+
+navigation: 
+  cursor-focus: Do not focus cursor
+  warn-on-unsaved-changes: true
+
+css: 
+  inline: |
+    /* APEX RDS */
+    .apex-rds {
+      --ut-tabs-item-padding-x: 0rem; /* Remove Tab Padding */
+    
+      gap: 1rem; /* Add Gap Between Tabs */
+    }
+
+security: 
+  authorization-scheme: MODEL.LOV.MUST_NOT_BE_PUBLIC_USER
+  authentication: Page Requires Authentication
+  deep-linking: Application Default
+  page-access-protection: Arguments Must Have Checksum
+  form-auto-complete: Off
+  browser-cache: Application Default
+
+session-management: 
+  rejoin-sessions: Application Default
+
+advanced: 
+  enable-duplicate-page-submissions: Yes - Enable page to be re-posted
+  reload-on-submit: Only for Success
+
+server-cache: 
+  caching: Disabled
+
+regions: 
+- # ====== Region: In Progress =================================
+  id: 734776590126184420
+  identification: 
+    name: In Progress
+    type: Content Row
+
+  source: 
+    location: Local Database
+    type: SQL Query
+    sql-query: |
+      select o.order_id,
+             o.order_datetime,
+             initcap( o.order_status ) as order_status
+        from sample_restaurant_orders o
+       where order_status = 'IN PROGRESS'
+         and ( session_id is null or session_id = :APP_SESSION )
+       order by order_datetime desc
+
+  order-by: 
+    type: None
+
+  layout: 
+    sequence: 10
+    parent-region: Orders # 2027583044504979406
+    slot: SUB_REGIONS
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+
+  appearance: 
+    template: Content Block
+    template-options: 
+    - '#DEFAULT#'
+    - t-ContentBlock--h3
+    - t-Region--removeHeader js-removeLandmark
+    - margin-top-md
+    render-components: Above Content
+
+  accessibility: 
+    use-landmark: true
+    landmark-type: Region
+
+  advanced: 
+    region-display-selector: true
+    exclude-title-from-translation: false
+
+  customization: 
+    customizable: Not Customizable By End Users
+
+  attributes: 
+    appearance: 
+      display: Multiple (Report)
+
+    settings: 
+      title: 'Order #&ORDER_ID.'
+      description: '&ORDER_STATUS. • &ORDER_DATETIME.'
+      display-avatar: true
+      display-badge: false
+
+    avatar: 
+      type: Image
+      image: 
+        url: '#APP_FILES#orders/order-progress.png'
+
+      shape: Rounded
+      size: Default
+
+    appearance: 
+      apply-theme-colors: true
+      style: Default
+      hide-borders: false
+      remove-padding: false
+
+    row-selection: 
+      type: None
+
+    performance: 
+      lazy-loading: false
+
+    pagination: 
+      type: Page
+      entities-per-page: 15
+      show-total-count: false
+
+    messages: 
+      when-no-data-found: No Orders Found!
+
+  columns: 
+  - # ====== Column: ORDER_ID ====================================
+    id: 734776857394184423
+    identification: 
+      name: ORDER_ID
+
+    layout: 
+      sequence: 20
+
+    source: 
+      type: Database Column
+      database-column: ORDER_ID
+      data-type: NUMBER
+      primary-key: false
+
+    accessibility: 
+      value-identifies-row: false
+
+    appearance: 
+      group: false
+
+  - # ====== Column: ORDER_DATETIME ==============================
+    id: 915965940389784100
+    identification: 
+      name: ORDER_DATETIME
+
+    layout: 
+      sequence: 30
+
+    source: 
+      type: Database Column
+      database-column: ORDER_DATETIME
+      data-type: TIMESTAMP
+      primary-key: false
+
+    accessibility: 
+      value-identifies-row: false
+
+    appearance: 
+      format-mask: FMMonth DD, YYYY
+      group: false
+
+  - # ====== Column: ORDER_STATUS ================================
+    id: 952577952535327232
+    identification: 
+      name: ORDER_STATUS
+
+    layout: 
+      sequence: 60
+
+    source: 
+      type: Database Column
+      database-column: ORDER_STATUS
+      data-type: VARCHAR2
+      primary-key: false
+
+    accessibility: 
+      value-identifies-row: false
+
+    appearance: 
+      group: false
+
+  actions: 
+  - # ====== Action: Full Row Link ===============================
+    id: 734778811630184443
+    identification: 
+      position: Full Row Link # 349402277895478545
+
+    layout: 
+      sequence: 10
+
+    link: 
+      type: Redirect to Page in this Application
+      target: 
+        url: 'f?p=&APP_ID.:10:&SESSION.::&DEBUG.::P10_ORDER_ID:&ORDER_ID.'
+        page: 10 # Order Details
+        values: 
+          p10_order_id: '&ORDER_ID.'
+
+- # ====== Region: Orders ======================================
+  id: 2027583044504979406
+  identification: 
+    name: Orders
+    type: Region Display Selector
+
+  layout: 
+    sequence: 10
+    parent-region: No Parent
+    slot: BODY
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+
+  appearance: 
+    template: Content Block
+    template-options: 
+    - '#DEFAULT#'
+    - t-ContentBlock--h1
+    render-components: Above Content
+
+  accessibility: 
+    use-landmark: true
+    landmark-type: Template Default
+
+  advanced: 
+    region-display-selector: false
+    exclude-title-from-translation: false
+
+  customization: 
+    customizable: Not Customizable By End Users
+
+  attributes: 
+    settings: 
+      mode: View Single Region
+      display-region-icons: false
+      include-'show-all': false
+      remember-selection: By User
+
+- # ====== Region: Past Orders =================================
+  id: 2027583164062979407
+  identification: 
+    name: Past Orders
+    type: Content Row
+
+  source: 
+    location: Local Database
+    type: SQL Query
+    sql-query: |
+      select o.order_id,
+             o.order_datetime,
+             initcap( o.order_status ) as order_status
+        from sample_restaurant_orders o
+       where order_status = 'PAST ORDERS'
+         and ( session_id is null or session_id = :APP_SESSION )
+       order by order_status desc, order_datetime desc
+
+  order-by: 
+    type: None
+
+  layout: 
+    sequence: 20
+    parent-region: Orders # 2027583044504979406
+    slot: SUB_REGIONS
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+
+  appearance: 
+    template: Content Block
+    template-options: 
+    - '#DEFAULT#'
+    - t-ContentBlock--h3
+    - t-Region--removeHeader js-removeLandmark
+    - margin-top-md
+    render-components: Above Content
+
+  accessibility: 
+    use-landmark: true
+    landmark-type: Region
+
+  advanced: 
+    region-display-selector: true
+    exclude-title-from-translation: false
+
+  customization: 
+    customizable: Not Customizable By End Users
+
+  attributes: 
+    appearance: 
+      display: Multiple (Report)
+
+    settings: 
+      title: 'Order #&ORDER_ID.'
+      description: '&ORDER_STATUS. • &ORDER_DATETIME.'
+      display-avatar: true
+      display-badge: false
+
+    avatar: 
+      type: Image
+      image: 
+        url: '#APP_FILES#orders/past-order.png'
+
+      shape: Rounded
+      size: Default
+
+    appearance: 
+      apply-theme-colors: true
+      style: Default
+      hide-borders: false
+      remove-padding: false
+
+    row-selection: 
+      type: None
+
+    performance: 
+      lazy-loading: false
+
+    pagination: 
+      type: Page
+      entities-per-page: 15
+      show-total-count: false
+
+    messages: 
+      when-no-data-found: No Orders Found!
+
+  columns: 
+  - # ====== Column: ORDER_ID ====================================
+    id: 2027583254027979408
+    identification: 
+      name: ORDER_ID
+
+    layout: 
+      sequence: 10
+
+    source: 
+      type: Database Column
+      database-column: ORDER_ID
+      data-type: NUMBER
+      primary-key: false
+
+    accessibility: 
+      value-identifies-row: false
+
+    appearance: 
+      group: false
+
+  - # ====== Column: ORDER_DATETIME ==============================
+    id: 2027583403344979409
+    identification: 
+      name: ORDER_DATETIME
+
+    layout: 
+      sequence: 20
+
+    source: 
+      type: Database Column
+      database-column: ORDER_DATETIME
+      data-type: TIMESTAMP
+      primary-key: false
+
+    accessibility: 
+      value-identifies-row: false
+
+    appearance: 
+      format-mask: FMMonth DD, YYYY
+      group: false
+
+  - # ====== Column: ORDER_STATUS ================================
+    id: 2027583590777979411
+    identification: 
+      name: ORDER_STATUS
+
+    layout: 
+      sequence: 40
+
+    source: 
+      type: Database Column
+      database-column: ORDER_STATUS
+      data-type: VARCHAR2
+      primary-key: false
+
+    accessibility: 
+      value-identifies-row: false
+
+    appearance: 
+      group: false
+
+  actions: 
+  - # ====== Action: Full Row Link ===============================
+    id: 2027583661163979412
+    identification: 
+      position: Full Row Link # 349402277895478545
+
+    layout: 
+      sequence: 10
+
+    link: 
+      type: Redirect to Page in this Application
+      target: 
+        url: 'f?p=&APP_ID.:10:&SESSION.::&DEBUG.::P10_ORDER_ID:&ORDER_ID.'
+        page: 10 # Order Details
+        values: 
+          p10_order_id: '&ORDER_ID.'
+
+dynamic-actions: 
+- # ====== Dynamic Action: Send Push Notification ==============
+  id: 81002212506510969
+  identification: 
+    name: Send Push Notification
+
+  execution: 
+    sequence: 10
+    event-scope: Static
+
+  when: 
+    event: Page Load
+
+  server-side-condition: 
+    type: Expression
+    language: PL/SQL
+    pl/sql-expression: apex_pwa.has_push_subscription
+
+  actions: 
+  - # ====== Action: Execute Server-side Code ====================
+    id: 81002725808510969
+    identification: 
+      action: Execute Server-side Code
+
+    settings: 
+      language: PE.PROPERTY.SOURCE_SNIPPET_LANG.LOV.PLSQL.D
+      pl/sql-code: |
+        apex_pwa.send_push_notification (
+            p_user_name      => :APP_USER,
+            p_title          => 'Message from delivery driver',
+            p_body           => 'Sorry, I ate your food :(',
+            p_icon_url       => apex_mail.get_instance_url || '#APP_FILES#icons/app-icon-512.png' );
+        apex_pwa.push_queue;
+
+    execution: 
+      sequence: 10
+      event: Send Push Notification # 81002212506510969
+      fire-when-event-result-is: True
+      fire-on-initialization: false
+      stop-execution-on-error: true
+      wait-for-result: true
+

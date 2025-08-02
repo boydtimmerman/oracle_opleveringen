@@ -1,0 +1,28 @@
+---
+- # ====== Application Process: Initialize Shopping Cart Header 
+  id: 794049504641142199
+  identification: 
+    name: Initialize Shopping Cart Header
+    type: NATIVE_PLSQL
+
+  source: 
+    location: Local Database
+    language: PL/SQL
+    pl/sql-code: |
+      :SHOPPING_CART_ITEMS := sample_restaurant_manage_orders.get_quantity;
+      :SHOPPING_CART_ICON  := case
+                                when :SHOPPING_CART_ITEMS > 0
+                                then 'fa-cart-full'
+                                else 'fa-cart-empty'
+                              end;
+
+  execution: 
+    sequence: 1
+    point: Before Header
+
+  security: 
+    authorization-scheme: MODEL.LOV.MUST_NOT_BE_PUBLIC_USER
+
+  subscription: 
+    version-number: 37167838126044
+

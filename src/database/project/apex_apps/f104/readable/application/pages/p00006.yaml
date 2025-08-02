@@ -1,0 +1,320 @@
+---
+# ====== Page: All Restaurants ===============================
+id: 6
+identification: 
+  name: All Restaurants
+  alias: ALL-RESTAURANTS
+  title: All Restaurants
+
+appearance: 
+  page-mode: Normal
+  page-template: Theme Default
+  template-options: 
+  - '#DEFAULT#'
+
+navigation-menu: 
+  override-user-interface-level: false
+
+navigation: 
+  cursor-focus: Do not focus cursor
+  warn-on-unsaved-changes: true
+
+security: 
+  authorization-scheme: MODEL.LOV.MUST_NOT_BE_PUBLIC_USER
+  authentication: Page Requires Authentication
+  deep-linking: Application Default
+  page-access-protection: Arguments Must Have Checksum
+  form-auto-complete: On
+  browser-cache: Application Default
+
+session-management: 
+  rejoin-sessions: Application Default
+
+advanced: 
+  enable-duplicate-page-submissions: Yes - Enable page to be re-posted
+  reload-on-submit: Only for Success
+
+server-cache: 
+  caching: Disabled
+
+regions: 
+- # ====== Region: All Restaurants =============================
+  id: 131491420242265321
+  identification: 
+    name: All Restaurants
+    type: Content Row
+
+  source: 
+    location: Local Database
+    type: SQL Query
+    sql-query: |
+      select r.id,
+             r.logo_url as image,
+             r.name as name,
+             c.name as category,
+             r.rating,
+             r.delivery_time,
+             r.delivery_time + 10 delivery_time_estimated,
+             r.delivery_fee
+        from sample_restaurant r,
+             sample_restaurant_categories c
+       where c.id = r.category_id
+       order by id
+
+  order-by: 
+    type: None
+
+  layout: 
+    sequence: 20
+    parent-region: No Parent
+    slot: BODY
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+
+  appearance: 
+    template: Content Block
+    template-options: 
+    - '#DEFAULT#'
+    - t-ContentBlock--h3
+    render-components: Above Content
+
+  accessibility: 
+    use-landmark: true
+    landmark-type: Region
+
+  advanced: 
+    region-display-selector: false
+    exclude-title-from-translation: false
+
+  customization: 
+    customizable: Not Customizable By End Users
+
+  attributes: 
+    appearance: 
+      display: Multiple (Report)
+
+    settings: 
+      title: '&NAME.'
+      description: |
+        {if !=DELIVERY_FEE/}Free Delivery{else/}$&DELIVERY_FEE. Delivery Fee{endif/}<br />
+        &DELIVERY_TIME.-&DELIVERY_TIME_ESTIMATED. min
+      display-avatar: true
+      display-badge: true
+
+    avatar: 
+      type: Image
+      image: 
+        url: '#APP_FILES#&IMAGE.'
+
+      shape: Rounded
+      size: Medium
+
+    badge: 
+      label: '&RATING.'
+      value: RATING
+      display-label: false
+      style: Subtle
+      shape: Circular
+      size: Default
+      column-width: Small
+      position: End
+      alignment: End
+
+    appearance: 
+      apply-theme-colors: true
+      style: Default
+      hide-borders: false
+      remove-padding: false
+
+    row-selection: 
+      type: None
+
+    performance: 
+      lazy-loading: false
+
+    pagination: 
+      type: Page
+      entities-per-page: 15
+      show-total-count: false
+
+  columns: 
+  - # ====== Column: NAME ========================================
+    id: 130318624432480171
+    identification: 
+      name: NAME
+
+    layout: 
+      sequence: 20
+
+    source: 
+      type: Database Column
+      database-column: NAME
+      data-type: VARCHAR2
+      primary-key: false
+
+    accessibility: 
+      value-identifies-row: false
+
+    appearance: 
+      group: false
+
+  - # ====== Column: RATING ======================================
+    id: 130318837425480173
+    identification: 
+      name: RATING
+
+    layout: 
+      sequence: 40
+
+    source: 
+      type: Database Column
+      database-column: RATING
+      data-type: VARCHAR2
+      primary-key: false
+
+    accessibility: 
+      value-identifies-row: false
+
+    appearance: 
+      group: false
+
+  - # ====== Column: DELIVERY_FEE ================================
+    id: 130319680683480181
+    identification: 
+      name: DELIVERY_FEE
+
+    layout: 
+      sequence: 120
+
+    source: 
+      type: Database Column
+      database-column: DELIVERY_FEE
+      data-type: NUMBER
+      primary-key: false
+
+    accessibility: 
+      value-identifies-row: false
+
+    appearance: 
+      group: false
+
+  - # ====== Column: DELIVERY_TIME ===============================
+    id: 130319726571480182
+    identification: 
+      name: DELIVERY_TIME
+
+    layout: 
+      sequence: 130
+
+    source: 
+      type: Database Column
+      database-column: DELIVERY_TIME
+      data-type: NUMBER
+      primary-key: false
+
+    accessibility: 
+      value-identifies-row: false
+
+    appearance: 
+      group: false
+
+  - # ====== Column: IMAGE =======================================
+    id: 130319828990480183
+    identification: 
+      name: IMAGE
+
+    layout: 
+      sequence: 140
+
+    source: 
+      type: Database Column
+      database-column: IMAGE
+      data-type: VARCHAR2
+      primary-key: false
+
+    accessibility: 
+      value-identifies-row: false
+
+    appearance: 
+      group: false
+
+  - # ====== Column: CATEGORY ====================================
+    id: 130319920498480184
+    identification: 
+      name: CATEGORY
+
+    layout: 
+      sequence: 150
+
+    source: 
+      type: Database Column
+      database-column: CATEGORY
+      data-type: VARCHAR2
+      primary-key: false
+
+    accessibility: 
+      value-identifies-row: false
+
+    appearance: 
+      group: false
+
+  - # ====== Column: DELIVERY_TIME_ESTIMATED =====================
+    id: 130320299915480187
+    identification: 
+      name: DELIVERY_TIME_ESTIMATED
+
+    layout: 
+      sequence: 160
+
+    source: 
+      type: Database Column
+      database-column: DELIVERY_TIME_ESTIMATED
+      data-type: NUMBER
+      primary-key: false
+
+    accessibility: 
+      value-identifies-row: false
+
+    appearance: 
+      group: false
+
+  - # ====== Column: ID ==========================================
+    id: 131491980103265325
+    identification: 
+      name: ID
+
+    layout: 
+      sequence: 10
+
+    source: 
+      type: Database Column
+      database-column: ID
+      data-type: NUMBER
+      primary-key: true
+
+    accessibility: 
+      value-identifies-row: false
+
+    appearance: 
+      group: false
+
+  actions: 
+  - # ====== Action: Full Row Link ===============================
+    id: 130320172482480186
+    identification: 
+      position: Full Row Link # 349402277895478545
+
+    layout: 
+      sequence: 10
+
+    link: 
+      type: Redirect to Page in this Application
+      target: 
+        url: 'f?p=&APP_ID.:5:&SESSION.::&DEBUG.::P5_RESTAURANT_ID:&ID.'
+        page: 5 # Restaurant
+        values: 
+          p5_restaurant_id: '&ID.'
+

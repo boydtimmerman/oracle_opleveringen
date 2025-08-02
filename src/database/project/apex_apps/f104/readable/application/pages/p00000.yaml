@@ -1,0 +1,406 @@
+---
+# ====== Page: Global Page ===================================
+id: 0
+identification: 
+  name: Global Page
+
+regions: 
+- # ====== Region: Search Restaurants ==========================
+  id: 39883598572993690
+  identification: 
+    name: Search Restaurants
+    type: Content Row
+
+  source: 
+    location: Local Database
+    type: SQL Query
+    sql-query: |
+      select r.id,
+             r.hero_url as image,
+             r.rating,
+             r.delivery_time,
+             r.name as name,
+             r.category_id,
+             c.name as category_name
+        from sample_restaurant r,
+             sample_restaurant_categories c
+       where r.category_id = c.id
+         and ( lower( r.name ) like '%' || lower( :P0_SEARCH ) || '%'
+            or lower( c.name ) like '%' || lower( :P0_SEARCH ) || '%' )
+    page-items-to-submit: 
+    - P0_SEARCH
+
+  order-by: 
+    type: None
+
+  layout: 
+    sequence: 20
+    parent-region: Search # 3835678930361122042
+    slot: BODY
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+
+  appearance: 
+    template: Blank with Attributes (No Grid)
+    template-options: 
+    - '#DEFAULT#'
+    render-components: Above Content
+
+  accessibility: 
+    use-landmark: true
+    landmark-type: Region
+
+  advanced: 
+    static-id: SearchRestaurants
+    region-display-selector: false
+    exclude-title-from-translation: false
+
+  customization: 
+    customizable: Not Customizable By End Users
+
+  attributes: 
+    appearance: 
+      display: Multiple (Report)
+
+    settings: 
+      title: '&NAME.'
+      description: '&CATEGORY_NAME.'
+      display-avatar: true
+      display-badge: false
+
+    avatar: 
+      type: Image
+      image: 
+        url: '#APP_FILES#&IMAGE.'
+
+      shape: Circular
+      size: Extra Small
+
+    appearance: 
+      apply-theme-colors: true
+      style: Default
+      hide-borders: false
+      remove-padding: false
+
+    row-selection: 
+      type: None
+
+    performance: 
+      lazy-loading: false
+
+    pagination: 
+      type: Page
+      entities-per-page: 15
+      show-total-count: false
+
+    messages: 
+      when-no-data-found: No restaurant found.
+      no-data-found-icon: fa-404
+
+  columns: 
+  - # ====== Column: ID ==========================================
+    id: 39883878293993693
+    identification: 
+      name: ID
+
+    layout: 
+      sequence: 10
+
+    source: 
+      type: Database Column
+      database-column: ID
+      data-type: NUMBER
+      primary-key: false
+
+    accessibility: 
+      value-identifies-row: false
+
+    appearance: 
+      group: false
+
+  - # ====== Column: IMAGE =======================================
+    id: 39883934759993694
+    identification: 
+      name: IMAGE
+
+    layout: 
+      sequence: 20
+
+    source: 
+      type: Database Column
+      database-column: IMAGE
+      data-type: VARCHAR2
+      primary-key: false
+
+    accessibility: 
+      value-identifies-row: false
+
+    appearance: 
+      group: false
+
+  - # ====== Column: RATING ======================================
+    id: 39884072134993695
+    identification: 
+      name: RATING
+
+    layout: 
+      sequence: 30
+
+    source: 
+      type: Database Column
+      database-column: RATING
+      data-type: VARCHAR2
+      primary-key: false
+
+    accessibility: 
+      value-identifies-row: false
+
+    appearance: 
+      group: false
+
+  - # ====== Column: DELIVERY_TIME ===============================
+    id: 39884157697993696
+    identification: 
+      name: DELIVERY_TIME
+
+    layout: 
+      sequence: 40
+
+    source: 
+      type: Database Column
+      database-column: DELIVERY_TIME
+      data-type: NUMBER
+      primary-key: false
+
+    accessibility: 
+      value-identifies-row: false
+
+    appearance: 
+      group: false
+
+  - # ====== Column: NAME ========================================
+    id: 39884249707993697
+    identification: 
+      name: NAME
+
+    layout: 
+      sequence: 50
+
+    source: 
+      type: Database Column
+      database-column: NAME
+      data-type: VARCHAR2
+      primary-key: false
+
+    accessibility: 
+      value-identifies-row: false
+
+    appearance: 
+      group: false
+
+  - # ====== Column: CATEGORY_ID =================================
+    id: 39884378979993698
+    identification: 
+      name: CATEGORY_ID
+
+    layout: 
+      sequence: 60
+
+    source: 
+      type: Database Column
+      database-column: CATEGORY_ID
+      data-type: NUMBER
+      primary-key: false
+
+    accessibility: 
+      value-identifies-row: false
+
+    appearance: 
+      group: false
+
+  - # ====== Column: CATEGORY_NAME ===============================
+    id: 39884465599993699
+    identification: 
+      name: CATEGORY_NAME
+
+    layout: 
+      sequence: 70
+
+    source: 
+      type: Database Column
+      database-column: CATEGORY_NAME
+      data-type: VARCHAR2
+      primary-key: false
+
+    accessibility: 
+      value-identifies-row: false
+
+    appearance: 
+      group: false
+
+  actions: 
+  - # ====== Action: Full Row Link ===============================
+    id: 39884724331993702
+    identification: 
+      position: Full Row Link # 349402277895478545
+
+    layout: 
+      sequence: 10
+
+    link: 
+      type: Redirect to Page in this Application
+      target: 
+        url: 'f?p=&APP_ID.:5:&SESSION.::&DEBUG.::P5_RESTAURANT_ID:&ID.'
+        page: 5 # Restaurant
+        values: 
+          p5_restaurant_id: '&ID.'
+
+      link-attributes: aria-label="&NAME."
+
+- # ====== Region: Search ======================================
+  id: 3835678930361122042
+  identification: 
+    name: Search
+    type: Static Content
+
+  layout: 
+    sequence: 10
+    parent-region: No Parent
+    slot: REGION_POSITION_04
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+
+  appearance: 
+    template: Inline Dialog
+    template-options: 
+    - js-dialog-autoheight
+    - js-modal
+    - js-dialog-size720x480
+    render-components: Above Content
+
+  accessibility: 
+    use-landmark: true
+    landmark-type: Search
+
+  advanced: 
+    static-id: SearchDialog
+    region-display-selector: false
+    exclude-title-from-translation: false
+
+  customization: 
+    customizable: Not Customizable By End Users
+
+  attributes: 
+    settings: 
+      output-as: HTML
+      expand-shortcuts: false
+
+page-items: 
+- # ====== Page Item: P0_SEARCH ================================
+  id: 5734263865467041396
+  identification: 
+    name: P0_SEARCH
+    type: Text Field
+
+  label: 
+    label: Search
+    alignment: Left
+
+  settings: 
+    subtype: Search
+    trim-spaces: Leading and Trailing
+    text-case: NO CHANGE
+    submit-when-enter-pressed: false
+    disabled: false
+
+  layout: 
+    sequence: 10
+    region: Search # 3835678930361122042
+    slot: BODY
+    alignment: Left
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+    label-column-span: 0
+
+  appearance: 
+    template: Hidden
+    template-options: 
+    - '#DEFAULT#'
+    - t-Form-fieldContainer--stretchInputs
+    - t-Form-fieldContainer--xlarge
+    - margin-top-none
+    - margin-bottom-sm
+    icon: fa-search
+    width: 30
+    value-placeholder: Search APEXToGo...
+
+  validation: 
+    value-required: false
+
+  advanced: 
+    css-classes: 
+    - rounded-full
+    warn-on-unsaved-changes: Ignore
+
+  source: 
+    type: Null
+    used: Only when current value in session state is null
+
+  session-state: 
+    storage: Per Session (Persistent)
+
+  quick-picks: 
+    show-quick-picks: false
+
+  security: 
+    session-state-protection: Unrestricted
+    store-value-encrypted-in-session-state: true
+    restricted-characters: All characters can be saved.
+
+dynamic-actions: 
+- # ====== Dynamic Action: P0_SEARCH Input =====================
+  id: 43726356482964588
+  identification: 
+    name: P0_SEARCH Input
+
+  execution: 
+    sequence: 10
+    event-scope: Static
+    type: Debounce
+    time: 200
+    immediate: false
+
+  when: 
+    event: Input
+    selection-type: Item(s)
+    item(s): 
+    - P0_SEARCH
+
+  actions: 
+  - # ====== Action: Refresh =====================================
+    id: 43726428328964589
+    identification: 
+      action: Refresh
+
+    settings: 
+      maintain-pagination: false
+
+    affected-elements: 
+      selection-type: Region
+      region: Search Restaurants # 39883598572993690
+
+    execution: 
+      sequence: 10
+      event: P0_SEARCH Input # 43726356482964588
+      fire-when-event-result-is: True
+      fire-on-initialization: false
+

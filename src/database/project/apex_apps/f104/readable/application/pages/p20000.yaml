@@ -1,0 +1,379 @@
+---
+# ====== Page: Account =======================================
+id: 20000
+identification: 
+  name: Account
+  alias: ACCOUNT
+  title: Account
+  page-group: User Settings # 166726674484130785
+
+appearance: 
+  page-mode: Modal Dialog
+  dialog-template: Drawer
+  template-options: 
+  - '#DEFAULT#'
+  - js-dialog-class-t-Drawer--pullOutEnd
+  - js-dialog-class-t-Drawer--md
+
+dialog: 
+  chained: true
+  resizable: false
+
+navigation-menu: 
+  override-user-interface-level: false
+
+navigation: 
+  cursor-focus: Do not focus cursor
+  warn-on-unsaved-changes: true
+
+security: 
+  authorization-scheme: MODEL.LOV.MUST_NOT_BE_PUBLIC_USER
+  authentication: Page Requires Authentication
+  deep-linking: Application Default
+  page-access-protection: Arguments Must Have Checksum
+  form-auto-complete: Off
+  browser-cache: Application Default
+
+session-management: 
+  rejoin-sessions: Application Default
+
+advanced: 
+  enable-duplicate-page-submissions: Yes - Enable page to be re-posted
+  reload-on-submit: Only for Success
+
+server-cache: 
+  caching: Disabled
+
+help: 
+  help-text: This page contains a list of settings applicable to the current application user.
+
+configuration: 
+  build-option: 'Feature: User Settings' # 166727186073130785
+
+regions: 
+- # ====== Region: User Info ===================================
+  id: 81313928880165609
+  identification: 
+    name: User Info
+    type: Cards
+
+  source: 
+    location: Local Database
+    type: SQL Query
+    sql-query: |
+      select nvl( :P11_NAME, :APP_USER ) USER_NAME,
+             nvl( :P11_EMAIL, :APP_USER || '@domain.com' ) EMAIL
+        from sys.dual
+
+  order-by: 
+    type: None
+
+  layout: 
+    sequence: 50
+    parent-region: No Parent
+    slot: BODY
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+
+  appearance: 
+    template: Cards Container
+    template-options: 
+    - '#DEFAULT#'
+    - t-CardsRegion--styleB
+    render-components: Above Content
+
+  accessibility: 
+    use-landmark: true
+    landmark-type: Template Default
+
+  advanced: 
+    region-display-selector: false
+    exclude-title-from-translation: false
+
+  server-side-condition: 
+    type: No Rows returned
+    sql-query: |
+      select *
+        from apex_application_temp_files
+       where name = :P11_PROFILE_PIC
+
+  customization: 
+    customizable: Not Customizable By End Users
+
+  attributes: 
+    id: 81314017143165610
+    appearance: 
+      layout: Horizontal (Row)
+
+    card: 
+      css-classes: 
+      - a-CardView--noUI
+
+    title: 
+      advanced-formatting: true
+      html-expression: <h3 class="a-CardView-title">&USER_NAME.</h3>
+
+    subtitle: 
+      advanced-formatting: true
+      html-expression: <h4 class="a-CardView-subTitle u-textLower">&EMAIL.</h4>
+
+    body: 
+      advanced-formatting: false
+
+    secondary-body: 
+      advanced-formatting: false
+
+    icon-and-badge: 
+      icon-source: Icon Class
+      icon-css-classes: fa-user fa-2x
+      icon-position: Start
+
+    media: 
+      advanced-formatting: false
+      source: No Media
+
+    performance: 
+      lazy-loading: false
+
+    pagination: 
+      type: Scroll
+      show-total-count: false
+
+- # ====== Region: Settings ====================================
+  id: 166733193592130793
+  identification: 
+    name: Settings
+    type: List
+
+  source: 
+    list: User Settings # 166730712941130789
+
+  layout: 
+    sequence: 70
+    parent-region: No Parent
+    slot: BODY
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+
+  appearance: 
+    template: Standard
+    template-options: 
+    - '#DEFAULT#'
+    - t-Region--noPadding
+    - t-Region--removeHeader js-removeLandmark
+    - t-Region--scrollBody
+    render-components: Above Content
+
+  accessibility: 
+    use-landmark: true
+    landmark-type: Template Default
+
+  advanced: 
+    region-display-selector: false
+    exclude-title-from-translation: false
+
+  server-cache: 
+    caching: Disabled
+
+  customization: 
+    customizable: Not Customizable By End Users
+
+  attributes: 
+    appearance: 
+      list-template: Media List
+      template-options: 
+      - t-MediaList--showIcons
+      - t-MediaList--showBadges
+      - u-colors
+
+- # ====== Region: Actions =====================================
+  id: 639351501883725705
+  identification: 
+    name: Actions
+    type: Static Content
+
+  layout: 
+    sequence: 10
+    parent-region: No Parent
+    slot: REGION_POSITION_03
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+
+  appearance: 
+    template: Standard
+    template-options: 
+    - '#DEFAULT#'
+    - t-Region--removeHeader js-removeLandmark
+    - t-Region--stacked
+    - t-Region--scrollBody
+    render-components: Above Content
+
+  accessibility: 
+    use-landmark: true
+    landmark-type: Template Default
+
+  advanced: 
+    region-display-selector: false
+    exclude-title-from-translation: false
+
+  customization: 
+    customizable: Not Customizable By End Users
+
+  attributes: 
+    settings: 
+      output-as: HTML
+      expand-shortcuts: false
+
+- # ====== Region: User Info ===================================
+  id: 1866817744776602402
+  identification: 
+    name: User Info
+    type: Cards
+
+  source: 
+    location: Local Database
+    type: SQL Query
+    sql-query: |
+      select *
+        from apex_application_temp_files
+       where name = :P11_PROFILE_PIC
+
+  order-by: 
+    type: None
+
+  layout: 
+    sequence: 40
+    parent-region: No Parent
+    slot: BODY
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+
+  appearance: 
+    template: Cards Container
+    template-options: 
+    - '#DEFAULT#'
+    - t-CardsRegion--styleB
+    render-components: Above Content
+
+  accessibility: 
+    use-landmark: true
+    landmark-type: Template Default
+
+  advanced: 
+    region-display-selector: false
+    exclude-title-from-translation: false
+
+  server-side-condition: 
+    type: Rows returned
+    sql-query: |
+      select *
+        from apex_application_temp_files
+       where name = :P11_PROFILE_PIC
+
+  customization: 
+    customizable: Not Customizable By End Users
+
+  attributes: 
+    id: 1866817852555602403
+    appearance: 
+      layout: Horizontal (Row)
+
+    card: 
+      css-classes: 
+      - a-CardView--noUI
+      primary-key-column-1: ID
+
+    title: 
+      advanced-formatting: true
+      html-expression: <h3 class="a-CardView-title">&P11_NAME.</h3>
+
+    subtitle: 
+      advanced-formatting: true
+      html-expression: <h4 class="a-CardView-subTitle u-textLower">&P11_EMAIL.</h4>
+
+    body: 
+      advanced-formatting: false
+
+    secondary-body: 
+      advanced-formatting: false
+
+    icon-and-badge: 
+      icon-source: Image BLOB Column
+      image-column: BLOB_CONTENT
+      icon-position: Start
+
+    media: 
+      advanced-formatting: false
+      source: No Media
+
+    performance: 
+      lazy-loading: false
+
+    pagination: 
+      type: Scroll
+      show-total-count: false
+
+buttons: 
+- # ====== Button: SIGN_OUT ====================================
+  id: 639351359673725704
+  identification: 
+    button-name: SIGN_OUT
+    label: Sign Out
+
+  layout: 
+    sequence: 10
+    region: Actions # 639351501883725705
+    slot: BODY
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+    alignment: Left center
+
+  appearance: 
+    button-template: Text with Icon
+    hot: false
+    template-options: 
+    - '#DEFAULT#'
+    - t-Button--large
+    - t-Button--simple
+    - t-Button--iconLeft
+    - t-Button--stretch
+    icon: fa-sign-out
+
+  behavior: 
+    action: Submit Page
+    execute-validations: true
+    show-processing: false
+    warn-on-unsaved-changes: Do Not Check
+
+branches: 
+- # ====== Branch: Go To Page &LOGOUT_URL. =====================
+  id: 639351784595725708
+  identification: 
+    name: Go To Page &LOGOUT_URL.
+
+  execution: 
+    sequence: 10
+    point: After Processing
+
+  behavior: 
+    type: Page or URL (Redirect)
+    target: '&LOGOUT_URL.'
+
+  server-side-condition: 
+    when-button-pressed: SIGN_OUT # 639351359673725704
+

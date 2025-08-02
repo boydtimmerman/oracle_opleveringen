@@ -1,0 +1,43 @@
+---
+- # ====== Automation: Session orders cleanup ==================
+  id: 85448920771598636
+  identification: 
+    name: Session orders cleanup
+    static-id: session-orders-cleanup
+
+  execution: 
+    type: Scheduled
+    schedule-expression: FREQ=DAILY;INTERVAL=1;BYHOUR=0;BYMINUTE=0
+    schedule-status: Disabled
+    actions-initiated-on: Always
+
+  action-execution: 
+    action-error-handling: Ignore
+
+  actions: 
+  - # ====== Action: Delete Orders ===============================
+    id: 85449284083598639
+    identification: 
+      name: Delete Orders
+      type: Execute Code
+
+    source: 
+      location: Local Database
+      language: PL/SQL
+      pl/sql-code: |
+        delete sample_restaurant_order_items
+         where order_id in (
+               select order_id
+                 from sample_restaurant_orders
+                where session_id is not null );
+        
+        delete sample_restaurant_orders
+         where session_id is not null;
+        
+
+    execution: 
+      sequence: 10
+
+    error: 
+      stop-execution-on-error: true
+

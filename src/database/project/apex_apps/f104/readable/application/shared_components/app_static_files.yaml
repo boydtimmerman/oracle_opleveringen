@@ -1,0 +1,730 @@
+---
+- # ====== Static Application File: background.jpg =============
+  id: 84348733127235584
+  identification: 
+    file-name: background.jpg
+
+  attributes: 
+    mime-type: image/jpeg
+    file-character-set: Unicode UTF-8
+
+- # ====== Static Application File: category/category-1.png ====
+  id: 84348919699235589
+  identification: 
+    file-name: category/category-1.png
+
+  attributes: 
+    mime-type: image/png
+    file-character-set: Unicode UTF-8
+
+- # ====== Static Application File: category/category-10.png ===
+  id: 84349213012235594
+  identification: 
+    file-name: category/category-10.png
+
+  attributes: 
+    mime-type: image/png
+    file-character-set: Unicode UTF-8
+
+- # ====== Static Application File: category/category-2.png ====
+  id: 84349560338235599
+  identification: 
+    file-name: category/category-2.png
+
+  attributes: 
+    mime-type: image/png
+    file-character-set: Unicode UTF-8
+
+- # ====== Static Application File: category/category-3.png ====
+  id: 84349848263235604
+  identification: 
+    file-name: category/category-3.png
+
+  attributes: 
+    mime-type: image/png
+    file-character-set: Unicode UTF-8
+
+- # ====== Static Application File: category/category-4.png ====
+  id: 84350180765235609
+  identification: 
+    file-name: category/category-4.png
+
+  attributes: 
+    mime-type: image/png
+    file-character-set: Unicode UTF-8
+
+- # ====== Static Application File: category/category-5.png ====
+  id: 84350426473235614
+  identification: 
+    file-name: category/category-5.png
+
+  attributes: 
+    mime-type: image/png
+    file-character-set: Unicode UTF-8
+
+- # ====== Static Application File: category/category-6.png ====
+  id: 84350809416235618
+  identification: 
+    file-name: category/category-6.png
+
+  attributes: 
+    mime-type: image/png
+    file-character-set: Unicode UTF-8
+
+- # ====== Static Application File: category/category-7.png ====
+  id: 84350948311235623
+  identification: 
+    file-name: category/category-7.png
+
+  attributes: 
+    mime-type: image/png
+    file-character-set: Unicode UTF-8
+
+- # ====== Static Application File: category/category-8.png ====
+  id: 84351223458235628
+  identification: 
+    file-name: category/category-8.png
+
+  attributes: 
+    mime-type: image/png
+    file-character-set: Unicode UTF-8
+
+- # ====== Static Application File: category/category-9.png ====
+  id: 84351590302235632
+  identification: 
+    file-name: category/category-9.png
+
+  attributes: 
+    mime-type: image/png
+    file-character-set: Unicode UTF-8
+
+- # ====== Static Application File: icons/app-icon-144-rounded.p
+  id: 84351887114235638
+  identification: 
+    file-name: icons/app-icon-144-rounded.png
+
+  attributes: 
+    mime-type: image/png
+    file-character-set: Unicode UTF-8
+
+- # ====== Static Application File: icons/app-icon-192.png =====
+  id: 84352180346235643
+  identification: 
+    file-name: icons/app-icon-192.png
+
+  attributes: 
+    mime-type: image/png
+    file-character-set: Unicode UTF-8
+
+- # ====== Static Application File: icons/app-icon-256-rounded.p
+  id: 84352493395235648
+  identification: 
+    file-name: icons/app-icon-256-rounded.png
+
+  attributes: 
+    mime-type: image/png
+    file-character-set: Unicode UTF-8
+
+- # ====== Static Application File: icons/app-icon-32.png ======
+  id: 84352749773235653
+  identification: 
+    file-name: icons/app-icon-32.png
+
+  attributes: 
+    mime-type: image/png
+    file-character-set: Unicode UTF-8
+
+- # ====== Static Application File: icons/app-icon-512.png =====
+  id: 84353082423235659
+  identification: 
+    file-name: icons/app-icon-512.png
+
+  attributes: 
+    mime-type: image/png
+    file-character-set: Unicode UTF-8
+
+- # ====== Static Application File: item/brownie.jpg ===========
+  id: 84353339491235665
+  identification: 
+    file-name: item/brownie.jpg
+
+  attributes: 
+    mime-type: image/jpeg
+    file-character-set: Unicode UTF-8
+
+- # ====== Static Application File: item/burger.jpg ============
+  id: 84353676864235671
+  identification: 
+    file-name: item/burger.jpg
+
+  attributes: 
+    mime-type: image/jpeg
+    file-character-set: Unicode UTF-8
+
+- # ====== Static Application File: item/chicken.jpg ===========
+  id: 84353985260235677
+  identification: 
+    file-name: item/chicken.jpg
+
+  attributes: 
+    mime-type: image/jpeg
+    file-character-set: Unicode UTF-8
+
+- # ====== Static Application File: item/coffee.jpg ============
+  id: 84354263248235683
+  identification: 
+    file-name: item/coffee.jpg
+
+  attributes: 
+    mime-type: image/jpeg
+    file-character-set: Unicode UTF-8
+
+- # ====== Static Application File: item/dumplin.jpg ===========
+  id: 84354573311235690
+  identification: 
+    file-name: item/dumplin.jpg
+
+  attributes: 
+    mime-type: image/jpeg
+    file-character-set: Unicode UTF-8
+
+- # ====== Static Application File: item/eggs.jpg ==============
+  id: 84354894900235696
+  identification: 
+    file-name: item/eggs.jpg
+
+  attributes: 
+    mime-type: image/jpeg
+    file-character-set: Unicode UTF-8
+
+- # ====== Static Application File: item/fruits.jpg ============
+  id: 84355205306235702
+  identification: 
+    file-name: item/fruits.jpg
+
+  attributes: 
+    mime-type: image/jpeg
+    file-character-set: Unicode UTF-8
+
+- # ====== Static Application File: item/hotcake.jpg ===========
+  id: 84355419716235709
+  identification: 
+    file-name: item/hotcake.jpg
+
+  attributes: 
+    mime-type: image/jpeg
+    file-character-set: Unicode UTF-8
+
+- # ====== Static Application File: item/icecream.jpg ==========
+  id: 84355727083235715
+  identification: 
+    file-name: item/icecream.jpg
+
+  attributes: 
+    mime-type: image/jpeg
+    file-character-set: Unicode UTF-8
+
+- # ====== Static Application File: item/latte.jpg =============
+  id: 84356084493235721
+  identification: 
+    file-name: item/latte.jpg
+
+  attributes: 
+    mime-type: image/jpeg
+    file-character-set: Unicode UTF-8
+
+- # ====== Static Application File: item/pasta.jpg =============
+  id: 84356221138235728
+  identification: 
+    file-name: item/pasta.jpg
+
+  attributes: 
+    mime-type: image/jpeg
+    file-character-set: Unicode UTF-8
+
+- # ====== Static Application File: item/pizza.jpg =============
+  id: 84356598570235735
+  identification: 
+    file-name: item/pizza.jpg
+
+  attributes: 
+    mime-type: image/jpeg
+    file-character-set: Unicode UTF-8
+
+- # ====== Static Application File: item/poke.jpg ==============
+  id: 84356868344235742
+  identification: 
+    file-name: item/poke.jpg
+
+  attributes: 
+    mime-type: image/jpeg
+    file-character-set: Unicode UTF-8
+
+- # ====== Static Application File: item/salad.jpg =============
+  id: 84357151233235751
+  identification: 
+    file-name: item/salad.jpg
+
+  attributes: 
+    mime-type: image/jpeg
+    file-character-set: Unicode UTF-8
+
+- # ====== Static Application File: item/salmon.jpg ============
+  id: 84357510575235758
+  identification: 
+    file-name: item/salmon.jpg
+
+  attributes: 
+    mime-type: image/jpeg
+    file-character-set: Unicode UTF-8
+
+- # ====== Static Application File: item/seafood.jpg ===========
+  id: 84357751082235765
+  identification: 
+    file-name: item/seafood.jpg
+
+  attributes: 
+    mime-type: image/jpeg
+    file-character-set: Unicode UTF-8
+
+- # ====== Static Application File: item/shrimp.jpg ============
+  id: 84358090499235773
+  identification: 
+    file-name: item/shrimp.jpg
+
+  attributes: 
+    mime-type: image/jpeg
+    file-character-set: Unicode UTF-8
+
+- # ====== Static Application File: item/soup.jpg ==============
+  id: 84358395544235780
+  identification: 
+    file-name: item/soup.jpg
+
+  attributes: 
+    mime-type: image/jpeg
+    file-character-set: Unicode UTF-8
+
+- # ====== Static Application File: item/steak.jpg =============
+  id: 84358683218235788
+  identification: 
+    file-name: item/steak.jpg
+
+  attributes: 
+    mime-type: image/jpeg
+    file-character-set: Unicode UTF-8
+
+- # ====== Static Application File: item/sushi.jpg =============
+  id: 84358939376235795
+  identification: 
+    file-name: item/sushi.jpg
+
+  attributes: 
+    mime-type: image/jpeg
+    file-character-set: Unicode UTF-8
+
+- # ====== Static Application File: item/taco.jpg ==============
+  id: 84359239877235804
+  identification: 
+    file-name: item/taco.jpg
+
+  attributes: 
+    mime-type: image/jpeg
+    file-character-set: Unicode UTF-8
+
+- # ====== Static Application File: item/vada.jpg ==============
+  id: 84359559957235812
+  identification: 
+    file-name: item/vada.jpg
+
+  attributes: 
+    mime-type: image/jpeg
+    file-character-set: Unicode UTF-8
+
+- # ====== Static Application File: item/wrap.jpg ==============
+  id: 84359890332235820
+  identification: 
+    file-name: item/wrap.jpg
+
+  attributes: 
+    mime-type: image/jpeg
+    file-character-set: Unicode UTF-8
+
+- # ====== Static Application File: item/yogurt.jpg ============
+  id: 84360018921235828
+  identification: 
+    file-name: item/yogurt.jpg
+
+  attributes: 
+    mime-type: image/jpeg
+    file-character-set: Unicode UTF-8
+
+- # ====== Static Application File: js/apextogo.js =============
+  id: 84360369215235835
+  identification: 
+    file-name: js/apextogo.js
+
+  attributes: 
+    mime-type: text/javascript
+    file-character-set: Unicode UTF-8
+
+- # ====== Static Application File: orders/past-order.png ======
+  id: 84360965431235851
+  identification: 
+    file-name: orders/past-order.png
+
+  attributes: 
+    mime-type: image/png
+    file-character-set: Unicode UTF-8
+
+- # ====== Static Application File: orders/order-progress.png ==
+  id: 84361269882235859
+  identification: 
+    file-name: orders/order-progress.png
+
+  attributes: 
+    mime-type: image/png
+    file-character-set: Unicode UTF-8
+
+- # ====== Static Application File: pwa/screenshot-2.png =======
+  id: 84361909619235876
+  identification: 
+    file-name: pwa/screenshot-2.png
+
+  attributes: 
+    mime-type: image/png
+    file-character-set: Unicode UTF-8
+
+- # ====== Static Application File: pwa/screenshot-3.png =======
+  id: 84362161315235884
+  identification: 
+    file-name: pwa/screenshot-3.png
+
+  attributes: 
+    mime-type: image/png
+    file-character-set: Unicode UTF-8
+
+- # ====== Static Application File: pwa/screenshot-4.png =======
+  id: 84362449533235893
+  identification: 
+    file-name: pwa/screenshot-4.png
+
+  attributes: 
+    mime-type: image/png
+    file-character-set: Unicode UTF-8
+
+- # ====== Static Application File: pwa/shortcut-icon-10.png ===
+  id: 84362799061235901
+  identification: 
+    file-name: pwa/shortcut-icon-10.png
+
+  attributes: 
+    mime-type: image/png
+    file-character-set: Unicode UTF-8
+
+- # ====== Static Application File: pwa/shortcut-icon-30.png ===
+  id: 84363062035235909
+  identification: 
+    file-name: pwa/shortcut-icon-30.png
+
+  attributes: 
+    mime-type: image/png
+    file-character-set: Unicode UTF-8
+
+- # ====== Static Application File: pwa/shortcut-icon-40.png ===
+  id: 84363379181235918
+  identification: 
+    file-name: pwa/shortcut-icon-40.png
+
+  attributes: 
+    mime-type: image/png
+    file-character-set: Unicode UTF-8
+
+- # ====== Static Application File: restaurant/apex-mex-grill.jp
+  id: 84363539048235927
+  identification: 
+    file-name: restaurant/apex-mex-grill.jpg
+
+  attributes: 
+    mime-type: image/jpeg
+    file-character-set: Unicode UTF-8
+
+- # ====== Static Application File: restaurant/apexquisite-delig
+  id: 84363823986235936
+  identification: 
+    file-name: restaurant/apexquisite-delights.jpg
+
+  attributes: 
+    mime-type: image/jpeg
+    file-character-set: Unicode UTF-8
+
+- # ====== Static Application File: restaurant/apextraordinary-f
+  id: 84364171065235945
+  identification: 
+    file-name: restaurant/apextraordinary-fare.jpg
+
+  attributes: 
+    mime-type: image/jpeg
+    file-character-set: Unicode UTF-8
+
+- # ====== Static Application File: restaurant/bytestart-breakfa
+  id: 84364458940235954
+  identification: 
+    file-name: restaurant/bytestart-breakfast-nook.jpg
+
+  attributes: 
+    mime-type: image/jpeg
+    file-character-set: Unicode UTF-8
+
+- # ====== Static Application File: restaurant/oracool-cafe.jpg 
+  id: 84364757119235964
+  identification: 
+    file-name: restaurant/oracool-cafe.jpg
+
+  attributes: 
+    mime-type: image/jpeg
+    file-character-set: Unicode UTF-8
+
+- # ====== Static Application File: restaurant/oraculicious-cuis
+  id: 84365083386235973
+  identification: 
+    file-name: restaurant/oraculicious-cuisine.jpg
+
+  attributes: 
+    mime-type: image/jpeg
+    file-character-set: Unicode UTF-8
+
+- # ====== Static Application File: restaurant/restaurant-hero-1
+  id: 84365407766235983
+  identification: 
+    file-name: restaurant/restaurant-hero-1.jpg
+
+  attributes: 
+    mime-type: image/jpeg
+    file-character-set: Unicode UTF-8
+
+- # ====== Static Application File: restaurant/restaurant-hero-1
+  id: 84365692217235993
+  identification: 
+    file-name: restaurant/restaurant-hero-10.jpg
+
+  attributes: 
+    mime-type: image/jpeg
+    file-character-set: Unicode UTF-8
+
+- # ====== Static Application File: restaurant/restaurant-hero-1
+  id: 84366004040236003
+  identification: 
+    file-name: restaurant/restaurant-hero-11.jpg
+
+  attributes: 
+    mime-type: image/jpeg
+    file-character-set: Unicode UTF-8
+
+- # ====== Static Application File: restaurant/restaurant-hero-2
+  id: 84366233097236013
+  identification: 
+    file-name: restaurant/restaurant-hero-2.jpg
+
+  attributes: 
+    mime-type: image/jpeg
+    file-character-set: Unicode UTF-8
+
+- # ====== Static Application File: restaurant/restaurant-hero-3
+  id: 84366552977236023
+  identification: 
+    file-name: restaurant/restaurant-hero-3.jpg
+
+  attributes: 
+    mime-type: image/jpeg
+    file-character-set: Unicode UTF-8
+
+- # ====== Static Application File: restaurant/restaurant-hero-4
+  id: 84366717602236032
+  identification: 
+    file-name: restaurant/restaurant-hero-4.jpg
+
+  attributes: 
+    mime-type: image/jpeg
+    file-character-set: Unicode UTF-8
+
+- # ====== Static Application File: restaurant/restaurant-hero-5
+  id: 84367069083236042
+  identification: 
+    file-name: restaurant/restaurant-hero-5.jpg
+
+  attributes: 
+    mime-type: image/jpeg
+    file-character-set: Unicode UTF-8
+
+- # ====== Static Application File: restaurant/restaurant-hero-6
+  id: 84367350077236052
+  identification: 
+    file-name: restaurant/restaurant-hero-6.jpg
+
+  attributes: 
+    mime-type: image/jpeg
+    file-character-set: Unicode UTF-8
+
+- # ====== Static Application File: restaurant/restaurant-hero-7
+  id: 84367638777236062
+  identification: 
+    file-name: restaurant/restaurant-hero-7.jpg
+
+  attributes: 
+    mime-type: image/jpeg
+    file-character-set: Unicode UTF-8
+
+- # ====== Static Application File: restaurant/restaurant-hero-8
+  id: 84367964669236072
+  identification: 
+    file-name: restaurant/restaurant-hero-8.jpg
+
+  attributes: 
+    mime-type: image/jpeg
+    file-character-set: Unicode UTF-8
+
+- # ====== Static Application File: restaurant/restaurant-hero-9
+  id: 84368296329236082
+  identification: 
+    file-name: restaurant/restaurant-hero-9.jpg
+
+  attributes: 
+    mime-type: image/jpeg
+    file-character-set: Unicode UTF-8
+
+- # ====== Static Application File: restaurant/sql-paradise.jpg 
+  id: 84368538430236092
+  identification: 
+    file-name: restaurant/sql-paradise.jpg
+
+  attributes: 
+    mime-type: image/jpeg
+    file-character-set: Unicode UTF-8
+
+- # ====== Static Application File: restaurant/sql-sushi-grill.j
+  id: 84368814887236102
+  identification: 
+    file-name: restaurant/sql-sushi-grill.jpg
+
+  attributes: 
+    mime-type: image/jpeg
+    file-character-set: Unicode UTF-8
+
+- # ====== Static Application File: restaurant/sqlicious-bistro.
+  id: 84369167797236112
+  identification: 
+    file-name: restaurant/sqlicious-bistro.jpg
+
+  attributes: 
+    mime-type: image/jpeg
+    file-character-set: Unicode UTF-8
+
+- # ====== Static Application File: restaurant/sqlovely-diner.jp
+  id: 84369429523236123
+  identification: 
+    file-name: restaurant/sqlovely-diner.jpg
+
+  attributes: 
+    mime-type: image/jpeg
+    file-character-set: Unicode UTF-8
+
+- # ====== Static Application File: restaurant/sqltastic-grill.j
+  id: 84369688761236133
+  identification: 
+    file-name: restaurant/sqltastic-grill.jpg
+
+  attributes: 
+    mime-type: image/jpeg
+    file-character-set: Unicode UTF-8
+
+- # ====== Static Application File: slides/slide-1.jpg =========
+  id: 84369961252236143
+  identification: 
+    file-name: slides/slide-1.jpg
+
+  attributes: 
+    mime-type: image/jpeg
+    file-character-set: Unicode UTF-8
+
+- # ====== Static Application File: slides/slide-2.jpg =========
+  id: 84370269955236154
+  identification: 
+    file-name: slides/slide-2.jpg
+
+  attributes: 
+    mime-type: image/jpeg
+    file-character-set: Unicode UTF-8
+
+- # ====== Static Application File: slides/slide-3.jpg =========
+  id: 84370541901236164
+  identification: 
+    file-name: slides/slide-3.jpg
+
+  attributes: 
+    mime-type: image/jpeg
+    file-character-set: Unicode UTF-8
+
+- # ====== Static Application File: splash/splash-1.png ========
+  id: 84370888489236175
+  identification: 
+    file-name: splash/splash-1.png
+
+  attributes: 
+    mime-type: image/png
+    file-character-set: Unicode UTF-8
+
+- # ====== Static Application File: splash/splash-2.png ========
+  id: 84371183482236185
+  identification: 
+    file-name: splash/splash-2.png
+
+  attributes: 
+    mime-type: image/png
+    file-character-set: Unicode UTF-8
+
+- # ====== Static Application File: splash/splash-3.png ========
+  id: 84371482295236196
+  identification: 
+    file-name: splash/splash-3.png
+
+  attributes: 
+    mime-type: image/png
+    file-character-set: Unicode UTF-8
+
+- # ====== Static Application File: pwa/screenshot-1.png =======
+  id: 84373996385259587
+  identification: 
+    file-name: pwa/screenshot-1.png
+
+  attributes: 
+    mime-type: image/png
+    file-character-set: Unicode UTF-8
+
+- # ====== Static Application File: css/apextogo.css ===========
+  id: 84505438489089388
+  identification: 
+    file-name: css/apextogo.css
+
+  attributes: 
+    mime-type: text/css
+    file-character-set: Unicode UTF-8
+
+- # ====== Static Application File: css/apextogo.min.css =======
+  id: 84506474878089804
+  identification: 
+    file-name: css/apextogo.min.css
+
+  attributes: 
+    mime-type: text/css
+    file-character-set: Unicode UTF-8
+
+- # ====== Static Application File: js/apextogo.min.js =========
+  id: 84864362973624006
+  identification: 
+    file-name: js/apextogo.min.js
+
+  attributes: 
+    mime-type: text/javascript
+    file-character-set: Unicode UTF-8
+

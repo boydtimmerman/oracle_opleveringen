@@ -1,0 +1,213 @@
+---
+# ====== Page: Get Started ===================================
+id: 3
+identification: 
+  name: Get Started
+  alias: GET-STARTED
+  title: Get Started
+
+appearance: 
+  page-mode: Normal
+  page-template: Login
+  template-options: 
+  - '#DEFAULT#'
+
+navigation-menu: 
+  override-user-interface-level: false
+
+navigation: 
+  cursor-focus: Do not focus cursor
+  warn-on-unsaved-changes: true
+
+security: 
+  authentication: Page Is Public
+  deep-linking: Application Default
+  page-access-protection: Arguments Must Have Checksum
+  form-auto-complete: On
+  browser-cache: Application Default
+
+session-management: 
+  rejoin-sessions: Application Default
+
+advanced: 
+  enable-meta-tags: false
+  enable-duplicate-page-submissions: Yes - Enable page to be re-posted
+  reload-on-submit: Only for Success
+
+server-cache: 
+  caching: Disabled
+
+regions: 
+- # ====== Region: Background Image ============================
+  id: 311481000408774948
+  identification: 
+    name: Background Image
+    type: Static Content
+
+  layout: 
+    sequence: 70
+    parent-region: No Parent
+    slot: BACKGROUND_IMAGE
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+
+  appearance: 
+    template: Image
+    template-options: 
+    - '#DEFAULT#'
+    - t-ImageRegion--auto
+    - t-ImageRegion--cover
+    - t-ImageRegion--square
+    - t-ImageRegion--noFilter
+    render-components: Above Content
+
+  accessibility: 
+    use-landmark: false
+
+  image: 
+    file-url: '#APP_FILES#background.jpg'
+
+  advanced: 
+    region-display-selector: false
+    exclude-title-from-translation: false
+
+  customization: 
+    customizable: Not Customizable By End Users
+
+  attributes: 
+    settings: 
+      output-as: HTML
+      expand-shortcuts: false
+
+- # ====== Region: Get Started Image ===========================
+  id: 3781410600245469101
+  identification: 
+    name: Get Started Image
+    type: Static Content
+
+  layout: 
+    sequence: 20
+    parent-region: No Parent
+    slot: BODY
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+
+  appearance: 
+    template: Image
+    template-options: 
+    - '#DEFAULT#'
+    - t-ImageRegion--auto
+    - t-ImageRegion--cover
+    - t-ImageRegion--square
+    - t-ImageRegion--noFilter
+    - margin-top-none
+    css-classes: 
+    - u-flex
+    - u-justify-content-center
+    render-components: Above Content
+
+  accessibility: 
+    use-landmark: false
+
+  image: 
+    file-url: '#APP_FILES#splash/splash-3.png'
+
+  advanced: 
+    region-display-selector: false
+    exclude-title-from-translation: false
+
+  customization: 
+    customizable: Not Customizable By End Users
+
+  attributes: 
+    settings: 
+      output-as: HTML
+      expand-shortcuts: false
+
+- # ====== Region: Get Started Text ============================
+  id: 3781411149076469868
+  identification: 
+    name: Get Started Text
+    type: Static Content
+
+  source: 
+    html-code: <p>Get the best experience on your mobile device<a href="#action$a-pwa-install"> by installing this app</a>.</p>
+
+  layout: 
+    sequence: 40
+    parent-region: No Parent
+    slot: BODY
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+
+  appearance: 
+    template: Blank with Attributes
+    template-options: 
+    - '#DEFAULT#'
+    - margin-top-md
+    - margin-bottom-lg
+    css-classes: 
+    - u-textCenter
+    render-components: Above Content
+
+  accessibility: 
+    use-landmark: false
+
+  advanced: 
+    region-display-selector: false
+    exclude-title-from-translation: false
+
+  customization: 
+    customizable: Not Customizable By End Users
+
+  attributes: 
+    settings: 
+      output-as: HTML
+      expand-shortcuts: false
+
+buttons: 
+- # ====== Button: GO ==========================================
+  id: 80958869917489242
+  identification: 
+    button-name: GO
+    label: Go!
+
+  layout: 
+    sequence: 50
+    region: No Parent
+    slot: BODY
+    start-new-layout: false
+    start-new-row: true
+    column: 5
+    new-column: true
+    column-span: 4
+    alignment: Left center
+
+  appearance: 
+    button-template: Text
+    hot: true
+    template-options: 
+    - '#DEFAULT#'
+    - t-Button--large
+    - t-Button--stretch
+    css-classes: 
+    - mxw320
+    - margin-auto
+
+  behavior: 
+    action: Redirect to Page in this Application
+    target: 
+      url: 'f?p=&APP_ID.:9999:&SESSION.::&DEBUG.:::'
+      page: 9999 # Sign In
+
+    warn-on-unsaved-changes: Do Not Check
+

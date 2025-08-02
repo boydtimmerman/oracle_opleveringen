@@ -1,0 +1,97 @@
+---
+# ====== Theme: Universal Theme ==============================
+id: 42
+identification: 
+  theme-number: 42
+  name: Universal Theme
+  identifier: UNIVERSAL_THEME
+  version: 24.2
+
+navigation: 
+  type: List
+  navigation-bar-type: List
+
+javascript: 
+  file-urls: 
+  - '#APEX_FILES#libraries/apex/#MIN_DIRECTORY#widget.stickyWidget#MIN#.js?v=#APEX_VERSION#'
+  - '#THEME_FILES#js/theme42#MIN#.js?v=#APEX_VERSION#'
+
+css: 
+  file-urls: 
+  - '#THEME_FILES#css/Core#MIN#.css?v=#APEX_VERSION#'
+
+component-defaults: 
+  current-theme-style: APEXToGo
+  page: Standard
+  navigation-bar-list: Navigation Bar
+  navigation-menu-list-position: Side
+  navigation-menu-list-(top): Top Navigation Menu
+  navigation-menu-list-(side): Side Navigation Menu
+  login-page: Login
+  error-page: Login
+  printer-friendly-page: Standard
+  breadcrumb: Breadcrumb
+  button: Text
+  legacy-calendar: Calendar
+  default-label: Optional - Floating
+  optional-label: Optional - Floating
+  required-label: Required - Floating
+  list: Links List
+  region: Standard
+  classic-report: Standard
+
+region-defaults: 
+  breadcrumbs: Title Bar
+  charts: Standard
+  forms: Standard
+  lists: Standard
+  reports: Standard
+  wizards: Standard
+  interactive-reports: Interactive Report
+
+dialog-defaults: 
+  dialog-content-region: Blank with Attributes
+  dialog-button-region: Buttons Container
+  dialog-page: Modal Dialog
+
+icons: 
+  library: Font APEX
+
+files: 
+  file-prefix: '#APEX_FILES#themes/theme_42/24.2/'
+
+styles: 
+- # ====== Style: APEXToGo =====================================
+  id: 84868577813040560
+  identification: 
+    name: APEXToGo
+
+  settings: 
+    is-public: true
+    accessibility-tested: true
+
+  theme-roller-attributes: 
+    read-only: false
+    input-parameter-file-urls: '#THEME_FILES#less/theme/Vita.less'
+    output-css-file-url: '#THEME_DB_FILES#63540532184032268.css'
+    json-configuration: '{"classes":[],"vars":{"@g_Accent-BG":"#c13c1e","@g_Button-BorderRadius":"24px","@g_Form-BorderRadius":"4px","@g_Color-Palette-1":"#c13c1e","@g_Color-Palette-1-FG":"#ffffff","@g_Color-Palette-2":"#c33b12","@g_Color-Palette-2-FG":"#e4f9fd","@g_Color-Palette-3":"#af4a2b","@g_Color-Palette-3-FG":"#f0fcfb","@g_Color-Palette-4":"#a85941","@g_Color-Palette-4-FG":"#f0faf6","@g_Color-Palette-5":"#b8715c","@g_Color-Palette-5-FG":"#ffffff","@g_Color-Palette-6":"#cc4319","@g_Color-Palette-6-FG":"#2a2a08","@g_Container-BorderRadius":"4px","@g_Nav_Style":"light","@g_Nav-Accent-BG":"#e53500","@g_Nav-Accent-FG":"#ffffff","@Nav-Exp":"340px","@g_Body-Content-Max-Width":"100%","@Actions-Exp":"360px","@Head-Height":"56px","@g_Nav-BG":"#ffffff","@g_Nav-FG":"#333333","@g_Nav-Icon":"#333333","@g_Nav-Icon-Active":"#050505","@g_Disabled-BG":"#707070","@g_Disabled-FG":"#FFFFFF","@g_Button-BG":"#f8f8f8","@g_Button-Text":"#383838","@g_Focus":"#e8684c","@g_Form-Item-BG":"#f9f9f9","@g_Form-Item-FG":"#211e1e","@g_Accent-OG":"#fdfdfd","@g_Header-BG":"#ffffff","@g_Header-FG":"#000000","@l_Button-Hot-BG":"#c13c1e","@l_Button-Hot-Text":"#ffffff","@g_Nav-Badge-BG":"#de5435","@g_Nav-Badge-FG":"#ffffff","@g_Link-Base":"#c13c1e"},"customCSS":"","useCustomLess":"N"}'
+
+files: 
+- # ====== File: 63540532184032268.css =========================
+  id: 35026163731876162
+  identification: 
+    file-name: 63540532184032268.css
+
+  attributes: 
+    mime-type: text/css
+    file-character-set: Unicode UTF-8
+
+- # ====== File: 50244066654171588.css =========================
+  id: 84868972260040565
+  identification: 
+    file-name: 50244066654171588.css
+
+  attributes: 
+    mime-type: text/css
+    file-character-set: Unicode UTF-8
+

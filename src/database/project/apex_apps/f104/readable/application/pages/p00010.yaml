@@ -1,0 +1,840 @@
+---
+# ====== Page: Order Details =================================
+id: 10
+identification: 
+  name: Order Details
+  alias: ORDER-DETAILS
+  title: Order Details
+
+appearance: 
+  page-mode: Normal
+  page-template: Theme Default
+  template-options: 
+  - '#DEFAULT#'
+
+navigation-menu: 
+  override-user-interface-level: false
+
+navigation: 
+  cursor-focus: Do not focus cursor
+  warn-on-unsaved-changes: true
+
+security: 
+  authorization-scheme: MODEL.LOV.MUST_NOT_BE_PUBLIC_USER
+  authentication: Page Requires Authentication
+  deep-linking: Application Default
+  page-access-protection: Arguments Must Have Checksum
+  form-auto-complete: Off
+  browser-cache: Application Default
+
+session-management: 
+  rejoin-sessions: Application Default
+
+advanced: 
+  enable-duplicate-page-submissions: Yes - Enable page to be re-posted
+  reload-on-submit: Only for Success
+
+server-cache: 
+  caching: Disabled
+
+regions: 
+- # ====== Region: Order Total =================================
+  id: 746932805163495704
+  identification: 
+    name: Order Total
+    type: Classic Report
+
+  source: 
+    location: Local Database
+    type: SQL Query
+    sql-query: |
+      select '$' || sum( unit_price * quantity ) as total
+        from sample_restaurant_order_items
+       where order_id = :P10_ORDER_ID
+       order by order_id
+
+  order-by: 
+    type: None
+
+  layout: 
+    sequence: 70
+    parent-region: No Parent
+    slot: BODY
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+
+  appearance: 
+    template: Content Block
+    template-options: 
+    - '#DEFAULT#'
+    - t-ContentBlock--h1
+    - t-ContentBlock--shadowBG
+    - t-Region--removeHeader js-removeLandmark
+    render-components: Below Content
+
+  accessibility: 
+    use-landmark: true
+    landmark-type: Template Default
+
+  advanced: 
+    region-display-selector: false
+    exclude-title-from-translation: false
+
+  server-cache: 
+    caching: Disabled
+
+  customization: 
+    customizable: Not Customizable By End Users
+
+  attributes: 
+    layout: 
+      number-of-rows-type: Static Value
+      number-of-rows: 15
+
+    appearance: 
+      template-type: Theme
+      template: Value Attribute Pairs - Column
+      template-options: 
+      - '#DEFAULT#'
+      - t-AVPList--fixedLabelSmall
+      - t-AVPList--rightAligned
+
+    pagination: 
+      type: No Pagination (Show All Rows)
+      partial-page-refresh: true
+
+    performance: 
+      lazy-loading: false
+
+    break-formatting: 
+      break-columns: No Break
+
+    advanced: 
+      strip-html: false
+      sort-nulls: Last
+
+    heading: 
+      type: Custom Headings
+
+    download: 
+      csv-export-enabled: false
+
+    printing: 
+      enabled: false
+
+  columns: 
+  - # ====== Column: TOTAL =======================================
+    id: 81022021473520493
+    identification: 
+      column-name: TOTAL
+      type: Plain Text
+
+    heading: 
+      heading: Total
+      alignment: end
+
+    layout: 
+      sequence: 10
+      column-alignment: end
+
+    accessibility: 
+      value-identifies-row: true
+
+    column-formatting: 
+      html-expression: <strong>#TOTAL#</strong>
+
+    sorting: 
+      sortable: false
+
+    export-/-printing: 
+      include-in-export-/-print: true
+
+    advanced: 
+      compute-sum: false
+
+    ui-defaults-reference: 
+      table-owner: Parsing Schema
+
+    security: 
+      escape-special-characters: true
+
+- # ====== Region: Order Summary ===============================
+  id: 952619114232341879
+  identification: 
+    name: Order Summary
+    type: Content Row
+
+  source: 
+    location: Local Database
+    type: SQL Query
+    sql-query: |
+      select o.order_id,
+             o.item_id,
+             o.unit_price,
+             o.quantity,
+             i.name,
+             i.description,
+             i.image_url,
+             o.unit_price * o.quantity subtotal,
+             o.utensils,
+             o.note
+        from sample_restaurant_order_items o,
+             sample_restaurant_items i
+       where o.order_id = :P10_ORDER_ID
+         and o.item_id = i.id
+
+  order-by: 
+    type: None
+
+  layout: 
+    sequence: 60
+    parent-region: No Parent
+    slot: BODY
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+
+  appearance: 
+    template: Content Block
+    template-options: 
+    - '#DEFAULT#'
+    - t-ContentBlock--padded
+    - t-ContentBlock--h3
+    - t-ContentBlock--lightBG
+    render-components: Above Content
+
+  accessibility: 
+    use-landmark: true
+    landmark-type: Region
+
+  advanced: 
+    region-display-selector: false
+    exclude-title-from-translation: false
+
+  customization: 
+    customizable: Not Customizable By End Users
+
+  attributes: 
+    appearance: 
+      display: Multiple (Report)
+
+    settings: 
+      title: '&NAME.'
+      description: |
+        <div>Utensils: &UTENSILS.</div>
+        <div>&NOTE.</div>
+      miscellaneous: Subtotal $&SUBTOTAL.
+      display-avatar: true
+      display-badge: true
+
+    avatar: 
+      type: Image
+      image: 
+        url: '#APP_FILES#&IMAGE_URL.'
+
+      shape: Rounded
+      size: Default
+
+    badge: 
+      label: Quantity
+      value: QUANTITY
+      display-label: false
+      style: Default
+      shape: Rounded
+      size: Medium
+      column-width: Auto
+      position: START
+      alignment: START
+
+    appearance: 
+      apply-theme-colors: false
+      style: Default
+      hide-borders: false
+      remove-padding: false
+
+    row-selection: 
+      type: None
+
+    performance: 
+      lazy-loading: false
+
+    pagination: 
+      type: Scroll
+      show-total-count: false
+
+    messages: 
+      when-no-data-found: No Items Found!
+
+  columns: 
+  - # ====== Column: UTENSILS ====================================
+    id: 173283923422798996
+    identification: 
+      name: UTENSILS
+
+    layout: 
+      sequence: 110
+
+    source: 
+      type: Database Column
+      database-column: UTENSILS
+      data-type: VARCHAR2
+      primary-key: false
+
+    accessibility: 
+      value-identifies-row: false
+
+    appearance: 
+      group: false
+
+    list-of-values: 
+      type: Static Values
+      static-values: 'STATIC:Yes;Y,No;N'
+      display-extra-values: true
+
+  - # ====== Column: NOTE ========================================
+    id: 173284048494798997
+    identification: 
+      name: NOTE
+
+    layout: 
+      sequence: 120
+
+    source: 
+      type: Database Column
+      database-column: NOTE
+      data-type: VARCHAR2
+      primary-key: false
+
+    accessibility: 
+      value-identifies-row: false
+
+    appearance: 
+      group: false
+
+  - # ====== Column: ORDER_ID ====================================
+    id: 952619255554341880
+    identification: 
+      name: ORDER_ID
+
+    layout: 
+      sequence: 10
+
+    source: 
+      type: Database Column
+      database-column: ORDER_ID
+      data-type: NUMBER
+      primary-key: true
+
+    accessibility: 
+      value-identifies-row: false
+
+    appearance: 
+      group: false
+
+  - # ====== Column: UNIT_PRICE ==================================
+    id: 952619549736341883
+    identification: 
+      name: UNIT_PRICE
+
+    layout: 
+      sequence: 40
+
+    source: 
+      type: Database Column
+      database-column: UNIT_PRICE
+      data-type: NUMBER
+      primary-key: false
+
+    accessibility: 
+      value-identifies-row: false
+
+    appearance: 
+      group: false
+
+  - # ====== Column: QUANTITY ====================================
+    id: 952619677832341884
+    identification: 
+      name: QUANTITY
+
+    layout: 
+      sequence: 50
+
+    source: 
+      type: Database Column
+      database-column: QUANTITY
+      data-type: NUMBER
+      primary-key: false
+
+    accessibility: 
+      value-identifies-row: false
+
+    appearance: 
+      group: false
+
+  - # ====== Column: NAME ========================================
+    id: 952619762771341885
+    identification: 
+      name: NAME
+
+    layout: 
+      sequence: 60
+
+    source: 
+      type: Database Column
+      database-column: NAME
+      data-type: VARCHAR2
+      primary-key: false
+
+    accessibility: 
+      value-identifies-row: false
+
+    appearance: 
+      group: false
+
+  - # ====== Column: IMAGE_URL ===================================
+    id: 952619837004341886
+    identification: 
+      name: IMAGE_URL
+
+    layout: 
+      sequence: 70
+
+    source: 
+      type: Database Column
+      database-column: IMAGE_URL
+      data-type: VARCHAR2
+      primary-key: false
+
+    accessibility: 
+      value-identifies-row: false
+
+    appearance: 
+      group: false
+
+  - # ====== Column: ITEM_ID =====================================
+    id: 952619914454341887
+    identification: 
+      name: ITEM_ID
+
+    layout: 
+      sequence: 80
+
+    source: 
+      type: Database Column
+      database-column: ITEM_ID
+      data-type: NUMBER
+      primary-key: false
+
+    accessibility: 
+      value-identifies-row: false
+
+    appearance: 
+      group: false
+
+  - # ====== Column: DESCRIPTION =================================
+    id: 952620084420341888
+    identification: 
+      name: DESCRIPTION
+
+    layout: 
+      sequence: 90
+
+    source: 
+      type: Database Column
+      database-column: DESCRIPTION
+      data-type: VARCHAR2
+      primary-key: false
+
+    accessibility: 
+      value-identifies-row: false
+
+    appearance: 
+      group: false
+
+  - # ====== Column: SUBTOTAL ====================================
+    id: 952620365464341891
+    identification: 
+      name: SUBTOTAL
+
+    layout: 
+      sequence: 100
+
+    source: 
+      type: Database Column
+      database-column: SUBTOTAL
+      data-type: NUMBER
+      primary-key: false
+
+    accessibility: 
+      value-identifies-row: false
+
+    appearance: 
+      group: false
+
+- # ====== Region: Order Details ===============================
+  id: 952620728459341895
+  identification: 
+    name: Order Details
+    type: Classic Report
+
+  source: 
+    location: Local Database
+    type: SQL Query
+    sql-query: |
+      select order_id,
+             order_datetime,
+             initcap( order_status ) as order_status
+        from sample_restaurant_orders
+       where order_id = :P10_ORDER_ID
+       order by order_id
+
+  order-by: 
+    type: None
+
+  layout: 
+    sequence: 40
+    parent-region: No Parent
+    slot: BODY
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+
+  appearance: 
+    template: Content Block
+    template-options: 
+    - '#DEFAULT#'
+    - t-ContentBlock--h3
+    - t-ContentBlock--lightBG
+    render-components: Above Content
+
+  accessibility: 
+    use-landmark: true
+    landmark-type: Template Default
+
+  advanced: 
+    region-display-selector: false
+    exclude-title-from-translation: false
+
+  server-cache: 
+    caching: Disabled
+
+  customization: 
+    customizable: Not Customizable By End Users
+
+  attributes: 
+    layout: 
+      number-of-rows-type: Static Value
+      number-of-rows: 15
+
+    appearance: 
+      template-type: Theme
+      template: Value Attribute Pairs - Column
+      template-options: 
+      - '#DEFAULT#'
+      - t-AVPList--rightAligned
+
+    pagination: 
+      type: No Pagination (Show All Rows)
+      partial-page-refresh: true
+
+    performance: 
+      lazy-loading: false
+
+    break-formatting: 
+      break-columns: No Break
+
+    advanced: 
+      strip-html: false
+      sort-nulls: Last
+
+    heading: 
+      type: Custom Headings
+
+    download: 
+      csv-export-enabled: false
+
+    printing: 
+      enabled: false
+
+  columns: 
+  - # ====== Column: ORDER_ID ====================================
+    id: 81027309013520509
+    identification: 
+      column-name: ORDER_ID
+      type: Plain Text
+
+    heading: 
+      heading: Order ID
+      alignment: end
+
+    layout: 
+      sequence: 10
+      column-alignment: end
+
+    accessibility: 
+      value-identifies-row: true
+
+    sorting: 
+      sortable: false
+
+    export-/-printing: 
+      include-in-export-/-print: true
+
+    advanced: 
+      compute-sum: false
+
+    ui-defaults-reference: 
+      table-owner: Parsing Schema
+
+    security: 
+      escape-special-characters: true
+
+  - # ====== Column: ORDER_DATETIME ==============================
+    id: 81027658327520510
+    identification: 
+      column-name: ORDER_DATETIME
+      type: Plain Text
+
+    heading: 
+      heading: Ordered On
+      alignment: start
+
+    layout: 
+      sequence: 20
+      column-alignment: start
+
+    accessibility: 
+      value-identifies-row: false
+
+    appearance: 
+      format-mask: FMMonth DD, YYYY
+
+    sorting: 
+      sortable: false
+
+    export-/-printing: 
+      include-in-export-/-print: true
+
+    advanced: 
+      compute-sum: false
+
+    ui-defaults-reference: 
+      table-owner: Parsing Schema
+
+    security: 
+      escape-special-characters: true
+
+  - # ====== Column: ORDER_STATUS ================================
+    id: 81028035237520512
+    identification: 
+      column-name: ORDER_STATUS
+      type: Plain Text
+
+    heading: 
+      heading: Status
+      alignment: start
+
+    layout: 
+      sequence: 30
+      column-alignment: start
+
+    accessibility: 
+      value-identifies-row: false
+
+    sorting: 
+      sortable: false
+
+    export-/-printing: 
+      include-in-export-/-print: true
+
+    advanced: 
+      compute-sum: false
+
+    ui-defaults-reference: 
+      table-owner: Parsing Schema
+
+    security: 
+      escape-special-characters: true
+
+- # ====== Region: Actions =====================================
+  id: 952622307396341911
+  identification: 
+    name: Actions
+    type: Static Content
+
+  layout: 
+    sequence: 30
+    parent-region: No Parent
+    slot: BODY
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+
+  appearance: 
+    template: Buttons Container
+    template-options: 
+    - '#DEFAULT#'
+    - t-ButtonRegion--noPadding
+    - t-ButtonRegion--noUI
+    render-components: Above Content
+
+  accessibility: 
+    use-landmark: false
+
+  advanced: 
+    region-display-selector: false
+    exclude-title-from-translation: false
+
+  customization: 
+    customizable: Not Customizable By End Users
+
+  attributes: 
+    settings: 
+      output-as: HTML
+      expand-shortcuts: false
+
+page-items: 
+- # ====== Page Item: P10_ORDER_ID =============================
+  id: 756522725414641524
+  identification: 
+    name: P10_ORDER_ID
+    type: Hidden
+
+  settings: 
+    value-protected: true
+
+  layout: 
+    sequence: 20
+    region: No Parent
+    slot: BODY
+
+  advanced: 
+    warn-on-unsaved-changes: Page Default
+
+  source: 
+    type: Null
+    used: Only when current value in session state is null
+
+  session-state: 
+    data-type: VARCHAR2
+    storage: Per Session (Persistent)
+
+  security: 
+    session-state-protection: Unrestricted
+    store-value-encrypted-in-session-state: true
+    restricted-characters: All characters can be saved.
+
+buttons: 
+- # ====== Button: INVITE_FRIENDS ==============================
+  id: 81021313142520492
+  identification: 
+    button-name: INVITE_FRIENDS
+    label: Invite a friend
+
+  layout: 
+    sequence: 80
+    region: No Parent
+    slot: BODY
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+    alignment: Right
+
+  appearance: 
+    button-template: Text with Icon
+    hot: true
+    template-options: 
+    - '#DEFAULT#'
+    - t-Button--large
+    - t-Button--simple
+    - t-Button--iconLeft
+    - t-Button--stretch
+    icon: fa-cutlery
+
+  behavior: 
+    action: Defined by Dynamic Action
+    execute-validations: true
+
+- # ====== Button: GO_BACK =====================================
+  id: 81029311110520514
+  identification: 
+    button-name: GO_BACK
+    label: Go Back
+
+  layout: 
+    sequence: 10
+    region: Actions # 952622307396341911
+    slot: PREVIOUS
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+
+  appearance: 
+    button-template: Text with Icon
+    hot: false
+    template-options: 
+    - '#DEFAULT#'
+    - t-Button--simple
+    - t-Button--iconLeft
+    - t-Button--hoverIconPush
+    icon: fa-chevron-left
+
+  behavior: 
+    action: Redirect to Page in this Application
+    target: 
+      url: 'f?p=&APP_ID.:9:&SESSION.::&DEBUG.:::'
+      page: 9 # Orders
+
+    warn-on-unsaved-changes: Do Not Check
+
+dynamic-actions: 
+- # ====== Dynamic Action: Share Application ===================
+  id: 81030124086520515
+  identification: 
+    name: Share Application
+
+  execution: 
+    sequence: 10
+    event-scope: Static
+    type: Immediate
+
+  when: 
+    event: Click
+    selection-type: Button
+    button: INVITE_FRIENDS # 81021313142520492
+
+  actions: 
+  - # ====== Action: Share =======================================
+    id: 81030629804520515
+    identification: 
+      action: Share
+
+    settings: 
+      title: Invite Friends
+      text: Check out this Oracle APEX mobile app
+      share-type: URL
+      url: 
+        url: 'f?p=&APP_ID.:1:&SESSION.::&DEBUG.:::'
+        page: 1 # Welcome
+
+    execution: 
+      sequence: 10
+      event: Share Application # 81030124086520515
+      fire-when-event-result-is: True
+      fire-on-initialization: false
+      stop-execution-on-error: true
+      wait-for-result: true
+

@@ -1,0 +1,388 @@
+---
+# ====== Page: Support =======================================
+id: 14
+identification: 
+  name: Support
+  alias: SUPPORT
+  title: Support
+  page-group: User Settings # 166726674484130785
+
+appearance: 
+  page-mode: Modal Dialog
+  dialog-template: Drawer
+  template-options: 
+  - '#DEFAULT#'
+  - js-dialog-class-t-Drawer--pullOutEnd
+
+dialog: 
+  chained: true
+  resizable: false
+
+navigation-menu: 
+  override-user-interface-level: false
+
+navigation: 
+  cursor-focus: Do not focus cursor
+  warn-on-unsaved-changes: true
+
+security: 
+  authorization-scheme: MODEL.LOV.MUST_NOT_BE_PUBLIC_USER
+  authentication: Page Requires Authentication
+  deep-linking: Application Default
+  page-access-protection: Arguments Must Have Checksum
+  form-auto-complete: On
+  browser-cache: Application Default
+
+session-management: 
+  rejoin-sessions: Application Default
+
+advanced: 
+  enable-duplicate-page-submissions: Yes - Enable page to be re-posted
+  reload-on-submit: Only for Success
+
+server-cache: 
+  caching: Disabled
+
+regions: 
+- # ====== Region: Actions =====================================
+  id: 126722582834094455
+  identification: 
+    name: Actions
+    type: Static Content
+
+  layout: 
+    sequence: 10
+    parent-region: No Parent
+    slot: REGION_POSITION_03
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+
+  appearance: 
+    template: Standard
+    template-options: 
+    - '#DEFAULT#'
+    - t-Region--removeHeader js-removeLandmark
+    - t-Region--stacked
+    - t-Region--scrollBody
+    render-components: Above Content
+
+  accessibility: 
+    use-landmark: true
+    landmark-type: Template Default
+
+  advanced: 
+    region-display-selector: false
+    exclude-title-from-translation: false
+
+  customization: 
+    customizable: Not Customizable By End Users
+
+  attributes: 
+    settings: 
+      output-as: HTML
+      expand-shortcuts: false
+
+page-items: 
+- # ====== Page Item: P14_FEEDBACK =============================
+  id: 1965682920272064400
+  identification: 
+    name: P14_FEEDBACK
+    type: Textarea
+
+  label: 
+    label: Feedback
+    alignment: Left
+
+  settings: 
+    resizable: true
+    auto-height: false
+    character-counter: false
+    trim-spaces: Leading and Trailing
+
+  layout: 
+    sequence: 40
+    region: No Parent
+    slot: BODY
+    alignment: Left
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+    label-column-span: Page Template Default
+
+  appearance: 
+    template: Optional - Floating
+    template-options: 
+    - '#DEFAULT#'
+    width: 30
+    height: 16
+    value-placeholder: We are here to help you with any questions or issues you may have.
+
+  validation: 
+    value-required: false
+
+  advanced: 
+    warn-on-unsaved-changes: Page Default
+
+  source: 
+    type: Null
+    used: Always, replacing any existing value in session state
+
+  session-state: 
+    data-type: VARCHAR2
+    storage: Per Session (Persistent)
+
+  quick-picks: 
+    show-quick-picks: false
+
+  security: 
+    session-state-protection: Unrestricted
+    store-value-encrypted-in-session-state: true
+    restricted-characters: All characters can be saved.
+
+buttons: 
+- # ====== Button: BACK ========================================
+  id: 80737642377403172
+  identification: 
+    button-name: BACK
+    label: Account
+
+  layout: 
+    sequence: 20
+    region: No Parent
+    slot: BODY
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+    alignment: Left center
+
+  appearance: 
+    button-template: Text with Icon
+    hot: false
+    template-options: 
+    - '#DEFAULT#'
+    - t-Button--simple
+    - t-Button--iconLeft
+    - t-Button--gapBottom
+    icon: fa-chevron-left
+
+  behavior: 
+    action: Redirect to Page in this Application
+    target: 
+      url: 'f?p=&APP_ID.:20000:&APP_SESSION.::&DEBUG.:::'
+      page: 20000 # Account
+
+    warn-on-unsaved-changes: Do Not Check
+
+- # ====== Button: SEND ========================================
+  id: 80739238136403192
+  identification: 
+    button-name: SEND
+    label: Send
+
+  layout: 
+    sequence: 10
+    region: Actions # 126722582834094455
+    slot: BODY
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+    alignment: Left center
+
+  appearance: 
+    button-template: Text
+    hot: true
+    template-options: 
+    - '#DEFAULT#'
+    - t-Button--large
+    - t-Button--stretch
+    - t-Button--padTop
+
+  behavior: 
+    action: Submit Page
+    execute-validations: true
+    show-processing: false
+    warn-on-unsaved-changes: Do Not Check
+
+processes: 
+- # ====== Process: Send Notification ==========================
+  id: 81311551226165585
+  identification: 
+    name: Send Notification
+    type: Invoke API
+    execution-chain: None
+
+  settings: 
+    type: PL/SQL Package
+    owner: PARSING SCHEMA
+    package: APEX_PWA
+    procedure-or-function: SEND_PUSH_NOTIFICATION
+
+  execution: 
+    sequence: 10
+    point: Processing
+    run-process: Once Per Page Visit (default)
+
+  error: 
+    display-location: Inline in Notification
+
+  server-side-condition: 
+    when-button-pressed: SEND # 80739238136403192
+    type: Expression
+    language: PL/SQL
+    pl/sql-expression: apex_pwa.has_push_subscription
+
+  parameters: 
+  - # ====== Parameter: p_application_id =========================
+    id: 81311664672165586
+    identification: 
+      name: p_application_id
+
+    parameter: 
+      direction: In
+      data-type: NUMBER
+      has-default: true
+
+    value: 
+      type: API Default
+
+    advanced: 
+      display-sequence: 10
+
+  - # ====== Parameter: p_user_name ==============================
+    id: 81311752674165587
+    identification: 
+      name: p_user_name
+
+    parameter: 
+      direction: In
+      data-type: VARCHAR2
+      has-default: false
+
+    value: 
+      type: Item
+      item: APP_USER
+
+    advanced: 
+      display-sequence: 20
+
+  - # ====== Parameter: p_title ==================================
+    id: 81311836872165588
+    identification: 
+      name: p_title
+
+    parameter: 
+      direction: In
+      data-type: VARCHAR2
+      has-default: false
+
+    value: 
+      type: Static Value
+      static-value: Thank you for reaching out to us
+
+    advanced: 
+      display-sequence: 30
+
+  - # ====== Parameter: p_body ===================================
+    id: 81311960453165589
+    identification: 
+      name: p_body
+
+    parameter: 
+      direction: In
+      data-type: VARCHAR2
+      has-default: true
+
+    value: 
+      type: Static Value
+      static-value: We will get back to you soon
+
+    advanced: 
+      display-sequence: 40
+
+  - # ====== Parameter: p_icon_url ===============================
+    id: 81312063492165590
+    identification: 
+      name: p_icon_url
+
+    parameter: 
+      direction: In
+      data-type: VARCHAR2
+      has-default: true
+
+    value: 
+      type: API Default
+
+    advanced: 
+      display-sequence: 50
+
+  - # ====== Parameter: p_target_url =============================
+    id: 81312164802165591
+    identification: 
+      name: p_target_url
+
+    parameter: 
+      direction: In
+      data-type: VARCHAR2
+      has-default: true
+
+    value: 
+      type: API Default
+
+    advanced: 
+      display-sequence: 60
+
+- # ====== Process: Push Queue =================================
+  id: 81312922075165599
+  identification: 
+    name: Push Queue
+    type: Invoke API
+    execution-chain: None
+
+  settings: 
+    type: PL/SQL Package
+    owner: PARSING SCHEMA
+    package: APEX_PWA
+    procedure-or-function: PUSH_QUEUE
+
+  execution: 
+    sequence: 30
+    point: Processing
+    run-process: Once Per Page Visit (default)
+
+  error: 
+    display-location: Inline in Notification
+
+  server-side-condition: 
+    when-button-pressed: SEND # 80739238136403192
+    type: Expression
+    language: PL/SQL
+    pl/sql-expression: apex_pwa.has_push_subscription
+
+branches: 
+- # ====== Branch: Go To Page 20000 ============================
+  id: 80613418341560322
+  identification: 
+    name: Go To Page 20000
+
+  execution: 
+    sequence: 20
+    point: After Processing
+
+  behavior: 
+    type: Page or URL (Redirect)
+    target: 
+      url: 'f?p=&APP_ID.:20000:&SESSION.::&DEBUG.:::&success_msg=#SUCCESS_MSG#'
+      page: 20000 # Account
+
+  server-side-condition: 
+    when-button-pressed: SEND # 80739238136403192
+

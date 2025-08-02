@@ -1,0 +1,595 @@
+---
+# ====== Page: Restaurant ====================================
+id: 5
+identification: 
+  name: Restaurant
+  alias: RESTAURANT
+  title: Restaurant
+
+appearance: 
+  page-mode: Normal
+  page-template: Theme Default
+  template-options: 
+  - '#DEFAULT#'
+
+navigation-menu: 
+  override-user-interface-level: false
+
+navigation: 
+  cursor-focus: Do not focus cursor
+  warn-on-unsaved-changes: true
+
+css: 
+  inline: |
+    /* Hero */
+    .c-HeroCard {
+      --a-cv-placeholder-color: transparent; /* Hide Placeholders */
+      --a-cv-background-color: transparent; /* Remove Hero Card Background */
+      --a-cv-border-width: 0px; /* Remove Hero Card Borders */
+      --a-cv-shadow: none; /* Remove Hero Card Shadow */
+      --a-cv-icon-image-border-radius: .5rem;
+      --a-cv-icon-image-size: 6rem;
+    
+      min-block-size: 16.875rem; /* Set Initial Hero Card Size */
+    }
+    
+    /* Hero Card Icon */
+    .c-HeroCard .a-CardView-iconImg {
+      margin-block-start: -5rem;
+      position: relative;
+      box-shadow: var(--ut-body-background-color) 0 0 0 .25rem;
+    }
+    
+    /* Set Hero Card Grid */
+    .a-CardView-items--grid {
+      grid-template-columns: auto;
+      padding: 0;
+    }
+    
+    /* Set Max-Height for Hero Card Image */
+    .c-HeroCard .a-CardView-media {
+      max-block-size: 10rem;
+    }
+    
+    /* Show Only First Hero Card */
+    .c-HeroCard .is-placeholder li:not(:first-child) {
+      display: none;
+    }
+    
+    /* Content Row */
+    .t-ContentRow-wrap {
+      flex-direction: row-reverse; /* Flip Order of Avatar */
+    }
+    
+    /* Content Row Actions */
+    .t-ContentRow-actions {
+      align-self: flex-end;
+      position: absolute;
+      inset-block-end: .375rem;
+      inset-inline-end: .25rem;
+    }
+    
+
+security: 
+  authorization-scheme: MODEL.LOV.MUST_NOT_BE_PUBLIC_USER
+  authentication: Page Requires Authentication
+  deep-linking: Application Default
+  page-access-protection: Arguments Must Have Checksum
+  form-auto-complete: Off
+  browser-cache: Application Default
+
+session-management: 
+  rejoin-sessions: Application Default
+
+advanced: 
+  enable-duplicate-page-submissions: Yes - Enable page to be re-posted
+  reload-on-submit: Only for Success
+
+server-cache: 
+  caching: Disabled
+
+regions: 
+- # ====== Region: Restaurant Information ======================
+  id: 348281597561627569
+  identification: 
+    name: Restaurant Information
+    type: Cards
+
+  source: 
+    location: Local Database
+    type: SQL Query
+    sql-query: |
+      select r.id,
+             r.hero_url as image,
+             r.logo_url as icon,
+             r.name as name,
+             c.name as category,
+             r.rating,
+             r.delivery_time,
+             r.delivery_fee
+        from sample_restaurant r,
+             sample_restaurant_categories c
+       where c.id = r.category_id
+         and r.id = :P5_RESTAURANT_ID
+
+  order-by: 
+    type: None
+
+  layout: 
+    sequence: 10
+    parent-region: No Parent
+    slot: REGION_POSITION_08
+    start-new-layout: false
+    start-new-row: true
+    row-css-classes: 
+    - margin-none
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+    column-css-classes: 
+    - padding-none
+
+  appearance: 
+    template: Cards Container
+    template-options: 
+    - '#DEFAULT#'
+    css-classes: 
+    - c-HeroCard
+    render-components: Above Content
+
+  accessibility: 
+    use-landmark: true
+    landmark-type: Template Default
+
+  advanced: 
+    region-display-selector: false
+    exclude-title-from-translation: false
+
+  customization: 
+    customizable: Not Customizable By End Users
+
+  attributes: 
+    id: 80982875199501230
+    appearance: 
+      layout: Grid
+      grid-columns: Auto
+
+    card: 
+      css-classes: 
+      - a-CardView--noUI
+
+    title: 
+      advanced-formatting: false
+      column: NAME
+
+    subtitle: 
+      advanced-formatting: true
+      html-expression: |
+        <div class="a-CardView-subTitle">
+          <div class="margin-bottom-sm">&CATEGORY.</div>
+          <div><span class="fa fa-star u-alignBaseline" aria-hidden="true"></span> &RATING. &bull; {if !=DELIVERY_FEE/}Free Delivery{else/}$&DELIVERY_FEE. Delivery Fee{endif/} &bull; &DELIVERY_TIME. min</div>
+        </div>
+
+    body: 
+      advanced-formatting: false
+
+    secondary-body: 
+      advanced-formatting: false
+
+    icon-and-badge: 
+      icon-source: Image URL
+      image-url: '#APP_FILES#&ICON.'
+      icon-css-classes: u-color-14-bg
+      icon-position: Top
+
+    media: 
+      advanced-formatting: false
+      source: Image URL
+      url: '#APP_FILES#&IMAGE.'
+      position: First
+      appearance: Widescreen
+      sizing: Cover
+
+    performance: 
+      lazy-loading: false
+
+    pagination: 
+      type: Scroll
+      show-total-count: false
+
+    messages: 
+      when-no-data-found: No details found!
+      no-data-found-icon: fa-emoji-grin-sweat
+
+- # ====== Region: Restaurant Items ============================
+  id: 348281838198627572
+  identification: 
+    name: Restaurant Items
+    type: Content Row
+
+  source: 
+    location: Local Database
+    type: SQL Query
+    sql-query: |
+      select id,
+             image_url as image,
+             name,
+             description,
+             price,
+             rating
+        from sample_restaurant_items
+       order by dbms_random.value
+       fetch first 6 rows only
+
+  order-by: 
+    type: None
+
+  layout: 
+    sequence: 60
+    parent-region: No Parent
+    slot: BODY
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+
+  appearance: 
+    template: Blank with Attributes (No Grid)
+    template-options: 
+    - '#DEFAULT#'
+    - margin-top-none
+    render-components: Above Content
+
+  accessibility: 
+    use-landmark: true
+    landmark-type: Region
+
+  advanced: 
+    region-display-selector: false
+    exclude-title-from-translation: false
+
+  customization: 
+    customizable: Not Customizable By End Users
+
+  attributes: 
+    appearance: 
+      display: Multiple (Report)
+
+    settings: 
+      title: '&NAME.'
+      description: |
+        <div>$&PRICE. &bull; <span class="fa fa-thumbs-up u-alignBaseline" aria-hidden="true"></span> &RATING.</div>
+        <div>&DESCRIPTION.</div>
+      display-avatar: true
+      display-badge: false
+
+    avatar: 
+      type: Image
+      image: 
+        url: '#APP_FILES#&IMAGE.'
+
+      shape: Rounded
+      size: Medium
+
+    appearance: 
+      apply-theme-colors: false
+      style: Default
+      hide-borders: false
+      remove-padding: false
+
+    row-selection: 
+      type: None
+
+    performance: 
+      lazy-loading: false
+
+    pagination: 
+      type: Page
+      entities-per-page: 15
+      show-total-count: false
+
+  columns: 
+  - # ====== Column: RATING ======================================
+    id: 130299542125473392
+    identification: 
+      name: RATING
+
+    layout: 
+      sequence: 80
+
+    source: 
+      type: Database Column
+      database-column: RATING
+      data-type: VARCHAR2
+      primary-key: false
+
+    accessibility: 
+      value-identifies-row: false
+
+    appearance: 
+      group: false
+
+  - # ====== Column: NAME ========================================
+    id: 348282082110627574
+    identification: 
+      name: NAME
+
+    layout: 
+      sequence: 20
+
+    source: 
+      type: Database Column
+      database-column: NAME
+      data-type: VARCHAR2
+      primary-key: false
+
+    accessibility: 
+      value-identifies-row: false
+
+    appearance: 
+      group: false
+
+  - # ====== Column: DESCRIPTION =================================
+    id: 348282142683627575
+    identification: 
+      name: DESCRIPTION
+
+    layout: 
+      sequence: 30
+
+    source: 
+      type: Database Column
+      database-column: DESCRIPTION
+      data-type: VARCHAR2
+      primary-key: false
+
+    accessibility: 
+      value-identifies-row: false
+
+    appearance: 
+      group: false
+
+  - # ====== Column: ID ==========================================
+    id: 728612362680862269
+    identification: 
+      name: ID
+
+    layout: 
+      sequence: 50
+
+    source: 
+      type: Database Column
+      database-column: ID
+      data-type: NUMBER
+      primary-key: true
+
+    accessibility: 
+      value-identifies-row: false
+
+    appearance: 
+      group: false
+
+  - # ====== Column: IMAGE =======================================
+    id: 728613219185862278
+    identification: 
+      name: IMAGE
+
+    layout: 
+      sequence: 60
+
+    source: 
+      type: Database Column
+      database-column: IMAGE
+      data-type: VARCHAR2
+      primary-key: false
+
+    accessibility: 
+      value-identifies-row: false
+
+    appearance: 
+      group: false
+
+  - # ====== Column: PRICE =======================================
+    id: 735178376082410801
+    identification: 
+      name: PRICE
+
+    layout: 
+      sequence: 70
+
+    source: 
+      type: Database Column
+      database-column: PRICE
+      data-type: NUMBER
+      primary-key: false
+
+    accessibility: 
+      value-identifies-row: false
+
+    appearance: 
+      group: false
+
+  actions: 
+  - # ====== Action: Full Row Link ===============================
+    id: 348282377595627577
+    identification: 
+      position: Full Row Link # 349402277895478545
+
+    layout: 
+      sequence: 10
+
+    link: 
+      type: Redirect to Page in this Application
+      target: 
+        url: 'f?p=&APP_ID.:7:&SESSION.::&DEBUG.:7:P7_ITEM_ID,P7_ITEM_NAME:&ID.,&NAME.'
+        page: 7 # Item Details
+        clear-cache: 7
+        values: 
+          p7_item_id: '&ID.'
+          p7_item_name: '&NAME.'
+
+      link-attributes: aria-label="&NAME."
+
+  - # ====== Action: Add =========================================
+    id: 1021280370757995598
+    identification: 
+      position: Primary Actions # 362316004162771045
+      template: Button # 362316605839802174
+      label: Add
+
+    layout: 
+      sequence: 30
+
+    link: 
+      type: Redirect to Page in this Application
+      target: 
+        url: 'f?p=&APP_ID.:7:&SESSION.::&DEBUG.:7:P7_ITEM_ID,P7_ITEM_NAME:&ID.,&NAME.'
+        page: 7 # Item Details
+        clear-cache: 7
+        values: 
+          p7_item_id: '&ID.'
+          p7_item_name: '&NAME.'
+
+    appearance: 
+      display-type: Icon
+      icon: fa-plus
+      hot: true
+      show-as-disabled: false
+      css-classes: 
+      - padding-sm
+      - t-Button--tiny
+
+page-items: 
+- # ====== Page Item: P5_RESTAURANT_ID =========================
+  id: 348295611199627611
+  identification: 
+    name: P5_RESTAURANT_ID
+    type: Hidden
+
+  settings: 
+    value-protected: true
+
+  layout: 
+    sequence: 20
+    region: No Parent
+    slot: BODY
+
+  advanced: 
+    warn-on-unsaved-changes: Page Default
+
+  source: 
+    type: Null
+    used: Only when current value in session state is null
+
+  session-state: 
+    data-type: VARCHAR2
+    storage: Per Session (Persistent)
+
+  security: 
+    session-state-protection: Unrestricted
+    store-value-encrypted-in-session-state: true
+    restricted-characters: All characters can be saved.
+
+dynamic-actions: 
+- # ====== Dynamic Action: Send Push Notification ==============
+  id: 80987472016501244
+  identification: 
+    name: Send Push Notification
+
+  execution: 
+    sequence: 20
+    event-scope: Static
+
+  when: 
+    event: Page Load
+
+  server-side-condition: 
+    type: Expression
+    language: PL/SQL
+    pl/sql-expression: apex_pwa.has_push_subscription
+
+  actions: 
+  - # ====== Action: Execute Server-side Code ====================
+    id: 80988003968501245
+    identification: 
+      action: Execute Server-side Code
+
+    settings: 
+      language: PE.PROPERTY.SOURCE_SNIPPET_LANG.LOV.PLSQL.D
+      pl/sql-code: |
+        apex_pwa.send_push_notification (
+            p_user_name      => :APP_USER,
+            p_title          => 'Offer Available',
+            p_body           => 'Buy 1, Get 1 Free. Complete your order!',
+            p_icon_url       => apex_mail.get_instance_url || '#APP_FILES#icons/app-icon-512.png' );
+        apex_pwa.push_queue;
+
+    execution: 
+      sequence: 10
+      event: Send Push Notification # 80987472016501244
+      fire-when-event-result-is: True
+      fire-on-initialization: false
+      stop-execution-on-error: true
+      wait-for-result: true
+
+- # ====== Dynamic Action: Update Cart Badge on Dialog Close ===
+  id: 80988313558501245
+  identification: 
+    name: Update Cart Badge on Dialog Close
+
+  execution: 
+    sequence: 10
+    event-scope: Static
+    type: Immediate
+
+  when: 
+    event: Dialog Closed
+    selection-type: Region
+    region: Restaurant Items # 348281838198627572
+
+  client-side-condition: 
+    type: JavaScript expression
+    javascript-expression: parseInt(this.data.P7_SHOPPING_CART_ITEMS) > 0
+
+  actions: 
+  - # ====== Action: Update Cart Badge ===========================
+    id: 80988827168501246
+    identification: 
+      name: Update Cart Badge
+      action: Execute JavaScript Code
+
+    settings: 
+      code: |
+        // Update Badge Text
+        apex.jQuery( '.js-shopping-cart-item .t-Button-badge' ).text( this.data.P7_SHOPPING_CART_ITEMS );
+        
+        // Update Icon
+        apex.jQuery( '.js-shopping-cart-item .t-Icon' ).toggleClass( 'fa-cart-empty fa-cart-full' );
+
+    execution: 
+      sequence: 10
+      event: Update Cart Badge on Dialog Close # 80988313558501245
+      fire-when-event-result-is: True
+      fire-on-initialization: false
+
+  - # ====== Action: Remove Cart Badge ===========================
+    id: 80989379652501246
+    identification: 
+      name: Remove Cart Badge
+      action: Execute JavaScript Code
+
+    settings: 
+      code: |
+        // Update Badge Text
+        apex.jQuery( '.js-shopping-cart-item .t-Button-badge' ).text( '' );
+        
+        // Update Icon
+        apex.jQuery( '.js-shopping-cart-item .t-Icon' ).toggleClass( 'fa-cart-full fa-cart-empty' );
+
+    execution: 
+      sequence: 10
+      event: Update Cart Badge on Dialog Close # 80988313558501245
+      fire-when-event-result-is: False
+      fire-on-initialization: false
+
