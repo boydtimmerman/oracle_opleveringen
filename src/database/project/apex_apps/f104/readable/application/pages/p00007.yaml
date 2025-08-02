@@ -1,0 +1,1092 @@
+---
+# ====== Page: Item Details ==================================
+id: 7
+identification: 
+  name: Item Details
+  alias: ITEM-DETAILS
+  title: Item Details
+
+appearance: 
+  page-mode: Modal Dialog
+  dialog-template: Drawer
+  template-options: 
+  - '#DEFAULT#'
+  - js-dialog-class-t-Drawer--pullOutEnd
+  - js-dialog-class-t-Drawer--md
+
+dialog: 
+  chained: true
+  resizable: false
+
+navigation-menu: 
+  override-user-interface-level: false
+
+navigation: 
+  cursor-focus: Do not focus cursor
+  warn-on-unsaved-changes: true
+
+css: 
+  inline: |
+    /* Hero */
+    .c-HeroCard {
+      --a-cv-placeholder-color: transparent; /* Hide Placeholders */
+      --a-cv-background-color: transparent; /* Remove Hero Card Background */
+      --a-cv-border-width: 0px; /* Remove Hero Card Borders */
+      --a-cv-shadow: none; /* Remove Hero Card Shadow */
+      --a-cv-media-border-radius: .5rem;
+      --a-cv-header-padding-x: 0rem;
+      --a-cv-grid-gap: 0rem;
+    
+      min-block-size: 15.75rem; /* Set Initial Hero Card Size */
+    }
+    
+    /* Set Hero Card Grid */
+    .a-CardView-items--grid {
+      grid-template-columns: auto;
+      padding: 0;
+    }
+    
+    /* Set Max-Height for Hero Card Image */
+    .c-HeroCard .a-CardView-media {
+      max-block-size: 10rem;
+    }
+    
+    /* Show Only First Hero Card */
+    .c-HeroCard .is-placeholder li:not(:first-child) {
+      display: none;
+    }
+
+security: 
+  authorization-scheme: MODEL.LOV.MUST_NOT_BE_PUBLIC_USER
+  authentication: Page Requires Authentication
+  deep-linking: Application Default
+  page-access-protection: Arguments Must Have Checksum
+  form-auto-complete: Off
+  browser-cache: Application Default
+
+session-management: 
+  rejoin-sessions: Application Default
+
+advanced: 
+  enable-duplicate-page-submissions: Yes - Enable page to be re-posted
+  reload-on-submit: Only for Success
+
+server-cache: 
+  caching: Disabled
+
+regions: 
+- # ====== Region: Item Information ============================
+  id: 81313390084165603
+  identification: 
+    name: Item Information
+    type: Cards
+
+  source: 
+    location: Local Database
+    type: SQL Query
+    sql-query: |
+      select id,
+             image_url as image,
+             name,
+             description,
+             price
+        from sample_restaurant_items
+       where id = :P7_ITEM_ID
+
+  order-by: 
+    type: None
+
+  layout: 
+    sequence: 10
+    parent-region: No Parent
+    slot: BODY
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+
+  appearance: 
+    template: Cards Container
+    template-options: 
+    - '#DEFAULT#'
+    - t-CardsRegion--styleC
+    css-classes: 
+    - c-HeroCard
+    render-components: Above Content
+
+  accessibility: 
+    use-landmark: true
+    landmark-type: Template Default
+
+  advanced: 
+    region-display-selector: false
+    exclude-title-from-translation: false
+
+  customization: 
+    customizable: Not Customizable By End Users
+
+  attributes: 
+    id: 81313416896165604
+    appearance: 
+      layout: Horizontal (Row)
+
+    card: 
+      primary-key-column-1: ID
+
+    title: 
+      advanced-formatting: true
+      html-expression: |
+        <div class="a-CardView-title">
+          &NAME.<br />
+          $&PRICE.
+        </div>
+
+    subtitle: 
+      advanced-formatting: true
+      html-expression: <div class="a-CardView-subTitle">&DESCRIPTION.</div>
+
+    body: 
+      advanced-formatting: false
+
+    secondary-body: 
+      advanced-formatting: false
+
+    icon-and-badge: 
+      icon-source: No Icon
+
+    media: 
+      advanced-formatting: false
+      source: Image URL
+      url: '#APP_FILES#&IMAGE.'
+      position: First
+      appearance: Widescreen
+      sizing: Cover
+      image-description: '&DESCRIPTION.'
+
+    performance: 
+      lazy-loading: false
+
+    pagination: 
+      type: Scroll
+      show-total-count: false
+
+- # ====== Region: Actions =====================================
+  id: 132526122274225013
+  identification: 
+    name: Actions
+    type: Static Content
+
+  layout: 
+    sequence: 160
+    parent-region: No Parent
+    slot: REGION_POSITION_03
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+
+  appearance: 
+    template: Standard
+    template-options: 
+    - '#DEFAULT#'
+    - t-Region--removeHeader js-removeLandmark
+    - t-Region--stacked
+    - t-Region--scrollBody
+    render-components: Above Content
+
+  accessibility: 
+    use-landmark: true
+    landmark-type: Template Default
+
+  advanced: 
+    region-display-selector: false
+    exclude-title-from-translation: false
+
+  customization: 
+    customizable: Not Customizable By End Users
+
+  attributes: 
+    settings: 
+      output-as: HTML
+      expand-shortcuts: false
+
+- # ====== Region: Quantity Container ==========================
+  id: 1021326204394019843
+  identification: 
+    name: Quantity Container
+    type: Static Content
+
+  layout: 
+    sequence: 60
+    parent-region: No Parent
+    slot: BODY
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+
+  appearance: 
+    template: Buttons Container
+    template-options: 
+    - '#DEFAULT#'
+    - t-ButtonRegion--noPadding
+    - t-ButtonRegion--noUI
+    - margin-top-sm
+    render-components: Above Content
+
+  accessibility: 
+    use-landmark: true
+    landmark-type: Template Default
+
+  advanced: 
+    region-display-selector: false
+    exclude-title-from-translation: false
+
+  customization: 
+    customizable: Not Customizable By End Users
+
+  attributes: 
+    settings: 
+      output-as: HTML
+      expand-shortcuts: false
+
+page-items: 
+- # ====== Page Item: P7_UTENSILS ==============================
+  id: 173262129922791634
+  identification: 
+    name: P7_UTENSILS
+    type: Checkbox
+
+  label: 
+    label: <span class="fa fa-cutlery" aria-hidden="true"></span> Request utensils, etc.
+    alignment: Left
+
+  settings: 
+    use-defaults: false
+    checked-value: Y
+    unchecked-value: N
+
+  layout: 
+    sequence: 70
+    region: No Parent
+    slot: BODY
+    alignment: Left
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+    label-column-span: Page Template Default
+
+  appearance: 
+    template: Optional - Floating
+    template-options: 
+    - '#DEFAULT#'
+    - t-Form-fieldContainer--large
+
+  validation: 
+    value-required: false
+
+  advanced: 
+    warn-on-unsaved-changes: Page Default
+
+  source: 
+    type: Null
+    used: Only when current value in session state is null
+
+  session-state: 
+    storage: Per Session (Persistent)
+
+  security: 
+    session-state-protection: Unrestricted
+    store-value-encrypted-in-session-state: true
+    restricted-characters: All characters can be saved.
+
+- # ====== Page Item: P7_NOTE ==================================
+  id: 173262160654791635
+  identification: 
+    name: P7_NOTE
+    type: Textarea
+
+  label: 
+    label: Add Note
+    alignment: Left
+
+  settings: 
+    resizable: true
+    auto-height: false
+    character-counter: false
+    trim-spaces: Leading and Trailing
+
+  layout: 
+    sequence: 80
+    region: No Parent
+    slot: BODY
+    alignment: Left
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+    label-column-span: Page Template Default
+
+  appearance: 
+    template: Optional - Floating
+    template-options: 
+    - '#DEFAULT#'
+    - t-Form-fieldContainer--large
+    width: 30
+    height: 2
+
+  validation: 
+    value-required: false
+
+  advanced: 
+    warn-on-unsaved-changes: Page Default
+
+  source: 
+    type: Null
+    used: Only when current value in session state is null
+
+  session-state: 
+    data-type: VARCHAR2
+    storage: Per Session (Persistent)
+
+  quick-picks: 
+    show-quick-picks: false
+
+  security: 
+    session-state-protection: Unrestricted
+    store-value-encrypted-in-session-state: true
+    restricted-characters: All characters can be saved.
+
+- # ====== Page Item: P7_ITEM_ID ===============================
+  id: 728668662349886547
+  identification: 
+    name: P7_ITEM_ID
+    type: Hidden
+
+  settings: 
+    value-protected: true
+
+  layout: 
+    sequence: 20
+    region: No Parent
+    slot: BODY
+
+  advanced: 
+    warn-on-unsaved-changes: Page Default
+
+  source: 
+    type: Null
+    used: Only when current value in session state is null
+
+  session-state: 
+    data-type: VARCHAR2
+    storage: Per Session (Persistent)
+
+  security: 
+    session-state-protection: Unrestricted
+    store-value-encrypted-in-session-state: true
+    restricted-characters: All characters can be saved.
+
+- # ====== Page Item: P7_ITEM_NAME =============================
+  id: 732003216138957048
+  identification: 
+    name: P7_ITEM_NAME
+    type: Hidden
+
+  settings: 
+    value-protected: true
+
+  layout: 
+    sequence: 40
+    region: No Parent
+    slot: BODY
+
+  advanced: 
+    warn-on-unsaved-changes: Page Default
+
+  source: 
+    type: Null
+    used: Only when current value in session state is null
+
+  session-state: 
+    data-type: VARCHAR2
+    storage: Per Session (Persistent)
+
+  security: 
+    session-state-protection: Unrestricted
+    store-value-encrypted-in-session-state: true
+    restricted-characters: All characters can be saved.
+
+- # ====== Page Item: P7_ITEM_DESCRIPTION ======================
+  id: 732003288910957049
+  identification: 
+    name: P7_ITEM_DESCRIPTION
+    type: Hidden
+
+  settings: 
+    value-protected: true
+
+  layout: 
+    sequence: 50
+    region: No Parent
+    slot: BODY
+
+  advanced: 
+    warn-on-unsaved-changes: Page Default
+
+  source: 
+    type: SQL Query (return single value)
+    sql-query: |
+      select description
+        from sample_restaurant_items
+       where id = :P7_ITEM_ID
+    used: Only when current value in session state is null
+
+  session-state: 
+    data-type: VARCHAR2
+    storage: Per Session (Persistent)
+
+  security: 
+    session-state-protection: Unrestricted
+    store-value-encrypted-in-session-state: true
+    restricted-characters: All characters can be saved.
+
+- # ====== Page Item: P7_SHOPPING_CART_ITEMS ===================
+  id: 877769978206567426
+  identification: 
+    name: P7_SHOPPING_CART_ITEMS
+    type: Hidden
+
+  settings: 
+    value-protected: true
+
+  layout: 
+    sequence: 30
+    region: No Parent
+    slot: BODY
+
+  advanced: 
+    warn-on-unsaved-changes: Page Default
+
+  source: 
+    type: Null
+    used: Only when current value in session state is null
+
+  session-state: 
+    data-type: VARCHAR2
+    storage: Per Session (Persistent)
+
+  security: 
+    session-state-protection: Unrestricted
+    store-value-encrypted-in-session-state: true
+    restricted-characters: All characters can be saved.
+
+- # ====== Page Item: P7_QUANTITY ==============================
+  id: 1021331227298019835
+  identification: 
+    name: P7_QUANTITY
+    type: Number Field
+
+  label: 
+    label: Quantity
+    alignment: Left
+
+  settings: 
+    minimum-value: 1
+    number-alignment: Center
+    virtual-keyboard: Numeric
+
+  layout: 
+    sequence: 20
+    region: Quantity Container # 1021326204394019843
+    slot: BODY
+    alignment: Left
+    start-new-layout: false
+    start-new-row: false
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+    label-column-span: 0
+    column-css-classes: 
+    - padding-none
+    - t-Button--pillEnd
+
+  appearance: 
+    template: Hidden
+    template-options: 
+    - '#DEFAULT#'
+    - t-Form-fieldContainer--stretchInputs
+    - t-Form-fieldContainer--large
+    css-classes: 
+    - margin-none
+    - t-Form-fieldContainer--noPadding
+    - rounded-none
+    width: 3
+
+  validation: 
+    value-required: false
+
+  advanced: 
+    css-classes: 
+    - rounded-none
+    warn-on-unsaved-changes: Page Default
+
+  source: 
+    type: Null
+    used: Only when current value in session state is null
+
+  session-state: 
+    storage: Per Session (Persistent)
+
+  quick-picks: 
+    show-quick-picks: false
+
+  security: 
+    session-state-protection: Unrestricted
+    store-value-encrypted-in-session-state: true
+    restricted-characters: All characters can be saved.
+
+buttons: 
+- # ====== Button: ADD_CART ====================================
+  id: 81005656866515699
+  identification: 
+    button-name: ADD_CART
+    label: Add to Cart
+
+  layout: 
+    sequence: 10
+    region: Actions # 132526122274225013
+    slot: BODY
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+    alignment: Left center
+
+  appearance: 
+    button-template: Text
+    hot: true
+    template-options: 
+    - '#DEFAULT#'
+    - t-Button--large
+    - t-Button--stretch
+    - t-Button--padTop
+
+  behavior: 
+    action: Submit Page
+    execute-validations: true
+    show-processing: false
+    warn-on-unsaved-changes: Do Not Check
+    database-action: SQL INSERT action
+
+  server-side-condition: 
+    type: Expression
+    language: PL/SQL
+    pl/sql-expression: 'sample_restaurant_manage_orders.item_quantity( p_item_id => :P7_ITEM_ID ) = 0'
+
+- # ====== Button: EDIT ========================================
+  id: 81006066938515700
+  identification: 
+    button-name: EDIT
+    label: Update Cart
+
+  layout: 
+    sequence: 20
+    region: Actions # 132526122274225013
+    slot: BODY
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+    alignment: Left center
+
+  appearance: 
+    button-template: Text
+    hot: true
+    template-options: 
+    - '#DEFAULT#'
+    - t-Button--large
+    - t-Button--stretch
+    - t-Button--padTop
+
+  behavior: 
+    action: Submit Page
+    execute-validations: true
+    show-processing: false
+    warn-on-unsaved-changes: Do Not Check
+    database-action: SQL UPDATE action
+
+  server-side-condition: 
+    type: Expression
+    language: PL/SQL
+    pl/sql-expression: 'sample_restaurant_manage_orders.item_quantity( p_item_id => :P7_ITEM_ID ) > 0'
+
+- # ====== Button: DELETE ======================================
+  id: 81006431768515700
+  identification: 
+    button-name: DELETE
+    label: Remove from Cart
+
+  layout: 
+    sequence: 30
+    region: Actions # 132526122274225013
+    slot: BODY
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+    alignment: Left center
+
+  appearance: 
+    button-template: Text
+    hot: true
+    template-options: 
+    - '#DEFAULT#'
+    - t-Button--large
+    - t-Button--danger
+    - t-Button--link
+    - t-Button--stretch
+    - t-Button--padBottom
+
+  behavior: 
+    action: Defined by Dynamic Action
+    execute-validations: true
+    database-action: SQL DELETE action
+
+  server-side-condition: 
+    type: Expression
+    language: PL/SQL
+    pl/sql-expression: 'sample_restaurant_manage_orders.item_quantity( p_item_id => :P7_ITEM_ID ) > 0'
+
+- # ====== Button: SUBSTRACT ===================================
+  id: 81007211232515701
+  identification: 
+    button-name: SUBSTRACT
+    label: '-'
+
+  layout: 
+    sequence: 10
+    region: Quantity Container # 1021326204394019843
+    slot: BODY
+    start-new-layout: false
+    start-new-row: true
+    row-css-classes: 
+    - u-flex
+    - u-align-items-stretch
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+    column-css-classes: 
+    - padding-none
+    - u-flex
+    alignment: Left center
+
+  appearance: 
+    button-template: Text
+    hot: false
+    template-options: 
+    - '#DEFAULT#'
+    - t-Button--simple
+    - t-Button--pillStart
+
+  behavior: 
+    action: Defined by Dynamic Action
+    execute-validations: true
+
+- # ====== Button: ADD =========================================
+  id: 81007648662515702
+  identification: 
+    button-name: ADD
+    label: +
+
+  layout: 
+    sequence: 50
+    region: Quantity Container # 1021326204394019843
+    slot: BODY
+    start-new-layout: false
+    start-new-row: false
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+    column-css-classes: 
+    - padding-none
+    - u-flex
+    alignment: Left center
+
+  appearance: 
+    button-template: Text
+    hot: false
+    template-options: 
+    - '#DEFAULT#'
+    - t-Button--simple
+    - t-Button--pillEnd
+
+  behavior: 
+    action: Defined by Dynamic Action
+    execute-validations: true
+
+- # ====== Button: SHARE =======================================
+  id: 81008034126515702
+  identification: 
+    button-name: SHARE
+    label: Share
+
+  layout: 
+    sequence: 10
+    region: Quantity Container # 1021326204394019843
+    slot: NEXT
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+
+  appearance: 
+    button-template: Icon
+    hot: false
+    template-options: 
+    - '#DEFAULT#'
+    icon: fa-share-alt
+
+  behavior: 
+    action: Defined by Dynamic Action
+    execute-validations: true
+
+dynamic-actions: 
+- # ====== Dynamic Action: Share Page ==========================
+  id: 81014428758515710
+  identification: 
+    name: Share Page
+
+  execution: 
+    sequence: 30
+    event-scope: Static
+    type: Immediate
+
+  when: 
+    event: Click
+    selection-type: Button
+    button: SHARE # 81008034126515702
+
+  actions: 
+  - # ====== Action: Share =======================================
+    id: 81014978642515710
+    identification: 
+      action: Share
+
+    settings: 
+      title: '&P7_ITEM_NAME.'
+      text: 'I recommend this: &P7_ITEM_DESCRIPTION.'
+      share-type: URL
+      url: 
+        url: 'f?p=&APP_ID.:1:&SESSION.::&DEBUG.:::'
+        page: 1 # Welcome
+
+    execution: 
+      sequence: 10
+      event: Share Page # 81014428758515710
+      fire-when-event-result-is: True
+      fire-on-initialization: false
+      stop-execution-on-error: true
+      wait-for-result: true
+
+- # ====== Dynamic Action: Confirm Delete ======================
+  id: 81015363971515711
+  identification: 
+    name: Confirm Delete
+
+  execution: 
+    sequence: 60
+    event-scope: Static
+    type: Immediate
+
+  when: 
+    event: Click
+    selection-type: Button
+    button: DELETE # 81006431768515700
+
+  actions: 
+  - # ====== Action: Confirm =====================================
+    id: 81015819370515711
+    identification: 
+      action: Confirm
+
+    settings: 
+      message: Confirm to remove from cart
+      style: Warning
+      confirm-label: Confirm
+
+    execution: 
+      sequence: 10
+      event: Confirm Delete # 81015363971515711
+      fire-when-event-result-is: True
+      fire-on-initialization: false
+
+  - # ====== Action: Submit Page =================================
+    id: 81016379982515712
+    identification: 
+      action: Submit Page
+
+    settings: 
+      request-/-button-name: DELETE
+      show-processing: true
+
+    execution: 
+      sequence: 20
+      event: Confirm Delete # 81015363971515711
+      fire-when-event-result-is: True
+      fire-on-initialization: false
+
+- # ====== Dynamic Action: Substract Action ====================
+  id: 81016810955515712
+  identification: 
+    name: Substract Action
+
+  execution: 
+    sequence: 70
+    event-scope: Static
+    type: Immediate
+
+  when: 
+    event: Click
+    selection-type: Button
+    button: SUBSTRACT # 81007211232515701
+
+  actions: 
+  - # ====== Action: Execute JavaScript Code =====================
+    id: 81017226052515712
+    identification: 
+      action: Execute JavaScript Code
+
+    settings: 
+      code: apex.items.P7_QUANTITY.setValue( Math.max ( parseInt( apex.items.P7_QUANTITY.value ) - 1, 1 ) )
+
+    execution: 
+      sequence: 10
+      event: Substract Action # 81016810955515712
+      fire-when-event-result-is: True
+      fire-on-initialization: false
+
+- # ====== Dynamic Action: Add Action ==========================
+  id: 81017665172515713
+  identification: 
+    name: Add Action
+
+  execution: 
+    sequence: 80
+    event-scope: Static
+    type: Immediate
+
+  when: 
+    event: Click
+    selection-type: Button
+    button: ADD # 81007648662515702
+
+  actions: 
+  - # ====== Action: Execute JavaScript Code =====================
+    id: 81018136782515713
+    identification: 
+      action: Execute JavaScript Code
+
+    settings: 
+      code: apex.items.P7_QUANTITY.setValue( parseInt( apex.items.P7_QUANTITY.value ) + 1 )
+
+    execution: 
+      sequence: 10
+      event: Add Action # 81017665172515713
+      fire-when-event-result-is: True
+      fire-on-initialization: false
+
+computations: 
+- # ====== Computation: P7_QUANTITY ============================
+  id: 81012181155515708
+  identification: 
+    item-name: P7_QUANTITY
+
+  execution: 
+    sequence: 10
+    point: Before Regions
+
+  computation: 
+    type: Function Body
+    language: PL/SQL
+    pl/sql-function-body: |
+      if sample_restaurant_manage_orders.item_quantity( p_item_id => :P7_ITEM_ID ) > 0 then
+          return sample_restaurant_manage_orders.item_quantity( p_item_id => :P7_ITEM_ID );
+      else
+          return 1;
+      end if;
+
+- # ====== Computation: P7_UTENSILS ============================
+  id: 81249670631629416
+  identification: 
+    item-name: P7_UTENSILS
+
+  execution: 
+    sequence: 20
+    point: Before Regions
+
+  computation: 
+    type: Function Body
+    language: PL/SQL
+    pl/sql-function-body: |
+      if sample_restaurant_manage_orders.item_quantity( p_item_id => :P7_ITEM_ID ) > 0 then
+          return sample_restaurant_manage_orders.get_utensils( p_item_id => :P7_ITEM_ID );
+      else
+          return 'N';
+      end if;
+
+- # ====== Computation: P7_NOTE ================================
+  id: 81249778955629417
+  identification: 
+    item-name: P7_NOTE
+
+  execution: 
+    sequence: 30
+    point: Before Regions
+
+  computation: 
+    type: Function Body
+    language: PL/SQL
+    pl/sql-function-body: |
+      if sample_restaurant_manage_orders.item_quantity( p_item_id => :P7_ITEM_ID ) > 0 then
+          return sample_restaurant_manage_orders.get_note( p_item_id => :P7_ITEM_ID );
+      else
+          return '';
+      end if;
+
+processes: 
+- # ====== Process: Add Item ===================================
+  id: 81012480016515708
+  identification: 
+    name: Add Item
+    type: Execute Code
+    execution-chain: None
+
+  source: 
+    location: Local Database
+    language: PL/SQL
+    pl/sql-code: |
+      if sample_restaurant_manage_orders.item_quantity( p_item_id => :P7_ITEM_ID ) = 0 then
+          sample_restaurant_manage_orders.add_item( p_item_id  => :P7_ITEM_ID,
+                                                    p_quantity => :P7_QUANTITY,
+                                                    p_utensils => :P7_UTENSILS,
+                                                    p_note     => :P7_NOTE );
+      end if;
+
+  execution: 
+    sequence: 10
+    point: Processing
+    run-process: Once Per Page Visit (default)
+
+  error: 
+    display-location: Inline in Notification
+
+  server-side-condition: 
+    when-button-pressed: ADD_CART # 81005656866515699
+
+- # ====== Process: Calculate Shopping Cart Items ==============
+  id: 81012836505515708
+  identification: 
+    name: Calculate Shopping Cart Items
+    type: Execute Code
+    execution-chain: None
+
+  source: 
+    location: Local Database
+    language: PL/SQL
+    pl/sql-code: ':P7_SHOPPING_CART_ITEMS := sample_restaurant_manage_orders.get_quantity;'
+
+  execution: 
+    sequence: 50
+    point: Processing
+    run-process: Once Per Page Visit (default)
+
+  error: 
+    display-location: Inline in Notification
+
+- # ====== Process: Delete Item ================================
+  id: 81013299204515709
+  identification: 
+    name: Delete Item
+    type: Execute Code
+    execution-chain: None
+
+  source: 
+    location: Local Database
+    language: PL/SQL
+    pl/sql-code: |
+      if sample_restaurant_manage_orders.item_quantity( p_item_id => :P7_ITEM_ID ) > 0 then
+          sample_restaurant_manage_orders.remove_item( p_item_id => :P7_ITEM_ID );
+      end if;
+
+  execution: 
+    sequence: 30
+    point: Processing
+    run-process: Once Per Page Visit (default)
+
+  error: 
+    display-location: Inline in Notification
+
+  server-side-condition: 
+    when-button-pressed: DELETE # 81006431768515700
+
+- # ====== Process: Edit Item ==================================
+  id: 81013663222515709
+  identification: 
+    name: Edit Item
+    type: Execute Code
+    execution-chain: None
+
+  source: 
+    location: Local Database
+    language: PL/SQL
+    pl/sql-code: |
+      if sample_restaurant_manage_orders.item_quantity( p_item_id => :P7_ITEM_ID ) > 0 then
+          sample_restaurant_manage_orders.remove_item( p_item_id => :P7_ITEM_ID );
+          sample_restaurant_manage_orders.add_item( p_item_id  => :P7_ITEM_ID,
+                                                    p_quantity => :P7_QUANTITY,
+                                                    p_utensils => :P7_UTENSILS,
+                                                    p_note     => :P7_NOTE );
+      end if;
+
+  execution: 
+    sequence: 20
+    point: Processing
+    run-process: Once Per Page Visit (default)
+
+  error: 
+    display-location: Inline in Notification
+
+  server-side-condition: 
+    when-button-pressed: EDIT # 81006066938515700
+
+- # ====== Process: Close Dialog ===============================
+  id: 81014055163515709
+  identification: 
+    name: Close Dialog
+    type: Close Dialog
+    execution-chain: None
+
+  settings: 
+    items-to-return-: 
+    - P7_SHOPPING_CART_ITEMS
+    show-success-messages: true
+
+  execution: 
+    sequence: 60
+    point: Processing
+    run-process: Once Per Page Visit (default)
+
+  error: 
+    display-location: Inline in Notification
+

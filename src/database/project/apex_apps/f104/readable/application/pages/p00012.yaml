@@ -1,0 +1,369 @@
+---
+# ====== Page: My Address ====================================
+id: 12
+identification: 
+  name: My Address
+  alias: MY-ADDRESS
+  title: My Address
+  page-group: User Settings # 166726674484130785
+
+appearance: 
+  page-mode: Modal Dialog
+  dialog-template: Drawer
+  template-options: 
+  - '#DEFAULT#'
+  - js-dialog-class-t-Drawer--pullOutEnd
+
+dialog: 
+  chained: true
+  resizable: false
+
+navigation-menu: 
+  override-user-interface-level: false
+
+navigation: 
+  cursor-focus: Do not focus cursor
+  warn-on-unsaved-changes: true
+
+security: 
+  authorization-scheme: MODEL.LOV.MUST_NOT_BE_PUBLIC_USER
+  authentication: Page Requires Authentication
+  deep-linking: Application Default
+  page-access-protection: Arguments Must Have Checksum
+  form-auto-complete: On
+  browser-cache: Application Default
+
+session-management: 
+  rejoin-sessions: Application Default
+
+advanced: 
+  enable-duplicate-page-submissions: Yes - Enable page to be re-posted
+  reload-on-submit: Only for Success
+
+server-cache: 
+  caching: Disabled
+
+regions: 
+- # ====== Region: Location Map ================================
+  id: 84166553751941796
+  identification: 
+    name: Location Map
+    type: Map
+
+  source: 
+    location: None
+    page-items-to-submit: 
+    - P12_LATITUDE
+    - P12_LONGITUDE
+
+  layout: 
+    sequence: 50
+    parent-region: No Parent
+    slot: BODY
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+
+  appearance: 
+    template: Blank with Attributes
+    template-options: 
+    - '#DEFAULT#'
+    render-components: Above Content
+
+  accessibility: 
+    use-landmark: true
+    landmark-type: Template Default
+
+  advanced: 
+    region-display-selector: false
+    exclude-title-from-translation: false
+
+  customization: 
+    customizable: Not Customizable By End Users
+
+  attributes: 
+    id: 81088665506544450
+    map: 
+      background: Default
+      height: 640
+
+    controls: 
+      navigation-bar: Zoom and Compass
+      navigation-bar-position: End
+      options: 
+      - Mousewheel Zoom
+      - Rectangle Zoom
+      - Scale Bar
+      - Infinite Map
+      - Get Browser Location
+
+    initial-position-and-zoom: 
+      get-position-from-browser: true
+      type: Static Values
+      longitude: 0
+      latitude: 0
+
+    legend: 
+      show: false
+
+    attributes: 
+      messages-position: Below
+      unit-system: Metric
+
+    performance: 
+      lazy-loading: false
+
+    layers: 
+    - # ====== Layer: Map ==========================================
+      id: 81089197467544451
+      identification: 
+        name: Map
+        layer-type: Points
+
+      layout: 
+        sequence: 10
+
+      source: 
+        location: Local Database
+        type: SQL Query
+        sql-query: |
+          select to_number( :P12_LATITUDE ) lat,
+                 to_number( :P12_LONGITUDE ) lon
+            from sys.dual
+        page-items-to-submit: 
+        - P15_LATITUDE
+        - P15_LONGITUDE
+        use-spatial-index: false
+
+      column-mapping: 
+        geometry-column-data-type: Longitude/Latitude
+        longitude-column: LON
+        latitude-column: LAT
+
+      point-objects: 
+        style: SVG
+        shape: Default
+
+      appearance: 
+        fill-color: '#de5234'
+
+      point-clustering: 
+        enable: false
+
+      tooltip: 
+        advanced-formatting: false
+
+      info-window: 
+        advanced-formatting: false
+
+      legend: 
+        show: true
+        enable-to-hide: true
+
+- # ====== Region: Actions =====================================
+  id: 173931735081778211
+  identification: 
+    name: Actions
+    type: Static Content
+
+  layout: 
+    sequence: 60
+    parent-region: No Parent
+    slot: REGION_POSITION_03
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+
+  appearance: 
+    template: Standard
+    template-options: 
+    - '#DEFAULT#'
+    - t-Region--removeHeader js-removeLandmark
+    - t-Region--stacked
+    - t-Region--scrollBody
+    render-components: Above Content
+
+  accessibility: 
+    use-landmark: true
+    landmark-type: Template Default
+
+  advanced: 
+    region-display-selector: false
+    exclude-title-from-translation: false
+
+  customization: 
+    customizable: Not Customizable By End Users
+
+  attributes: 
+    settings: 
+      output-as: HTML
+      expand-shortcuts: false
+
+page-items: 
+- # ====== Page Item: P12_LATITUDE =============================
+  id: 1913284191036277894
+  identification: 
+    name: P12_LATITUDE
+    type: Hidden
+
+  settings: 
+    value-protected: true
+
+  layout: 
+    sequence: 30
+    region: No Parent
+    slot: BODY
+
+  advanced: 
+    warn-on-unsaved-changes: Page Default
+
+  source: 
+    type: Null
+    used: Only when current value in session state is null
+
+  session-state: 
+    data-type: VARCHAR2
+    storage: Per Session (Persistent)
+
+  security: 
+    session-state-protection: Unrestricted
+    store-value-encrypted-in-session-state: true
+    restricted-characters: All characters can be saved.
+
+- # ====== Page Item: P12_LONGITUDE ============================
+  id: 1913284341016277895
+  identification: 
+    name: P12_LONGITUDE
+    type: Hidden
+
+  settings: 
+    value-protected: true
+
+  layout: 
+    sequence: 40
+    region: No Parent
+    slot: BODY
+
+  advanced: 
+    warn-on-unsaved-changes: Page Default
+
+  source: 
+    type: Null
+    used: Only when current value in session state is null
+
+  session-state: 
+    data-type: VARCHAR2
+    storage: Per Session (Persistent)
+
+  security: 
+    session-state-protection: Unrestricted
+    store-value-encrypted-in-session-state: true
+    restricted-characters: All characters can be saved.
+
+buttons: 
+- # ====== Button: BACK ========================================
+  id: 81087984951544449
+  identification: 
+    button-name: BACK
+    label: Account
+
+  layout: 
+    sequence: 20
+    region: No Parent
+    slot: BODY
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+    alignment: Left center
+
+  appearance: 
+    button-template: Text with Icon
+    hot: false
+    template-options: 
+    - '#DEFAULT#'
+    - t-Button--simple
+    - t-Button--iconLeft
+    - t-Button--gapBottom
+    icon: fa-chevron-left
+
+  behavior: 
+    action: Redirect to Page in this Application
+    target: 
+      url: 'f?p=&APP_ID.:20000:&APP_SESSION.::&DEBUG.:::'
+      page: 20000 # Account
+
+    warn-on-unsaved-changes: Do Not Check
+
+- # ====== Button: SAVE ========================================
+  id: 81510170448422059
+  identification: 
+    button-name: SAVE
+    label: Save
+
+  layout: 
+    sequence: 10
+    region: Actions # 173931735081778211
+    slot: BODY
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+    alignment: Left center
+
+  appearance: 
+    button-template: Text
+    hot: true
+    template-options: 
+    - '#DEFAULT#'
+    - t-Button--large
+    - t-Button--stretch
+    - t-Button--padTop
+
+  behavior: 
+    action: Redirect to Page in this Application
+    target: 
+      url: 'f?p=&APP_ID.:20000:&SESSION.::&DEBUG.:::'
+      page: 20000 # Account
+
+    warn-on-unsaved-changes: Do Not Check
+
+dynamic-actions: 
+- # ====== Dynamic Action: Get Current Position onLoad =========
+  id: 81090543217544454
+  identification: 
+    name: Get Current Position onLoad
+
+  execution: 
+    sequence: 10
+    event-scope: Static
+
+  when: 
+    event: Page Load
+
+  actions: 
+  - # ====== Action: Get Current Position ========================
+    id: 81091067779544454
+    identification: 
+      action: Get Current Position
+
+    settings: 
+      return-type: Latitude and Longitude
+      latitude-item: P12_LATITUDE
+      longitude-item: P12_LONGITUDE
+      enable-high-accuracy: true
+
+    execution: 
+      sequence: 20
+      event: Get Current Position onLoad # 81090543217544454
+      fire-when-event-result-is: True
+      fire-on-initialization: true
+      stop-execution-on-error: true
+      wait-for-result: true
+

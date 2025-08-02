@@ -1,0 +1,1121 @@
+---
+# ====== Page: Home ==========================================
+id: 4
+identification: 
+  name: Home
+  alias: HOME
+  title: Home
+
+appearance: 
+  page-mode: Normal
+  page-template: Theme Default
+  template-options: 
+  - '#DEFAULT#'
+
+navigation-menu: 
+  override-user-interface-level: false
+
+navigation: 
+  cursor-focus: Do not focus cursor
+  warn-on-unsaved-changes: false
+
+css: 
+  inline: |
+    /* Categories */
+    .c-Categories {
+      --a-cv-placeholder-color: transparent; /* Hide Placeholders */
+      --a-cv-background-color: transparent; /* Remove Card Background */
+      --a-cv-border-width: 0px; /* Remove Card Borders */
+      --a-cv-header-padding-y: .5rem;
+      --a-cv-title-font-size: .875rem;
+      --a-cv-title-font-weight: 400;
+      --a-cv-shadow: none;
+      --a-cv-icon-image-size: 4rem;
+    
+      min-block-size: 8rem; /* Set Initial Size of Cards */
+    }
+    
+    /* Align Category Image */
+    .c-Categories .a-CardView-iconImg {
+      margin-inline: auto;
+    }
+    
+    /* Misc Category Styles */
+    .c-Categories .a-CardView-items {
+      padding-inline: .25rem;
+      padding-block: 0;
+      margin-inline: auto;
+      text-align: center;
+      inline-size: max-content;
+    }
+    
+    /* Misc Category Item Styles */
+    .c-Categories .a-CardView-item {
+      flex-shrink: 0;
+      padding-block: .5rem;
+      min-inline-size: 0;
+    }
+    
+    /* Set Carousel Aspect Ratio */
+    .t-Region-carouselRegions {
+      aspect-ratio: 2.5 / 1;
+      overflow: hidden;
+    }
+    
+    /* Cards */
+    .a-CardView-items {
+      max-inline-size: 100%;
+      scrollbar-width: 0;
+      scroll-snap-type: x mandatory;
+      overflow-x: auto;
+      display: flex;
+      flex-wrap: nowrap;
+    }
+    
+    /* Hide Scrollbars for Webkit Browsers */
+    .a-CardView-items::-webkit-scrollbar {
+      display: none;
+    }
+    
+    .a-CardView-item {
+      scroll-snap-align: start;
+      min-inline-size: 17.5rem;
+    }
+    
+    /* Rating Badge */
+    .a-CardView-badge {
+      background-color: var(--a-palette-warning-shade);
+      color: var(--a-palette-warning);
+    }
+    
+    .a-CardView-badgeValue {
+      color: initial;
+    }
+    
+
+security: 
+  authorization-scheme: MODEL.LOV.MUST_NOT_BE_PUBLIC_USER
+  authentication: Page Requires Authentication
+  deep-linking: Application Default
+  page-access-protection: Arguments Must Have Checksum
+  form-auto-complete: Off
+  browser-cache: Application Default
+
+session-management: 
+  rejoin-sessions: Application Default
+
+advanced: 
+  enable-duplicate-page-submissions: Yes - Enable page to be re-posted
+  reload-on-submit: Only for Success
+
+server-cache: 
+  caching: Disabled
+
+regions: 
+- # ====== Region: Categories ==================================
+  id: 348246937993620070
+  identification: 
+    name: Categories
+    type: Cards
+
+  source: 
+    location: Local Database
+    type: SQL Query
+    sql-query: |
+      select c.id,
+             c.name,
+             c.image_url,
+             c.created,
+             c.created_by,
+             c.updated,
+             c.updated_by
+        from sample_restaurant_categories c
+       where exists ( select 1
+                        from sample_restaurant r 
+                       where r.category_id = c.id )
+       order by c.name
+
+  order-by: 
+    type: None
+
+  layout: 
+    sequence: 30
+    parent-region: No Parent
+    slot: BODY
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+
+  appearance: 
+    template: Cards Container
+    template-options: 
+    - '#DEFAULT#'
+    - margin-top-none
+    - margin-bottom-none
+    css-classes: 
+    - c-Categories
+    render-components: Above Content
+
+  accessibility: 
+    use-landmark: true
+    landmark-type: Template Default
+
+  advanced: 
+    region-display-selector: false
+    exclude-title-from-translation: false
+
+  customization: 
+    customizable: Not Customizable By End Users
+
+  attributes: 
+    id: 80962272837496337
+    appearance: 
+      layout: Grid
+      grid-columns: Auto
+
+    title: 
+      advanced-formatting: false
+      column: NAME
+      css-classes: 
+      - u-textCenter
+
+    subtitle: 
+      advanced-formatting: false
+
+    body: 
+      advanced-formatting: false
+
+    secondary-body: 
+      advanced-formatting: false
+
+    icon-and-badge: 
+      icon-source: Image URL
+      image-url: '#APP_FILES#&IMAGE_URL.'
+      icon-position: Top
+
+    media: 
+      advanced-formatting: false
+      source: No Media
+
+    performance: 
+      lazy-loading: false
+
+    pagination: 
+      type: Scroll
+      show-total-count: false
+
+    messages: 
+      when-no-data-found: The categories are empty!
+      no-data-found-icon: fa-emoji-grin-sweat
+
+    actions: 
+    - # ====== Action: Full Card ===================================
+      id: 80962719387496339
+      identification: 
+        type: Full Card
+
+      layout: 
+        sequence: 10
+
+      link: 
+        type: Redirect to URL
+        target: '#action$open-search?category=&NAME.'
+
+- # ====== Region: Favorites ===================================
+  id: 348247216426620073
+  identification: 
+    name: Favorites
+    type: Cards
+
+  source: 
+    location: Local Database
+    type: SQL Query
+    sql-query: |
+      select r.id,
+             r.hero_url as image,
+             r.name as name,
+             c.name as category,
+             r.rating,
+             r.delivery_time,
+             r.delivery_fee
+        from sample_restaurant r,
+             sample_restaurant_categories c
+       where c.id = r.category_id
+       order by dbms_random.value
+       fetch first 3 rows only
+
+  order-by: 
+    type: None
+
+  layout: 
+    sequence: 50
+    parent-region: No Parent
+    slot: BODY
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+
+  appearance: 
+    template: Content Block
+    template-options: 
+    - '#DEFAULT#'
+    - t-ContentBlock--h3
+    - margin-top-none
+    render-components: Above Content
+
+  accessibility: 
+    use-landmark: true
+    landmark-type: Template Default
+
+  advanced: 
+    region-display-selector: false
+    exclude-title-from-translation: false
+
+  customization: 
+    customizable: Not Customizable By End Users
+
+  attributes: 
+    id: 80963790380496341
+    appearance: 
+      layout: Grid
+      grid-columns: Auto
+
+    card: 
+      css-classes: 
+      - a-CardView-item-mobile
+      - rounded
+      - rounded-lg
+      primary-key-column-1: ID
+
+    title: 
+      advanced-formatting: false
+      column: NAME
+
+    subtitle: 
+      advanced-formatting: true
+      html-expression: '{if !=DELIVERY_FEE/}Free Delivery{else/}$&DELIVERY_FEE. Delivery Fee{endif/} &bull; &DELIVERY_TIME. min'
+
+    body: 
+      advanced-formatting: false
+
+    secondary-body: 
+      advanced-formatting: false
+
+    icon-and-badge: 
+      icon-source: No Icon
+      badge-column: RATING
+      badge-css-classes: 
+      - fa
+      - fa-star
+      - u-color-7-text
+
+    media: 
+      advanced-formatting: false
+      source: Image URL
+      url: '#APP_FILES#&IMAGE.'
+      position: First
+      appearance: Widescreen
+      sizing: Cover
+      css-classes: 
+      - rounded-top
+      - rounded-top-lg
+
+    performance: 
+      lazy-loading: false
+
+    pagination: 
+      type: Scroll
+      show-total-count: false
+
+    messages: 
+      when-no-data-found: This category is empty!
+      no-data-found-icon: fa-emoji-grin-sweat
+
+    actions: 
+    - # ====== Action: Full Card ===================================
+      id: 80964215984496342
+      identification: 
+        type: Full Card
+
+      layout: 
+        sequence: 10
+
+      link: 
+        type: Redirect to Page in this Application
+        target: 
+          url: 'f?p=&APP_ID.:5:&SESSION.::&DEBUG.::P5_RESTAURANT_ID:&ID.'
+          page: 5 # Restaurant
+          values: 
+            p5_restaurant_id: '&ID.'
+
+- # ====== Region: Promotionals ================================
+  id: 676521255633579473
+  identification: 
+    name: Promotionals
+    type: Static Content
+
+  layout: 
+    sequence: 40
+    parent-region: No Parent
+    slot: BODY
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+
+  appearance: 
+    template: Carousel Container
+    template-options: 
+    - '#DEFAULT#'
+    - js-cycle5s
+    - t-Region--carouselSlide
+    - t-Region--hideHeader js-addHiddenHeadingRoleDesc
+    - t-Region--hiddenOverflow
+    - margin-top-sm
+    - margin-bottom-md
+    css-classes: 
+    - rounded
+    - rounded-lg
+    render-components: Above Content
+
+  accessibility: 
+    use-landmark: false
+
+  advanced: 
+    region-display-selector: false
+    exclude-title-from-translation: false
+
+  customization: 
+    customizable: Not Customizable By End Users
+
+  attributes: 
+    settings: 
+      output-as: HTML
+      expand-shortcuts: false
+
+- # ====== Region: Premium =====================================
+  id: 676521309515579474
+  identification: 
+    name: Premium
+    type: Static Content
+
+  layout: 
+    sequence: 10
+    parent-region: Promotionals # 676521255633579473
+    slot: SUB_REGIONS
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+
+  appearance: 
+    template: Image
+    template-options: 
+    - '#DEFAULT#'
+    - t-ImageRegion--stretch
+    - t-ImageRegion--auto
+    - t-ImageRegion--cover
+    - t-ImageRegion--square
+    - t-ImageRegion--noFilter
+    render-components: Above Content
+
+  accessibility: 
+    use-landmark: true
+    landmark-type: Template Default
+
+  image: 
+    file-url: '#APP_FILES#slides/slide-1.jpg'
+    accessible-description: APEXToGo premium
+
+  advanced: 
+    region-display-selector: false
+    exclude-title-from-translation: false
+
+  customization: 
+    customizable: Not Customizable By End Users
+
+  attributes: 
+    settings: 
+      output-as: HTML
+      expand-shortcuts: false
+
+- # ====== Region: Popular near you ============================
+  id: 676521540752579476
+  identification: 
+    name: Popular near you
+    type: Cards
+
+  source: 
+    location: Local Database
+    type: SQL Query
+    sql-query: |
+      select r.id,
+             r.hero_url as image,
+             r.name as name,
+             c.name as category,
+             r.rating,
+             r.delivery_time,
+             r.delivery_fee
+        from sample_restaurant r,
+             sample_restaurant_categories c
+       where c.id = r.category_id
+       order by dbms_random.value
+       fetch first 8 rows only
+
+  order-by: 
+    type: None
+
+  layout: 
+    sequence: 60
+    parent-region: No Parent
+    slot: BODY
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+
+  appearance: 
+    template: Content Block
+    template-options: 
+    - '#DEFAULT#'
+    - t-ContentBlock--h3
+    render-components: Above Content
+
+  accessibility: 
+    use-landmark: true
+    landmark-type: Template Default
+
+  advanced: 
+    region-display-selector: false
+    exclude-title-from-translation: false
+
+  customization: 
+    customizable: Not Customizable By End Users
+
+  attributes: 
+    id: 80967263554496346
+    appearance: 
+      layout: Grid
+      grid-columns: Auto
+
+    card: 
+      css-classes: 
+      - a-CardView-item-mobile
+      - rounded
+      - rounded-lg
+      primary-key-column-1: ID
+
+    title: 
+      advanced-formatting: false
+      column: NAME
+
+    subtitle: 
+      advanced-formatting: true
+      html-expression: '{if !=DELIVERY_FEE/}Free Delivery{else/}$&DELIVERY_FEE. Delivery Fee{endif/} &bull; &DELIVERY_TIME. min'
+
+    body: 
+      advanced-formatting: false
+
+    secondary-body: 
+      advanced-formatting: false
+
+    icon-and-badge: 
+      icon-source: No Icon
+      badge-column: RATING
+      badge-css-classes: 
+      - fa
+      - fa-star
+      - u-color-7-text
+
+    media: 
+      advanced-formatting: false
+      source: Image URL
+      url: '#APP_FILES#&IMAGE.'
+      position: First
+      appearance: Widescreen
+      sizing: Cover
+      css-classes: 
+      - rounded-top
+      - rounded-top-lg
+
+    performance: 
+      lazy-loading: false
+
+    pagination: 
+      type: Scroll
+      show-total-count: false
+
+    messages: 
+      when-no-data-found: This category is empty!
+      no-data-found-icon: fa-emoji-grin-sweat
+
+    actions: 
+    - # ====== Action: Full Card ===================================
+      id: 80967808308496347
+      identification: 
+        type: Full Card
+
+      layout: 
+        sequence: 10
+
+      link: 
+        type: Redirect to Page in this Application
+        target: 
+          url: 'f?p=&APP_ID.:5:&SESSION.::&DEBUG.::P5_RESTAURANT_ID:&ID.'
+          page: 5 # Restaurant
+          values: 
+            p5_restaurant_id: '&ID.'
+
+- # ====== Region: Credits =====================================
+  id: 735141380403403278
+  identification: 
+    name: Credits
+    type: Static Content
+
+  layout: 
+    sequence: 20
+    parent-region: Promotionals # 676521255633579473
+    slot: SUB_REGIONS
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+
+  appearance: 
+    template: Image
+    template-options: 
+    - '#DEFAULT#'
+    - t-ImageRegion--stretch
+    - t-ImageRegion--auto
+    - t-ImageRegion--cover
+    - t-ImageRegion--square
+    - t-ImageRegion--noFilter
+    render-components: Above Content
+
+  accessibility: 
+    use-landmark: true
+    landmark-type: Template Default
+
+  image: 
+    file-url: '#APP_FILES#slides/slide-2.jpg'
+    accessible-description: APEXToGo credits
+
+  advanced: 
+    region-display-selector: false
+    exclude-title-from-translation: false
+
+  customization: 
+    customizable: Not Customizable By End Users
+
+  attributes: 
+    settings: 
+      output-as: HTML
+      expand-shortcuts: false
+
+- # ====== Region: Today's offers ==============================
+  id: 781405787916640490
+  identification: 
+    name: Today's offers
+    type: Cards
+
+  source: 
+    location: Local Database
+    type: SQL Query
+    sql-query: |
+      select r.id,
+             r.hero_url as image,
+             r.name as name,
+             c.name as category,
+             r.rating,
+             r.delivery_time,
+             r.delivery_fee
+        from sample_restaurant r,
+             sample_restaurant_categories c
+       where c.id = r.category_id
+       order by dbms_random.value
+       fetch first 8 rows only
+
+  order-by: 
+    type: None
+
+  layout: 
+    sequence: 70
+    parent-region: No Parent
+    slot: BODY
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+
+  appearance: 
+    template: Content Block
+    template-options: 
+    - '#DEFAULT#'
+    - t-ContentBlock--h3
+    render-components: Above Content
+
+  accessibility: 
+    use-landmark: true
+    landmark-type: Template Default
+
+  advanced: 
+    region-display-selector: false
+    exclude-title-from-translation: false
+
+  customization: 
+    customizable: Not Customizable By End Users
+
+  attributes: 
+    id: 80969208424496350
+    appearance: 
+      layout: Grid
+      grid-columns: Auto
+
+    card: 
+      css-classes: 
+      - a-CardView-item-mobile
+      - rounded
+      - rounded-lg
+      primary-key-column-1: ID
+
+    title: 
+      advanced-formatting: false
+      column: NAME
+
+    subtitle: 
+      advanced-formatting: true
+      html-expression: '{if !=DELIVERY_FEE/}Free Delivery{else/}$&DELIVERY_FEE. Delivery Fee{endif/} &bull; &DELIVERY_TIME. min'
+
+    body: 
+      advanced-formatting: false
+
+    secondary-body: 
+      advanced-formatting: false
+
+    icon-and-badge: 
+      icon-source: No Icon
+      badge-column: RATING
+      badge-css-classes: 
+      - fa
+      - fa-star
+      - u-color-7-text
+
+    media: 
+      advanced-formatting: false
+      source: Image URL
+      url: '#APP_FILES#&IMAGE.'
+      position: First
+      appearance: Widescreen
+      sizing: Cover
+      css-classes: 
+      - rounded-top
+      - rounded-top-lg
+
+    performance: 
+      lazy-loading: false
+
+    pagination: 
+      type: Scroll
+      show-total-count: false
+
+    messages: 
+      when-no-data-found: This category is empty!
+      no-data-found-icon: fa-emoji-grin-sweat
+
+    actions: 
+    - # ====== Action: Full Card ===================================
+      id: 80969660771496351
+      identification: 
+        type: Full Card
+
+      layout: 
+        sequence: 10
+
+      link: 
+        type: Redirect to Page in this Application
+        target: 
+          url: 'f?p=&APP_ID.:5:&SESSION.::&DEBUG.::P5_RESTAURANT_ID:&ID.'
+          page: 5 # Restaurant
+          values: 
+            p5_restaurant_id: '&ID.'
+
+- # ====== Region: Delivery Free ===============================
+  id: 781406055166640493
+  identification: 
+    name: Delivery Free
+    type: Cards
+
+  source: 
+    location: Local Database
+    type: SQL Query
+    sql-query: |
+      select r.id,
+             r.hero_url as image,
+             r.name as name,
+             c.name as category,
+             r.rating,
+             r.delivery_time,
+             r.delivery_fee
+        from sample_restaurant r,
+             sample_restaurant_categories c 
+       where c.id = r.category_id
+         and delivery_fee = 0
+
+  order-by: 
+    type: None
+
+  layout: 
+    sequence: 80
+    parent-region: No Parent
+    slot: BODY
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+
+  appearance: 
+    template: Content Block
+    template-options: 
+    - '#DEFAULT#'
+    - t-ContentBlock--h3
+    render-components: Above Content
+
+  accessibility: 
+    use-landmark: true
+    landmark-type: Template Default
+
+  advanced: 
+    region-display-selector: false
+    exclude-title-from-translation: false
+
+  customization: 
+    customizable: Not Customizable By End Users
+
+  attributes: 
+    id: 80971012210496353
+    appearance: 
+      layout: Grid
+      grid-columns: Auto
+
+    card: 
+      css-classes: 
+      - a-CardView-item-mobile
+      - rounded
+      - rounded-lg
+      primary-key-column-1: ID
+
+    title: 
+      advanced-formatting: false
+      column: NAME
+
+    subtitle: 
+      advanced-formatting: true
+      html-expression: '{if !=DELIVERY_FEE/}Free Delivery{else/}$&DELIVERY_FEE. Delivery Fee{endif/} &bull; &DELIVERY_TIME. min'
+
+    body: 
+      advanced-formatting: false
+
+    secondary-body: 
+      advanced-formatting: false
+
+    icon-and-badge: 
+      icon-source: No Icon
+      badge-column: RATING
+      badge-css-classes: 
+      - fa
+      - fa-star
+      - u-color-7-text
+
+    media: 
+      advanced-formatting: false
+      source: Image URL
+      url: '#APP_FILES#&IMAGE.'
+      position: First
+      appearance: Widescreen
+      sizing: Cover
+      css-classes: 
+      - rounded-top
+      - rounded-top-lg
+
+    performance: 
+      lazy-loading: false
+
+    pagination: 
+      type: Scroll
+      show-total-count: false
+
+    messages: 
+      when-no-data-found: This category is empty!
+      no-data-found-icon: fa-emoji-grin-sweat
+
+    actions: 
+    - # ====== Action: Full Card ===================================
+      id: 80971511292496354
+      identification: 
+        type: Full Card
+
+      layout: 
+        sequence: 10
+
+      link: 
+        type: Redirect to Page in this Application
+        target: 
+          url: 'f?p=&APP_ID.:5:&SESSION.::&DEBUG.::P5_RESTAURANT_ID:&ID.'
+          page: 5 # Restaurant
+          values: 
+            p5_restaurant_id: '&ID.'
+
+- # ====== Region: Info ========================================
+  id: 952513164661302808
+  identification: 
+    name: Info
+    type: Static Content
+
+  layout: 
+    sequence: 40
+    parent-region: Promotionals # 676521255633579473
+    slot: SUB_REGIONS
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+
+  appearance: 
+    template: Image
+    template-options: 
+    - '#DEFAULT#'
+    - t-ImageRegion--stretch
+    - t-ImageRegion--auto
+    - t-ImageRegion--cover
+    - t-ImageRegion--square
+    - t-ImageRegion--noFilter
+    render-components: Above Content
+
+  accessibility: 
+    use-landmark: true
+    landmark-type: Template Default
+
+  image: 
+    file-url: '#APP_FILES#slides/slide-3.jpg'
+    accessible-description: APEXToGo info
+
+  advanced: 
+    region-display-selector: false
+    exclude-title-from-translation: false
+
+  customization: 
+    customizable: Not Customizable By End Users
+
+  attributes: 
+    settings: 
+      output-as: HTML
+      expand-shortcuts: false
+
+buttons: 
+- # ====== Button: SHOW_ALL_FAVORITES ==========================
+  id: 43725972573964584
+  identification: 
+    button-name: SHOW_ALL_FAVORITES
+    label: Show All
+
+  layout: 
+    sequence: 20
+    region: Favorites # 348247216426620073
+    slot: CHANGE
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+
+  appearance: 
+    button-template: Text
+    hot: false
+    template-options: 
+    - '#DEFAULT#'
+    - t-Button--link
+
+  behavior: 
+    action: Redirect to Page in this Application
+    target: 
+      url: 'f?p=&APP_ID.:6:&SESSION.::&DEBUG.:::'
+      page: 6 # All Restaurants
+
+    warn-on-unsaved-changes: Do Not Check
+
+- # ====== Button: SEARCH ======================================
+  id: 80961526057496336
+  identification: 
+    button-name: SEARCH
+    label: Search APEXToGo...
+
+  layout: 
+    sequence: 20
+    region: No Parent
+    slot: BODY
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+    alignment: Left center
+
+  appearance: 
+    button-template: Text with Icon
+    hot: false
+    template-options: 
+    - '#DEFAULT#'
+    - t-Button--large
+    - t-Button--simple
+    - t-Button--iconLeft
+    - t-Button--stretch
+    - t-Button--gapTop
+    - t-Button--padBottom
+    css-classes: 
+    - margin-top-md
+    - u-textStart
+    - null
+    icon: fa-search
+
+  behavior: 
+    action: Defined by Dynamic Action
+    execute-validations: false
+
+  advanced: 
+    static-id: SEARCH
+
+- # ====== Button: SHOW_ALL_POPULAR ============================
+  id: 81310825053165578
+  identification: 
+    button-name: SHOW_ALL_POPULAR
+    label: Show All
+
+  layout: 
+    sequence: 10
+    region: Popular near you # 676521540752579476
+    slot: CHANGE
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+
+  appearance: 
+    button-template: Text
+    hot: false
+    template-options: 
+    - '#DEFAULT#'
+    - t-Button--link
+
+  behavior: 
+    action: Redirect to Page in this Application
+    target: 
+      url: 'f?p=&APP_ID.:6:&SESSION.::&DEBUG.:::'
+      page: 6 # All Restaurants
+
+    warn-on-unsaved-changes: Do Not Check
+
+- # ====== Button: SHOW_ALL_TODAYS_OFFERS ======================
+  id: 81310938891165579
+  identification: 
+    button-name: SHOW_ALL_TODAYS_OFFERS
+    label: Show All
+
+  layout: 
+    sequence: 10
+    region: Today's offers # 781405787916640490
+    slot: CHANGE
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+
+  appearance: 
+    button-template: Text
+    hot: false
+    template-options: 
+    - '#DEFAULT#'
+    - t-Button--link
+
+  behavior: 
+    action: Redirect to Page in this Application
+    target: 
+      url: 'f?p=&APP_ID.:6:&SESSION.::&DEBUG.:::'
+      page: 6 # All Restaurants
+
+    warn-on-unsaved-changes: Do Not Check
+
+- # ====== Button: SHOW_ALL_DELIVERY_FREE ======================
+  id: 81311071995165580
+  identification: 
+    button-name: SHOW_ALL_DELIVERY_FREE
+    label: Show All
+
+  layout: 
+    sequence: 10
+    region: Delivery Free # 781406055166640493
+    slot: CHANGE
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+
+  appearance: 
+    button-template: Text
+    hot: false
+    template-options: 
+    - '#DEFAULT#'
+    - t-Button--link
+
+  behavior: 
+    action: Redirect to Page in this Application
+    target: 
+      url: 'f?p=&APP_ID.:6:&SESSION.::&DEBUG.:::'
+      page: 6 # All Restaurants
+
+    warn-on-unsaved-changes: Do Not Check
+
+dynamic-actions: 
+- # ====== Dynamic Action: Open Search Region ==================
+  id: 81186285354818003
+  identification: 
+    name: Open Search Region
+
+  execution: 
+    sequence: 40
+    event-scope: Static
+    type: Immediate
+
+  when: 
+    event: Click
+    selection-type: Button
+    button: SEARCH # 80961526057496336
+
+  actions: 
+  - # ====== Action: Execute JavaScript Code =====================
+    id: 43726307058964587
+    identification: 
+      action: Execute JavaScript Code
+
+    settings: 
+      code: apex.actions.invoke( 'open-search' );
+
+    execution: 
+      sequence: 40
+      event: Open Search Region # 81186285354818003
+      fire-when-event-result-is: True
+      fire-on-initialization: false
+

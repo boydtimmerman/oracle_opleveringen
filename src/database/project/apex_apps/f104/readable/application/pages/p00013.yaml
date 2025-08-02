@@ -1,0 +1,383 @@
+---
+# ====== Page: FAQ ===========================================
+id: 13
+identification: 
+  name: FAQ
+  alias: FAQ
+  title: FAQ
+  page-group: User Settings # 166726674484130785
+
+appearance: 
+  page-mode: Modal Dialog
+  dialog-template: Drawer
+  template-options: 
+  - '#DEFAULT#'
+  - js-dialog-class-t-Drawer--pullOutEnd
+
+dialog: 
+  chained: true
+  resizable: false
+
+navigation-menu: 
+  override-user-interface-level: false
+
+navigation: 
+  cursor-focus: Do not focus cursor
+  warn-on-unsaved-changes: true
+
+css: 
+  inline: |
+    /* Fix Alignment on Mobile */
+    .t-Region-titleButton {
+      text-align: inherit;
+    }
+
+security: 
+  authorization-scheme: MODEL.LOV.MUST_NOT_BE_PUBLIC_USER
+  authentication: Page Requires Authentication
+  deep-linking: Application Default
+  page-access-protection: Arguments Must Have Checksum
+  form-auto-complete: On
+  browser-cache: Application Default
+
+session-management: 
+  rejoin-sessions: Application Default
+
+advanced: 
+  enable-duplicate-page-submissions: Yes - Enable page to be re-posted
+  reload-on-submit: Only for Success
+
+server-cache: 
+  caching: Disabled
+
+regions: 
+- # ====== Region: Can I see a history of my previous orders? ==
+  id: 127077057953241395
+  identification: 
+    name: Can I see a history of my previous orders?
+    type: Static Content
+
+  source: 
+    html-code: |
+      <p>
+      
+          Yes, you can view your order history by logging into your account.
+          Simply navigate to the Orders section and select "Past Orders".
+          There, you can see details of all your previous orders.
+      
+      </p>
+
+  layout: 
+    sequence: 70
+    parent-region: General # 1913285983904283521
+    slot: BODY
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+
+  appearance: 
+    template: Collapsible
+    template-options: 
+    - '#DEFAULT#'
+    - is-collapsed
+    - t-Region--noBorder
+    - t-Region--scrollBody
+    render-components: Above Content
+
+  accessibility: 
+    use-landmark: true
+    landmark-type: Template Default
+
+  advanced: 
+    region-display-selector: false
+    exclude-title-from-translation: false
+
+  customization: 
+    customizable: Not Customizable By End Users
+
+  attributes: 
+    settings: 
+      output-as: HTML
+      expand-shortcuts: false
+
+- # ====== Region: How do I report a problem with my delivery? =
+  id: 127077171172241396
+  identification: 
+    name: How do I report a problem with my delivery?
+    type: Static Content
+
+  source: 
+    html-code: |
+      <p>
+          
+          If you encounter any issues with your delivery driver, please contact
+          our customer support team immediately. Provide details of the incident
+          so we can address it promptly.
+      
+      </p>
+
+  layout: 
+    sequence: 80
+    parent-region: General # 1913285983904283521
+    slot: BODY
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+
+  appearance: 
+    template: Collapsible
+    template-options: 
+    - '#DEFAULT#'
+    - is-collapsed
+    - t-Region--noBorder
+    - t-Region--scrollBody
+    render-components: Above Content
+
+  accessibility: 
+    use-landmark: true
+    landmark-type: Template Default
+
+  advanced: 
+    region-display-selector: false
+    exclude-title-from-translation: false
+
+  customization: 
+    customizable: Not Customizable By End Users
+
+  attributes: 
+    settings: 
+      output-as: HTML
+      expand-shortcuts: false
+
+- # ====== Region: General =====================================
+  id: 1913285983904283521
+  identification: 
+    name: General
+    type: Static Content
+
+  layout: 
+    sequence: 30
+    parent-region: No Parent
+    slot: BODY
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+
+  appearance: 
+    template: Content Block
+    template-options: 
+    - '#DEFAULT#'
+    - t-ContentBlock--h2
+    - t-Region--removeHeader js-removeLandmark
+    render-components: Below Content
+
+  accessibility: 
+    use-landmark: true
+    landmark-type: Template Default
+
+  advanced: 
+    region-display-selector: false
+    exclude-title-from-translation: false
+
+  customization: 
+    customizable: Not Customizable By End Users
+
+  attributes: 
+    settings: 
+      output-as: HTML
+      expand-shortcuts: false
+
+- # ====== Region: Is there a minimum order amount? ============
+  id: 1979656564486936937
+  identification: 
+    name: Is there a minimum order amount?
+    type: Static Content
+
+  source: 
+    html-code: |
+      <p>
+          
+          No, there is no minimum order amount. You can order as little or as much
+          as you like. We aim to provide flexibility and convenience for all our
+          customers.
+      
+      </p>
+
+  layout: 
+    sequence: 40
+    parent-region: General # 1913285983904283521
+    slot: BODY
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+
+  appearance: 
+    template: Collapsible
+    template-options: 
+    - '#DEFAULT#'
+    - is-collapsed
+    - t-Region--noBorder
+    - t-Region--scrollBody
+    render-components: Above Content
+
+  accessibility: 
+    use-landmark: true
+    landmark-type: Template Default
+
+  advanced: 
+    region-display-selector: false
+    exclude-title-from-translation: false
+
+  customization: 
+    customizable: Not Customizable By End Users
+
+  attributes: 
+    settings: 
+      output-as: HTML
+      expand-shortcuts: false
+
+- # ====== Region: How do I place an order? ====================
+  id: 1979656705665936938
+  identification: 
+    name: How do I place an order?
+    type: Static Content
+
+  source: 
+    html-code: |
+      <p>
+          
+          Placing an order with APEXToGo is simple! Just look for a restaurant,
+          add your desired items to the cart, and proceed to checkout.
+      
+      </p>
+
+  layout: 
+    sequence: 30
+    parent-region: General # 1913285983904283521
+    slot: BODY
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+
+  appearance: 
+    template: Collapsible
+    template-options: 
+    - '#DEFAULT#'
+    - is-collapsed
+    - t-Region--noBorder
+    - t-Region--scrollBody
+    render-components: Above Content
+
+  accessibility: 
+    use-landmark: true
+    landmark-type: Template Default
+
+  advanced: 
+    region-display-selector: false
+    exclude-title-from-translation: false
+
+  customization: 
+    customizable: Not Customizable By End Users
+
+  attributes: 
+    settings: 
+      output-as: HTML
+      expand-shortcuts: false
+
+- # ====== Region: What is APEXToGo? ===========================
+  id: 1979656777088936939
+  identification: 
+    name: What is APEXToGo?
+    type: Static Content
+
+  source: 
+    html-code: |
+      <p>
+          
+          APEXToGo is a convenient food delivery service that brings your favorite
+          meals from local restaurants right to your doorstep. Whether you're craving
+          a quick snack or a full meal, we've got you covered.
+      
+      </p>
+
+  layout: 
+    sequence: 20
+    parent-region: General # 1913285983904283521
+    slot: BODY
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+
+  appearance: 
+    template: Collapsible
+    template-options: 
+    - '#DEFAULT#'
+    - is-collapsed
+    - t-Region--noBorder
+    - t-Region--scrollBody
+    render-components: Above Content
+
+  accessibility: 
+    use-landmark: true
+    landmark-type: Template Default
+
+  advanced: 
+    region-display-selector: false
+    exclude-title-from-translation: false
+
+  customization: 
+    customizable: Not Customizable By End Users
+
+  attributes: 
+    settings: 
+      output-as: HTML
+      expand-shortcuts: false
+
+buttons: 
+- # ====== Button: BACK ========================================
+  id: 81092830994550090
+  identification: 
+    button-name: BACK
+    label: Account
+
+  layout: 
+    sequence: 20
+    region: No Parent
+    slot: BODY
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+    alignment: Left center
+
+  appearance: 
+    button-template: Text with Icon
+    hot: false
+    template-options: 
+    - '#DEFAULT#'
+    - t-Button--simple
+    - t-Button--iconLeft
+    - t-Button--gapBottom
+    icon: fa-chevron-left
+
+  behavior: 
+    action: Redirect to Page in this Application
+    target: 
+      url: 'f?p=&APP_ID.:20000:&APP_SESSION.::&DEBUG.:::'
+      page: 20000 # Account
+
+    warn-on-unsaved-changes: Do Not Check
+

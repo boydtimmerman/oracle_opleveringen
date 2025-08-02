@@ -1,0 +1,213 @@
+---
+# ====== Page: Welcome =======================================
+id: 1
+identification: 
+  name: Welcome
+  alias: WELCOME
+  title: Welcome
+
+appearance: 
+  page-mode: Normal
+  page-template: Login
+  template-options: 
+  - '#DEFAULT#'
+
+navigation-menu: 
+  override-user-interface-level: false
+
+navigation: 
+  cursor-focus: Do not focus cursor
+  warn-on-unsaved-changes: true
+
+security: 
+  authentication: Page Is Public
+  deep-linking: Application Default
+  page-access-protection: Arguments Must Have Checksum
+  form-auto-complete: On
+  browser-cache: Application Default
+
+session-management: 
+  rejoin-sessions: Application Default
+
+advanced: 
+  enable-meta-tags: false
+  enable-duplicate-page-submissions: Yes - Enable page to be re-posted
+  reload-on-submit: Only for Success
+
+server-cache: 
+  caching: Disabled
+
+regions: 
+- # ====== Region: Background Image ============================
+  id: 305166469845606996
+  identification: 
+    name: Background Image
+    type: Static Content
+
+  layout: 
+    sequence: 50
+    parent-region: No Parent
+    slot: BACKGROUND_IMAGE
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+
+  appearance: 
+    template: Image
+    template-options: 
+    - '#DEFAULT#'
+    - t-ImageRegion--auto
+    - t-ImageRegion--cover
+    - t-ImageRegion--square
+    - t-ImageRegion--noFilter
+    render-components: Above Content
+
+  accessibility: 
+    use-landmark: false
+
+  image: 
+    file-url: '#APP_FILES#background.jpg'
+
+  advanced: 
+    region-display-selector: false
+    exclude-title-from-translation: false
+
+  customization: 
+    customizable: Not Customizable By End Users
+
+  attributes: 
+    settings: 
+      output-as: HTML
+      expand-shortcuts: false
+
+- # ====== Region: Welcome Image ===============================
+  id: 1913143444725214798
+  identification: 
+    name: Welcome Image
+    type: Static Content
+
+  layout: 
+    sequence: 20
+    parent-region: No Parent
+    slot: BODY
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+
+  appearance: 
+    template: Image
+    template-options: 
+    - '#DEFAULT#'
+    - t-ImageRegion--auto
+    - t-ImageRegion--cover
+    - t-ImageRegion--square
+    - t-ImageRegion--noFilter
+    - margin-top-none
+    css-classes: 
+    - u-flex
+    - u-justify-content-center
+    render-components: Above Content
+
+  accessibility: 
+    use-landmark: false
+
+  image: 
+    file-url: '#APP_FILES#splash/splash-1.png'
+
+  advanced: 
+    region-display-selector: false
+    exclude-title-from-translation: false
+
+  customization: 
+    customizable: Not Customizable By End Users
+
+  attributes: 
+    settings: 
+      output-as: HTML
+      expand-shortcuts: false
+
+- # ====== Region: Welcome Text ================================
+  id: 1913143617419214799
+  identification: 
+    name: Welcome Text
+    type: Static Content
+
+  source: 
+    html-code: <p>Experience the first Oracle APEX sample application designed for mobile.</p>
+
+  layout: 
+    sequence: 30
+    parent-region: No Parent
+    slot: BODY
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+
+  appearance: 
+    template: Blank with Attributes
+    template-options: 
+    - '#DEFAULT#'
+    - margin-top-md
+    - margin-bottom-lg
+    css-classes: 
+    - u-textCenter
+    render-components: Above Content
+
+  accessibility: 
+    use-landmark: false
+
+  advanced: 
+    region-display-selector: false
+    exclude-title-from-translation: false
+
+  customization: 
+    customizable: Not Customizable By End Users
+
+  attributes: 
+    settings: 
+      output-as: HTML
+      expand-shortcuts: false
+
+buttons: 
+- # ====== Button: NEXT ========================================
+  id: 80953980718481390
+  identification: 
+    button-name: NEXT
+    label: Next
+
+  layout: 
+    sequence: 40
+    region: No Parent
+    slot: BODY
+    start-new-layout: false
+    start-new-row: true
+    column: 5
+    new-column: true
+    column-span: 4
+    alignment: Left center
+
+  appearance: 
+    button-template: Text
+    hot: true
+    template-options: 
+    - '#DEFAULT#'
+    - t-Button--large
+    - t-Button--stretch
+    css-classes: 
+    - mxw320
+    - margin-auto
+
+  behavior: 
+    action: Redirect to Page in this Application
+    target: 
+      url: 'f?p=&APP_ID.:2:&SESSION.::&DEBUG.:::'
+      page: 2 # Discover
+
+    warn-on-unsaved-changes: Do Not Check
+

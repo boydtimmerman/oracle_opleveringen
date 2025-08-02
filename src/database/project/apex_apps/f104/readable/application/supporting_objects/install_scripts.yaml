@@ -1,0 +1,32 @@
+---
+- # ====== Install Script: Install Restaurant Tables ===========
+  id: 81492323869737014
+  identification: 
+    name: Install Restaurant Tables
+
+  execution: 
+    sequence: 10
+
+  server-side-condition: 
+    type: No Rows returned
+    sql-query: |
+      select null
+        from all_tab_columns
+       where table_name = 'SAMPLE_RESTAURANT';
+
+- # ====== Install Script: Install Manage Orders Package =======
+  id: 81492681804743694
+  identification: 
+    name: Install Manage Orders Package
+
+  execution: 
+    sequence: 20
+
+- # ====== Install Script: Install Data ========================
+  id: 869544856753753708
+  identification: 
+    name: Install Data
+
+  execution: 
+    sequence: 30
+

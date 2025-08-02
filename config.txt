@@ -1,0 +1,4 @@
+set cloudconfig c:\software\Wallet_AMS23AI.zip
+conn project@ams23ai_tp
+TransferSolutions$2025
+

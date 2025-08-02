@@ -1,0 +1,442 @@
+---
+# ====== Page: Sign In =======================================
+id: 9999
+identification: 
+  name: Sign In
+  alias: LOGIN
+  title: APEXToGo - Sign In
+
+appearance: 
+  page-mode: Normal
+  page-template: Login
+  template-options: 
+  - '#DEFAULT#'
+
+navigation-menu: 
+  override-user-interface-level: false
+
+navigation: 
+  cursor-focus: First item on page
+  warn-on-unsaved-changes: false
+
+css: 
+  inline: |
+    /* Setting the Logo to be Larger on Mobile */
+    .c-SplashBox {
+      --ut-xs-hero-region-icon-container-size: 8rem;
+      --ut-xs-hero-region-title-font-size: 2rem;
+      --ut-xs-hero-region-title-line-height: 2.5rem;
+      --ut-hero-region-icon-container-size: 8rem;
+      --ut-hero-region-icon-size: 4rem;
+    }
+
+security: 
+  authentication: Page Is Public
+  deep-linking: Application Default
+  page-access-protection: Arguments Must Have Checksum
+  form-auto-complete: Off
+  browser-cache: Application Default
+
+session-management: 
+  rejoin-sessions: Application Default
+
+advanced: 
+  enable-meta-tags: false
+  enable-duplicate-page-submissions: Yes - Enable page to be re-posted
+  reload-on-submit: Only for Success
+
+server-cache: 
+  caching: Disabled
+
+regions: 
+- # ====== Region: Background Image ============================
+  id: 255685443967420497
+  identification: 
+    name: Background Image
+    type: Static Content
+
+  layout: 
+    sequence: 20
+    parent-region: No Parent
+    slot: BACKGROUND_IMAGE
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+
+  appearance: 
+    template: Image
+    template-options: 
+    - '#DEFAULT#'
+    - t-ImageRegion--auto
+    - t-ImageRegion--cover
+    - t-ImageRegion--square
+    - t-ImageRegion--noFilter
+    render-components: Above Content
+
+  accessibility: 
+    use-landmark: false
+
+  image: 
+    file-url: '#APP_FILES#background.jpg'
+
+  advanced: 
+    region-display-selector: false
+    exclude-title-from-translation: false
+
+  customization: 
+    customizable: Not Customizable By End Users
+
+  attributes: 
+    settings: 
+      output-as: HTML
+      expand-shortcuts: false
+
+- # ====== Region: &APP_NAME. ==================================
+  id: 642576877573203675
+  identification: 
+    name: '&APP_NAME.'
+    type: Static Content
+
+  layout: 
+    sequence: 10
+    parent-region: No Parent
+    slot: BODY
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+
+  appearance: 
+    template: Hero
+    template-options: 
+    - '#DEFAULT#'
+    - t-HeroRegion--featured t-HeroRegion--centered
+    css-classes: 
+    - c-SplashBox
+    - mxw480
+    - margin-auto
+    render-components: Above Content
+
+  accessibility: 
+    use-landmark: false
+
+  image: 
+    file-url: '#APP_FILES#icons/app-icon-192.png'
+
+  advanced: 
+    region-display-selector: false
+    exclude-title-from-translation: false
+
+  customization: 
+    customizable: Not Customizable By End Users
+
+  attributes: 
+    settings: 
+      output-as: HTML
+      expand-shortcuts: false
+
+page-items: 
+- # ====== Page Item: P9999_USERNAME ===========================
+  id: 166713953866130760
+  identification: 
+    name: P9999_USERNAME
+    type: Text Field
+
+  label: 
+    label: Username
+    alignment: Left
+
+  settings: 
+    subtype: Text
+    trim-spaces: None
+    text-case: NO CHANGE
+    submit-when-enter-pressed: true
+    disabled: false
+
+  layout: 
+    sequence: 20
+    region: No Parent
+    slot: BODY
+    alignment: Left
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+    label-column-span: Page Template Default
+    column-css-classes: 
+    - mxw320
+    - margin-auto
+
+  appearance: 
+    template: Optional - Floating
+    template-options: 
+    - '#DEFAULT#'
+    - t-Form-fieldContainer--large
+    - margin-top-none
+    - margin-bottom-sm
+    icon: fa-user
+    value-placeholder: Enter any value
+
+  validation: 
+    value-required: false
+    maximum-length: 100
+
+  advanced: 
+    warn-on-unsaved-changes: Page Default
+
+  source: 
+    type: Null
+    used: Only when current value in session state is null
+
+  session-state: 
+    storage: Per Request (Memory Only)
+
+  quick-picks: 
+    show-quick-picks: false
+
+  security: 
+    session-state-protection: Unrestricted
+    store-value-encrypted-in-session-state: true
+    restricted-characters: All characters can be saved.
+
+buttons: 
+- # ====== Button: SIGNIN ======================================
+  id: 166715524328130762
+  identification: 
+    button-name: SIGNIN
+    label: Sign In
+
+  layout: 
+    sequence: 30
+    region: No Parent
+    slot: BODY
+    start-new-layout: false
+    start-new-row: true
+    column: 5
+    new-column: true
+    column-span: 4
+    alignment: Left center
+
+  appearance: 
+    button-template: Text
+    hot: true
+    template-options: 
+    - '#DEFAULT#'
+    - t-Button--large
+    - t-Button--stretch
+    - t-Button--gapTop
+    css-classes: 
+    - mxw320
+    - margin-auto
+
+  behavior: 
+    action: Submit Page
+    execute-validations: true
+    show-processing: false
+    warn-on-unsaved-changes: Do Not Check
+
+processes: 
+- # ====== Process: Login ======================================
+  id: 43724951563964574
+  identification: 
+    name: Login
+    type: Invoke API
+    execution-chain: None
+
+  settings: 
+    type: PL/SQL Package
+    owner: PARSING SCHEMA
+    package: APEX_AUTHENTICATION
+    procedure-or-function: LOGIN
+
+  execution: 
+    sequence: 20
+    point: Processing
+    run-process: Once Per Page Visit (default)
+
+  error: 
+    display-location: Inline in Notification
+
+  parameters: 
+  - # ====== Parameter: p_username ===============================
+    id: 43725092818964575
+    identification: 
+      name: p_username
+
+    parameter: 
+      direction: In
+      data-type: VARCHAR2
+      has-default: false
+
+    value: 
+      type: Function Body
+      language: PL/SQL
+      pl/sql-function-body: |
+        if :P9999_USERNAME is not null then
+            return :P9999_USERNAME;
+        else
+            return 'demo' || :APP_SESSION;
+        end if;
+
+    advanced: 
+      display-sequence: 10
+
+  - # ====== Parameter: p_password ===============================
+    id: 43725125536964576
+    identification: 
+      name: p_password
+
+    parameter: 
+      direction: In
+      data-type: VARCHAR2
+      has-default: false
+
+    value: 
+      type: Null
+
+    advanced: 
+      display-sequence: 20
+
+  - # ====== Parameter: p_set_persistent_auth ====================
+    id: 43725406394964578
+    identification: 
+      name: p_set_persistent_auth
+
+    parameter: 
+      direction: In
+      data-type: BOOLEAN
+      has-default: true
+
+    value: 
+      type: Static Value
+      static-value: True
+
+    advanced: 
+      display-sequence: 40
+
+- # ====== Process: Clear Page(s) Cache ========================
+  id: 43725448591964579
+  identification: 
+    name: Clear Page(s) Cache
+    type: Clear Session State
+    execution-chain: None
+
+  settings: 
+    type: Clear all Items on the Current Page
+
+  execution: 
+    sequence: 30
+    point: Processing
+    run-process: Once Per Page Visit (default)
+
+  error: 
+    display-location: Inline in Notification
+
+- # ====== Process: Set Username Cookie ========================
+  id: 43725529582964580
+  identification: 
+    name: Set Username Cookie
+    type: Invoke API
+    execution-chain: None
+
+  settings: 
+    type: PL/SQL Package
+    owner: PARSING SCHEMA
+    package: APEX_AUTHENTICATION
+    procedure-or-function: SEND_LOGIN_USERNAME_COOKIE
+
+  execution: 
+    sequence: 10
+    point: Processing
+    run-process: Once Per Page Visit (default)
+
+  error: 
+    display-location: Inline in Notification
+
+  parameters: 
+  - # ====== Parameter: p_username ===============================
+    id: 43725681985964581
+    identification: 
+      name: p_username
+
+    parameter: 
+      direction: In
+      data-type: VARCHAR2
+      has-default: false
+
+    value: 
+      type: Item
+      item: P9999_USERNAME
+
+    advanced: 
+      display-sequence: 10
+
+  - # ====== Parameter: p_cookie_name ============================
+    id: 43725805739964582
+    identification: 
+      name: p_cookie_name
+
+    parameter: 
+      direction: In
+      data-type: VARCHAR2
+      has-default: true
+
+    value: 
+      type: API Default
+
+    advanced: 
+      display-sequence: 20
+
+  - # ====== Parameter: p_consent ================================
+    id: 43725846148964583
+    identification: 
+      name: p_consent
+
+    parameter: 
+      direction: In
+      data-type: BOOLEAN
+      has-default: true
+
+    value: 
+      type: API Default
+
+    advanced: 
+      display-sequence: 30
+
+- # ====== Process: Get Username Cookie ========================
+  id: 1934953205627755373
+  identification: 
+    name: Get Username Cookie
+    type: Execute Code
+    execution-chain: None
+
+  source: 
+    location: Local Database
+    language: PL/SQL
+    pl/sql-code: ':P9999_USERNAME := apex_authentication.get_login_username_cookie;'
+
+  execution: 
+    sequence: 40
+    point: Before Header
+    run-process: Once Per Page Visit (default)
+
+branches: 
+- # ====== Branch: Go To Page 4 ================================
+  id: 39883107297993685
+  identification: 
+    name: Go To Page 4
+
+  execution: 
+    sequence: 10
+    point: After Processing
+
+  behavior: 
+    type: Page or URL (Redirect)
+    target: 
+      url: 'f?p=&APP_ID.:4:&SESSION.::&DEBUG.:::&success_msg=#SUCCESS_MSG#'
+      page: 4 # Home
+

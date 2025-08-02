@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.3.xsd">
+<include file="project/tables/sample_restaurant.sql" relativeToChangelogFile="true"/>
+<include file="project/tables/sample_restaurant_items.sql" relativeToChangelogFile="true"/>
+<include file="project/tables/sample_restaurant_orders.sql" relativeToChangelogFile="true"/>
+<include file="project/tables/sample_restaurant_order_items.sql" relativeToChangelogFile="true"/>
+<include file="project/tables/sample_restaurant_categories.sql" relativeToChangelogFile="true"/>
+<include file="project/ref_constraints/sample_restaurant_items_fr.sql" relativeToChangelogFile="true"/>
+<include file="project/ref_constraints/sample_restaurant_order_items_item_id_fk.sql" relativeToChangelogFile="true"/>
+<include file="project/ref_constraints/sample_restaurant_order_items_order_id_fk.sql" relativeToChangelogFile="true"/>
+<include file="project/triggers/sample_restaurant_biu.sql" relativeToChangelogFile="true"/>
+<include file="project/triggers/sample_restaurant_items_biu.sql" relativeToChangelogFile="true"/>
+<include file="project/package_specs/sample_restaurant_manage_orders.sql" relativeToChangelogFile="true"/>
+<include file="project/package_bodies/sample_restaurant_manage_orders.sql" relativeToChangelogFile="true"/>
+</databaseChangeLog>

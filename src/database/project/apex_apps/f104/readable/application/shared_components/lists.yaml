@@ -1,0 +1,319 @@
+---
+- # ====== List: Navigation Menu ===============================
+  id: 166424854541130361
+  identification: 
+    name: Navigation Menu
+
+  subscription: 
+    version-number: 37167837748279
+
+  source: 
+    type: Static Values
+
+  entries: 
+  - # ====== Entry: Account ======================================
+    id: 37782069338539887
+    label: 
+      label: Account
+
+    icon: 
+      image/icon-css-classes: fa-user
+
+    layout: 
+      sequence: 40
+
+    is-current: 
+      type: Target Page
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:20000:&SESSION.::&DEBUG.::::'
+        page: 20000 # Account
+
+    click-counting: 
+      count-clicks: false
+
+    user-defined-attributes: 
+      translatable: false
+
+  - # ====== Entry: Home =========================================
+    id: 81118431515695171
+    label: 
+      label: Home
+
+    icon: 
+      image/icon-css-classes: fa-home
+
+    layout: 
+      sequence: 10
+
+    is-current: 
+      type: Target Page
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:4:&SESSION.::&DEBUG.::::'
+        page: 4 # Home
+
+    click-counting: 
+      count-clicks: false
+
+    user-defined-attributes: 
+      translatable: false
+
+  - # ====== Entry: Orders =======================================
+    id: 81118735741700270
+    label: 
+      label: Orders
+
+    icon: 
+      image/icon-css-classes: fa-list-alt
+
+    layout: 
+      sequence: 30
+
+    is-current: 
+      type: Target Page
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:9:&SESSION.::&DEBUG.::::'
+        page: 9 # Orders
+
+    click-counting: 
+      count-clicks: false
+
+    user-defined-attributes: 
+      translatable: false
+
+  - # ====== Entry: Search =======================================
+    id: 1934984124074412960
+    label: 
+      label: Search
+
+    icon: 
+      image/icon-css-classes: fa-search
+
+    layout: 
+      sequence: 20
+
+    is-current: 
+      type: Target Page
+
+    link: 
+      target: '#action$open-search'
+
+    click-counting: 
+      count-clicks: false
+
+    user-defined-attributes: 
+      translatable: false
+
+- # ====== List: Navigation Bar ================================
+  id: 166708737345130741
+  identification: 
+    name: Navigation Bar
+
+  subscription: 
+    version-number: 37167787283630
+
+  source: 
+    type: Static Values
+
+  entries: 
+  - # ====== Entry: Cart =========================================
+    id: 81118197125691383
+    label: 
+      label: Cart
+
+    icon: 
+      image/icon-css-classes: '&SHOPPING_CART_ICON.'
+
+    layout: 
+      sequence: 20
+
+    is-current: 
+      type: Target Page
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:8:&SESSION.::&DEBUG.:8:::'
+        page: 8 # Cart
+        clear-cache: 8
+
+    click-counting: 
+      count-clicks: false
+
+    user-defined-attributes: 
+      translatable: false
+      1.: '&SHOPPING_CART_ITEMS.'
+      2.: js-shopping-cart-item
+
+  - # ====== Entry: Install App ==================================
+    id: 166723535327130782
+    label: 
+      label: Install App
+
+    icon: 
+      image/icon-css-classes: fa-cloud-download
+
+    layout: 
+      sequence: 10
+
+    is-current: 
+      type: Never
+
+    link: 
+      target: '#action$a-pwa-install'
+
+    click-counting: 
+      count-clicks: false
+
+    user-defined-attributes: 
+      translatable: false
+      2.: a-pwaInstall
+
+- # ====== List: User Settings =================================
+  id: 166730712941130789
+  identification: 
+    name: User Settings
+
+  subscription: 
+    version-number: 37167787225636
+
+  source: 
+    type: Static Values
+
+  configuration: 
+    build-option: 'Feature: User Settings' # 166727186073130785
+
+  entries: 
+  - # ====== Entry: Support ======================================
+    id: 80741702038408985
+    label: 
+      label: Support
+
+    icon: 
+      image/icon-css-classes: fa-support
+
+    layout: 
+      sequence: 50
+
+    is-current: 
+      type: Target Page
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:14:&SESSION.::&DEBUG.::::'
+        page: 14 # Support
+
+    click-counting: 
+      count-clicks: false
+
+    user-defined-attributes: 
+      translatable: false
+
+  - # ====== Entry: Manage Account ===============================
+    id: 81119095620705328
+    label: 
+      label: Manage Account
+
+    icon: 
+      image/icon-css-classes: fa-user
+
+    layout: 
+      sequence: 10
+
+    is-current: 
+      type: Target Page
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:11:&SESSION.::&DEBUG.::::'
+        page: 11 # Manage Account
+
+    click-counting: 
+      count-clicks: false
+
+    user-defined-attributes: 
+      translatable: false
+
+  - # ====== Entry: My Address ===================================
+    id: 81119323532708303
+    label: 
+      label: My Address
+
+    icon: 
+      image/icon-css-classes: fa-map-o
+
+    layout: 
+      sequence: 20
+
+    is-current: 
+      type: Target Page
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:12:&SESSION.::&DEBUG.::::'
+        page: 12 # My Address
+
+    click-counting: 
+      count-clicks: false
+
+    user-defined-attributes: 
+      translatable: false
+
+  - # ====== Entry: FAQ ==========================================
+    id: 81119882396712644
+    label: 
+      label: FAQ
+
+    icon: 
+      image/icon-css-classes: fa-question-circle-o
+
+    layout: 
+      sequence: 40
+
+    is-current: 
+      type: Target Page
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:13:&SESSION.::&DEBUG.::::'
+        page: 13 # FAQ
+
+    click-counting: 
+      count-clicks: false
+
+    user-defined-attributes: 
+      translatable: false
+
+  - # ====== Entry: Notifications ================================
+    id: 166731187247130790
+    label: 
+      label: Notifications
+
+    icon: 
+      image/icon-css-classes: fa-bell-o
+
+    layout: 
+      sequence: 30
+
+    is-current: 
+      type: Target Page
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:20010:&SESSION.::&DEBUG.::::'
+        page: 20010 # Notifications
+
+    click-counting: 
+      count-clicks: false
+
+    user-defined-attributes: 
+      translatable: false
+      2.: <span class="a-pwaPush--state"></span>
+
+    configuration: 
+      build-option: 'Feature: Push Notifications' # 166726818656130785
+

@@ -1,0 +1,27 @@
+---
+- # ====== Application Item: SHOPPING_CART_ICON ================
+  id: 794048944412137220
+  identification: 
+    name: SHOPPING_CART_ICON
+    scope: Application
+
+  security: 
+    session-state-protection: Restricted - May not be set from browser
+    escape-special-characters: true
+
+  subscription: 
+    version-number: 37166223624529
+
+- # ====== Application Item: SHOPPING_CART_ITEMS ===============
+  id: 794049143830138252
+  identification: 
+    name: SHOPPING_CART_ITEMS
+    scope: Application
+
+  security: 
+    session-state-protection: Restricted - May not be set from browser
+    escape-special-characters: true
+
+  subscription: 
+    version-number: 37166223624976
+
