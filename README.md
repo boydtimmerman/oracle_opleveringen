@@ -90,18 +90,27 @@ Kan via file of op database worden ontwikkelt
   > - Functions  
   > - Triggers  
 
-### 3a. Alle schema objecten exporteren
+### 3 <OPTIONEEL> Voeg custum scripts toe
+Wanneer je scripts hebt die je in een volgende omgeving uitgevoerd wil hebben kan je deze toevoegen d.m.v. `project stage add-custom`.
+Hier kan je bijvoorbeeld DML scripts toevoegen
+
+  ```sql
+   sql -conn {schema}
+   project stage add-custom -file-name ins_sample_restaurant -- insert script voor sample_restaurant
+   ```
+
+### 4a. Alle schema objecten exporteren
   ```sql
    sql -conn {schema}
    project export -verbose
    ```
-### 3b. Specifieke objecten exporteren
+### 4b. Specifieke objecten exporteren
   ```sql
    sql -conn {schema}
    project export -v -o sample_restaurant apex.104
    ```
 
-### 4. Git commit export
+### 5. Git commit export
   ```bash
   ## Via command line of GUI
   ## !git wanneer je binnen SQLcl zit anders git
@@ -109,13 +118,13 @@ Kan via file of op database worden ontwikkelt
   !git commit -m "commit message"
   ```
 
-### 5. Project stage
+### 6. Project stage
   ```sql
   -- gebruik -bn wanneer je wil vergelijken met een andere branch dan de default branch uit project.config.json
    project stage -v -bn develop 
   ```
 
-### 6. Git commit stage en push naar remote
+### 7. Git commit stage en push naar remote
   ```bash
   ## Via command line of GUI
   ## !git wanneer je binnen SQLcl zit anders git
@@ -124,10 +133,10 @@ Kan via file of op database worden ontwikkelt
   !git push
   ```
 
-### 7. Maak pull request (PR)
+### 8. Maak pull request (PR)
   Maak een PR aan in de git GUI en laat deze reviewen door collega
 
-### 8. Merge pull request
+### 9. Merge pull request
   Merge het pull request na review zodat de andere ontwikkelaars gebruik kunnen maken van de nieuwe functionaliteit
 
 ## Installatie Stappen
