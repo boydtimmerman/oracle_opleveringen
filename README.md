@@ -2,6 +2,7 @@
 
 Deze repository is een voorbeeld voor het gebruik van SQLcl project als tooling voor het maken releases van Oracle database en APEX code.
 
+
 ## Inhoudsopgave
 
 - [Overzicht](#overzicht)
@@ -10,15 +11,18 @@ Deze repository is een voorbeeld voor het gebruik van SQLcl project als tooling 
 - [Development Stappen](#development-stappen)
   - [1. Aanmaken feature branch](#1-aanmaken-feature-branch)
   - [2. Ontwikkelwerk op file of database](#2-ontwikkelwerk-op-file-of-database)
-  - [3a. Alle schema objecten exporteren](#3a-alle-schema-objecten-exporteren)
-  - [3b. Specifieke objecten exporteren](#3b-specifieke-objecten-exporteren)
-  - [4. Git commit export](#4-git-commit-export)
-  - [5. Project stage](#5-project-stage)
-  - [6. Git commit stage en push naar remote](#6-git-commit-stage-en-push-naar-remote)
-  - [7. Maak pull request (PR)](#7-maak-pull-request-pr)
+  - [3. <OPTIONEEL> Voeg custom scripts toe](#3-optioneel-voeg-custom-scripts-toe)
+  - [4a. Alle schema objecten exporteren](#4a-alle-schema-objecten-exporteren)
+  - [4b. Specifieke objecten exporteren](#4b-specifieke-objecten-exporteren)
+  - [5. Git commit export](#5-git-commit-export)
+  - [6. Project stage](#6-project-stage)
+  - [7. Git commit stage en push naar remote](#7-git-commit-stage-en-push-naar-remote)
+  - [8. Maak pull request (PR)](#8-maak-pull-request-pr)
+  - [9. Merge pull request](#9-merge-pull-request)
 - [Installatie Stappen](#installatie-stappen)
-  - [1a. Installatie op omgeving](#1a-omgeving-release)
+  - [1a. Omgeving release](#1a-omgeving-release)
   - [1b. Productie release](#1b-productie-release)
+- [Veelgebruikte SQLcl Project Commando's](#veelgebruikte-sqlcl-project-commando-s)
 - [Versie Informatie](#versie-informatie)
 
 ## Overzicht
@@ -150,6 +154,7 @@ Hier kan je bijvoorbeeld DML scripts toevoegen
 
 ### 1b. Productie release
   ```sql
+  sql -conn {schema}
   project release -version {version}
   project deploy -file release/DEMO-{version}.zip
   ```
@@ -158,5 +163,5 @@ Hier kan je bijvoorbeeld DML scripts toevoegen
 
 - **Versie**: 1.0
 - **Laatste Update**: Augustus 2025
-- **Compatibiliteit**: Oracle Database 19c+, APEX 24.2+
+- **Compatibiliteit**: Oracle Database 19c, APEX 24.2
 
